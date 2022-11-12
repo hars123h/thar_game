@@ -12,7 +12,7 @@ const Invite = () => {
                 </svg>
             </div>
 
-            <div className='p-3 text-xs'>http://www.hp01.in/index/user/register/invite_code/7ef69.html</div>
+            <p className='p-3 text-xs break-words'>http://www.hp01.in/index/user/register/invite_code/7ef69.html</p>
 
             <div className='p-3 font-bold'>
                 Invite link: clickCopy

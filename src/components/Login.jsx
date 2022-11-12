@@ -21,12 +21,12 @@ const Login = () => {
             <div className='flex flex-col m-auto w-3/5'>
                 <div className=" items-center mb-3 p-2 phoneno flex border-none bg-[#f1f1f1] rounded-md">
                     <img src={user_img} alt="user" className='h-5 border-r-2 pr-2 border-solid border-gray-300' />
-                    <input type="text" placeholder='Phone number' name="phone_no" id="phone_no" className='pl-1 bg-[#f1f1f1]  outline-none' />
+                    <input type="text" placeholder='Phone number' name="phone_no" id="phone_no" className='pl-1 bg-[#f1f1f1]  outline-none overflow-x-scroll' />
                 </div>
 
                 <div className=" items-center p-2 passowrd flex border-none bg-[#f1f1f1] rounded-md">
                     <img src={lock_img} alt="user" className='h-5 border-r-2 pr-2 border-solid border-gray-300' />
-                    <input type="password" placeholder='Login password' name="password" id="pwrd" className='pl-1 bg-[#f1f1f1] outline-none' />
+                    <input type="password" placeholder='Login password' name="password" id="pwrd" className='pl-1 bg-[#f1f1f1] outline-none overflow-x-scroll' />
                 </div>
 
                 <div className='mt-16'>

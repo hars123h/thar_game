@@ -10,21 +10,16 @@ import Recharge from './components/Recharge';
 import Invite from './components/Invite';
 import Record from './components/Record';
 import Project from './components/Project';
-import { useEffect } from 'react';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route } from 'react-router-dom';
+import Fallback from './components/Fallback';
 
 function App() {
-
-  const navigate = useNavigate();
   
-  useEffect(()=>{
-    navigate('/register');
-  },[]);
-
   return (
     <div className="app">
 
       <Routes>
+        <Route path="/" element={<Fallback/>} />
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgot" element={<ForgotPassword/>}/>
