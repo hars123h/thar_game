@@ -12,6 +12,7 @@ import Record from './components/Record';
 import Project from './components/Project';
 import {Routes, Route } from 'react-router-dom';
 import Fallback from './components/Fallback';
+import Withdrawal from './components/Withdrawal';
 
 function App() {
   
@@ -31,6 +32,7 @@ function App() {
         <Route path="/invite" element={<Invite/>}/>
         <Route path="/record" element={<Record/>}/>
         <Route path="/project" element={<Project/>}/>
+        <Route path="/withdrawal" element={<Withdrawal/>}/>
       </Routes>
     </div>
   );

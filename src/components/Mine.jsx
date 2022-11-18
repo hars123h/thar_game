@@ -11,11 +11,21 @@ import pot_img from '../images/pot_img.png';
 import doc_img from '../images/doc_img.png';
 import setting_img from '../images/setting_img.png';
 import { useNavigate } from 'react-router-dom';
+import {signOut, getAuth} from 'firebase/auth';
 
 
 const Mine = () => {
 
   const navigate = useNavigate();
+  const auth = getAuth();
+
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      navigate('/login');
+    }).catch((error) => {
+      console.log(error.message, error.code);
+    });
+  }
 
   return (
     <div>
@@ -51,7 +61,7 @@ const Mine = () => {
 
 
         <ul className=' list-none flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <li className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={()=>navigate('/widthdrawl')}>
+          <li className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={()=>navigate('/withdrawal')}>
             <img src={pot_img} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Withdrawl</div>
           </li>
@@ -87,7 +97,7 @@ const Mine = () => {
         
 
         <div className="button w-4/5 mx-auto text-white text-lg mt-20 mb-20">
-          <button className='w-full bg-[#2e9afe] rounded-lg py-1 ' onClick={()=>navigate('/login')}>Sign Out</button>
+          <button className='w-full bg-[#2e9afe] rounded-lg py-1 ' onClick={handleSignOut}>Sign Out</button>
         </div>
 
       </div>
