@@ -6,7 +6,7 @@ const Withdrawal = () => {
     const navigate = useNavigate();
 
     return (
-        <div className='bg-[#2e9afe] flex flex-col justify-between p-4 sm:h-[700px] md:h-[950px]'>
+        <div className='bg-[#2e9afe] flex flex-col p-4 sm:h-[700px] md:h-[950px]'>
             <div className="options text-center text-white text-lg pt-2 font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate('/home')} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute left-2  storke-white top-5 cursor-pointer">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />

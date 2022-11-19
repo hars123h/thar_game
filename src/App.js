@@ -13,6 +13,10 @@ import Project from './components/Project';
 import {Routes, Route } from 'react-router-dom';
 import Fallback from './components/Fallback';
 import Withdrawal from './components/Withdrawal';
+import Settings from './components/Settings';
+import Bank from './components/Bank';
+import ChangeLoginPassword from './components/ChangeLoginPassword';
+import ChangeWithdrawalPassword from './components/ChangeWithdrawalPassword';
 
 function App() {
   
@@ -33,6 +37,11 @@ function App() {
         <Route path="/record" element={<Record/>}/>
         <Route path="/project" element={<Project/>}/>
         <Route path="/withdrawal" element={<Withdrawal/>}/>
+        <Route path="/settings" element={<Settings/>}/>
+        <Route path="/bank" element={<Bank/>}/>
+        <Route  path="/change_login_password" element={< ChangeLoginPassword />}/>
+        <Route  path="/change_withdrawal_password" element={< ChangeWithdrawalPassword />}/>
+
       </Routes>
     </div>
   );

@@ -1,7 +1,5 @@
 import React from 'react';
-import ord_img from '../images/ord_img.png';
 import thar_app from '../images/thar_app.jpg';
-import custom_img from '../images/custom_img.jpg';
 
 
 const Card = () => {
