@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import hp_logo from '../images/hp_logo.png';
 import {useNavigate} from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import db from '../firebase/config.js';
+import {  setDoc, doc } from "firebase/firestore";
 
 // rgb(0, 150, 213) #0096D5
 // rgb(0, 112, 74) already #00704A
@@ -16,12 +18,19 @@ const Register = () => {
     const [wpwd, setwpwd] = useState('');
     const [invt, setInvt] = useState('');
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
         console.log({mobno, pwd, cpwd, wpwd, invt});
         const new_mobno = mobno + '@gmail.com';
         createUserWithEmailAndPassword(auth, new_mobno, pwd)
         .then((userCredential) => {
             console.log(userCredential);
+            try {
+                console.log(auth.currentUser.uid);
+                setDoc(doc(db, "users", auth.currentUser.uid), {mobno, pwd, wpwd, invt});
+                console.log("Document written successfully");
+              } catch (e) {
+                console.error("Error adding document: ", e);
+              }
             setMobno('');
             setpwd('');
             setCpwd('');
@@ -34,8 +43,6 @@ const Register = () => {
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
           });
-
-        
         
     }
 

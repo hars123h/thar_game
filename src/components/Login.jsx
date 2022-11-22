@@ -21,6 +21,7 @@ const Login = () => {
         const new_mobno = mobno + '@gmail.com';
         signInWithEmailAndPassword(auth, new_mobno, pwd)
         .then((userCredential)=>{
+            console.log(auth.currentUser.uid);
             navigate('/home');
         })
         .catch(error=>{

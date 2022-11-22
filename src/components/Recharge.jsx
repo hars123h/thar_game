@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
 const Recharge = () => {
 
+  const [recharge_value, setRecharge_Value] = useState(0);
   const navigate = useNavigate();
+
+  const handleRecharge = () => {
+    if(parseInt(recharge_value)) {
+        navigate(`/recharge_window/${recharge_value}`);
+    }else {
+        alert('Enter a valid recharge amount');
+    }
+  }
 
   return (
     <div className='bg-[#2e9afe] h-screen'>
@@ -20,7 +29,7 @@ const Recharge = () => {
             <div className='m-1 text-md text-white mb-4'>Enter Amount:</div>
             <div className='m-1 w-full flex items-center'>
                 <span className='text-red-400 font-bold p-0.5 pr-1 border-b border-white'>₹</span>
-                <input type="text" name="amount" id="amt" placeholder='Amount'  className='w-full bg-inherit text-[#fff] outline-none font-normal text-lg border-b border-white'/>
+                <input onChange={(e)=>setRecharge_Value(e.target.value)}  type="text" name="amount" id="amt" placeholder='Amount'  className='w-full bg-inherit text-[#fff] outline-none font-normal text-lg border-b border-white'/>
             </div>
 
             <ol className='text-white text-xs'>
@@ -31,7 +40,7 @@ const Recharge = () => {
         </div>
 
         <div className="cnf_recharge w-4/5 mx-auto mt-10">
-            <button className='w-full bg-[#2e9afe] py-2 rounded-md text-white text-lg shadow-customShadow shadow-[#beadcc]'>Confirm Recharge</button>
+            <button onClick={handleRecharge}  className='w-full bg-[#2e9afe] py-2 rounded-md text-white text-lg shadow-customShadow shadow-[#beadcc]'>Confirm Recharge</button>
         </div>
     </div>
   )

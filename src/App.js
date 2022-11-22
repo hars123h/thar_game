@@ -1,4 +1,7 @@
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 import Register from './components/Register';
 import Login from './components/Login';
 import ForgotPassword from './components/ForgotPassword';
@@ -17,6 +20,8 @@ import Settings from './components/Settings';
 import Bank from './components/Bank';
 import ChangeLoginPassword from './components/ChangeLoginPassword';
 import ChangeWithdrawalPassword from './components/ChangeWithdrawalPassword';
+import RechargeWindow from './components/RechargeWindow';
+import Approval from './components/Approval';
 
 function App() {
   
@@ -41,8 +46,10 @@ function App() {
         <Route path="/bank" element={<Bank/>}/>
         <Route  path="/change_login_password" element={< ChangeLoginPassword />}/>
         <Route  path="/change_withdrawal_password" element={< ChangeWithdrawalPassword />}/>
-
+        <Route path="/recharge_window/:recharge_value" element={<RechargeWindow/>}/>
+        <Route path="/recharge_approval" element={<Approval/>}/>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

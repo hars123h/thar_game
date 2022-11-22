@@ -11,7 +11,7 @@ import pot_img from '../images/pot_img.png';
 import doc_img from '../images/doc_img.png';
 import setting_img from '../images/setting_img.png';
 import { useNavigate } from 'react-router-dom';
-import {signOut, getAuth} from 'firebase/auth';
+import { signOut, getAuth } from 'firebase/auth';
 
 
 const Mine = () => {
@@ -61,40 +61,49 @@ const Mine = () => {
 
 
         <ul className=' list-none flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <li className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={()=>navigate('/withdrawal')}>
+          <li className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal')}>
             <img src={pot_img} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Withdrawl</div>
           </li>
 
-          <li className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={()=>navigate('/recharge')}>
+          <li className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge')}>
             <img src={recharge1_img} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Recharge</div>
           </li>
 
-          <li className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={()=>navigate('/project')}>
+          <li className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/project')}>
             <img src={project_img} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Project</div>
           </li>
         </ul>
 
         <div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={()=>navigate('/invite')}>
+          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/invite')}>
             <img src={invite_img} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Invite</div>
           </div>
 
-          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={()=>navigate('/record')}>
+          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/record')}>
             <img src={doc_img} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Record</div>
           </div>
 
-          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={()=>navigate('/settings')}>
+          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/settings')}>
             <img src={setting_img} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Settings</div>
           </div>
         </div>
 
-        
+        {auth.currentUser.uid === 'njh6IG808GMmaH6rGewIuZPLfLz2' && (<div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
+          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge_approval')}>
+            <img src={recharge1_img} alt="invite" className='w-14 h-14 mx-auto' />
+            <div className='text-center text-white text-sm'>Recharge Approval</div>
+          </div>
+        </div>)}
+
+
+
+
 
         <div className="button w-4/5 mx-auto text-white text-lg mt-20 mb-20">
           <button className='w-full bg-[#2e9afe] rounded-lg py-1 ' onClick={handleSignOut}>Sign Out</button>
@@ -105,22 +114,22 @@ const Mine = () => {
       {/*Navigation Bar 2*/}
       <div className="fixed bottom-0 z-10 bg-white rounded-none text-[#757575] flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
         <div className="flex flex-row justify-around items-center w-full py-2">
-          <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={()=>navigate('/home')}>
+          <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={() => navigate('/home')}>
             <img src={btm_home} alt="online" className='w-8' />
             <div>Home</div>
           </div>
 
-          <div className='cursor-pointer mx-2 flex flex-col justify-center items-center 'onClick={()=>navigate('/company')}>
+          <div className='cursor-pointer mx-2 flex flex-col justify-center items-center ' onClick={() => navigate('/company')}>
             <img src={btm_cpy} alt="app_dwd" className='w-8' />
             <div>Company</div>
           </div>
 
-          <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={()=>navigate('/team')}>
+          <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={() => navigate('/team')}>
             <img src={btm_team} alt="recharge" className='w-8' />
             <div>Team</div>
           </div>
 
-          <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={()=>navigate('/mine')}>
+          <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={() => navigate('/mine')}>
             <img src={btm_prof} alt="invite" className='w-8' />
             <div>Mine</div>
           </div>
