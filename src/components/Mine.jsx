@@ -12,12 +12,32 @@ import doc_img from '../images/doc_img.png';
 import setting_img from '../images/setting_img.png';
 import { useNavigate } from 'react-router-dom';
 import { signOut, getAuth } from 'firebase/auth';
+import { useLayoutEffect } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import db from '../firebase/config';
+import { useState } from 'react';
 
 
 const Mine = () => {
 
   const navigate = useNavigate();
   const auth = getAuth();
+  const [mobileno, setMobileno] = useState('');
+  const [recharge_amount, setRecharge_amount] = useState(0);
+
+  useLayoutEffect(()=>{
+    const getUserInfo = async() => {
+      const docRef = await getDoc(doc(db, 'users', auth.currentUser.uid));
+      if(docRef.exists()) {
+        console.log(docRef.data());
+        setMobileno(docRef.data().mobno);
+        setRecharge_amount(docRef.data().recharge_amount);
+      }else {
+        console.log('Document does not exits');
+      }
+    }
+    getUserInfo();
+  },[]);
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
@@ -36,24 +56,24 @@ const Mine = () => {
           <div className="info pt-10 pl-10 flex items-center justify-start">
             <img src={hp_small} alt="logo" className='w-20 rounded-full' />
             <div className="user_no flex flex-col text-white ml-5">
-              <div className="no text-3xl font-medium">7412589630</div>
+              <div className="no text-3xl font-medium">{mobileno}</div>
               <div className='text-xs border-2 border-white py-1 px-2 w-2/5 text-center rounded-lg mt-1'>LV0</div>
             </div>
           </div>
 
           <div className="h-28 overflow-y-visible rounded-xl  info_box bg-[#2b85d9] text-white flex items-center justify-between w-4/5 mx-auto mt-5 p-4">
             <div className='flex flex-col items-center'>
-              <div className='text-xs mb-2'>0.00</div>
+              <div className='text-xs mb-2'>&#8377; 0.00</div>
               <div>Balance</div>
             </div>
 
             <div className='flex flex-col items-center'>
-              <div className='text-xs mb-2'>0.00</div>
+              <div className='text-xs mb-2'>&#8377;{parseFloat(recharge_amount)}</div>
               <div>Recharge</div>
             </div>
 
             <div className='flex flex-col items-center'>
-              <div className='text-xs mb-2'>0</div>
+              <div className='text-xs mb-2'>&#8377; 0</div>
               <div>Earning</div>
             </div>
           </div>
@@ -102,13 +122,9 @@ const Mine = () => {
         </div>)}
 
 
-
-
-
         <div className="button w-4/5 mx-auto text-white text-lg mt-20 mb-20">
           <button className='w-full bg-[#2e9afe] rounded-lg py-1 ' onClick={handleSignOut}>Sign Out</button>
         </div>
-
       </div>
 
       {/*Navigation Bar 2*/}
@@ -135,8 +151,6 @@ const Mine = () => {
           </div>
         </div>
       </div>
-
-
 
     </div>
   )

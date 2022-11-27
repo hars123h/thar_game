@@ -44,7 +44,7 @@ const Record = () => {
         <div className=' bg-[#2e9afe] pb-3'>
 
             <div className="options text-center text-white flex gap-2 items-center p-2  bg-[#2a9afe] text-lg pt-2 font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate(-1)} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6  storke-white  cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate('/mine')} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6  storke-white  cursor-pointer">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                 </svg>
                 <div className='flex-grow text-center'>Record</div>
@@ -88,7 +88,7 @@ const Record = () => {
                     <div key={id} className="bg-blue-400 rounded-lg shadow-md p-2 text-white mt-2 mx-2">
                         <div className='flex justify-between items-center'>
                             <div className='flex flex-col gap-1'>
-                                <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Recharge Value:</span> {element.recharge_value}</div>
+                                <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Recharge Value:</span> &#8377;{element.recharge_value}</div>
                                 <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Ref No:</span> {element.refno}</div>
                                 <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Status:</span> {element.status}</div>
                             </div>

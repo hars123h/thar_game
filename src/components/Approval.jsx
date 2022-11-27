@@ -1,5 +1,5 @@
 import React from 'react';
-import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc, increment } from 'firebase/firestore';
 import db from '../firebase/config.js'
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -19,16 +19,16 @@ const Approval = () => {
         var temp_Data = [];
         var idx = 0;
         docSnap.forEach((doc) => {
-            temp_Data = [...temp_Data, {...doc.data(), 'recharge_id':docSnap._snapshot.docChanges[idx].doc.key.path.segments[6]}];
+            temp_Data = [...temp_Data, { ...doc.data(), 'recharge_id': docSnap._snapshot.docChanges[idx].doc.key.path.segments[6] }];
             console.log(temp_Data);
-            idx+=1;
+            idx += 1;
         });
         //_snapshot.docChanges[0].doc.key
         setRecharge_list(temp_Data);
-        
+
     }
 
-    // useInterval(getRecharges_list, 10000);
+    useInterval(getRecharges_list, 10000);
 
     useEffect(() => {
         const getRecharges_list = async () => {
@@ -38,27 +38,30 @@ const Approval = () => {
             var temp_Data = [];
             var idx = 0;
             docSnap.forEach((doc) => {
-                temp_Data = [...temp_Data, {...doc.data(), 'recharge_id':docSnap._snapshot.docChanges[idx].doc.key.path.segments[6]}];
+                temp_Data = [...temp_Data, { ...doc.data(), 'recharge_id': docSnap._snapshot.docChanges[idx].doc.key.path.segments[6] }];
                 console.log(temp_Data);
-                idx+=1;
+                idx += 1;
             });
             //_snapshot.docChanges[0].doc.key
             setRecharge_list(temp_Data);
-            
         }
         getRecharges_list();
     }, []);
 
-    const updateStatus = async (recharge_id, new_status) => {
+    const updateStatus = async (recharge_id, new_status, recharge_value, user_id) => {
         const docRef = doc(db, 'recharges', recharge_id);
+        const docRef2 = doc(db, 'users', user_id);
         await updateDoc(docRef, {
             status: new_status
-          }).then(()=>{
+        }).then(() => {
             console.log('Recharge Status Approved');
+            updateDoc(docRef2, {
+                recharge_amount: increment(recharge_value)
+            });
             getRecharges_list();
-          }).catch((error)=>{
+        }).catch((error) => {
             console.log('Some Error Occured');
-          });
+        });
     }
 
 
@@ -86,17 +89,17 @@ const Approval = () => {
                 </div>)}
                 {recharge_list && recharge_list.map((element, id) => {
                     return (
-                        <div key={id} className="bg-blue-400 rounded-lg shadow-md p-2 text-white">
+                        <div key={id} className="bg-blue-400 rounded-lg shadow-md p-2 text-white mb-2">
                             <div className='flex justify-between items-center'>
                                 <div className='flex flex-col gap-1'>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Mobile No:</span>  {element.mobno}</div>
-                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Recharge Value:</span> {element.recharge_value}</div>
+                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Recharge Value:</span> &#8377;{element.recharge_value}</div>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Ref No:</span> {element.refno}</div>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Status:</span> {element.status}</div>
                                 </div>
                                 <div className='flex gap-1'>
-                                    <button className='bg-green-500 text-sm shadow-lg rounded-lg p-2' onClick={()=>updateStatus(element.recharge_id, 'confirmed')}>Confirm</button>
-                                    <button className='bg-red-500 text-sm shadow-lg rounded-lg p-2' onClick={()=>updateStatus(element.recharge_id, 'declined')}>Decline</button>
+                                    <button className='bg-green-500 text-sm shadow-lg rounded-lg p-2' onClick={() => updateStatus(element.recharge_id, 'confirmed', element.recharge_value, element.user_id)}>Confirm</button>
+                                    <button className='bg-red-500 text-sm shadow-lg rounded-lg p-2 ml-2' onClick={() => updateStatus(element.recharge_id, 'declined', element.recharge_value, element.user_id)}>Decline</button>
                                 </div>
                             </div>
                         </div>
