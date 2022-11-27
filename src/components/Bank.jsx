@@ -1,9 +1,39 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { getAuth } from 'firebase/auth';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import db from '../firebase/config.js';
 
 const Bank = () => {
     const navigate = useNavigate();
+    const auth = getAuth();
+    const [details, setDetails] = useState({
+        fullName:'',
+        phoneNo:'',
+        bankAccount:'',
+        bankName:'',
+        ifsc:'',
+        wpwd:'',
+    });
+
+    
+
+    const handleChange = (e) => {
+        setDetails({
+            ...details,
+            [e.target.name]:e.target.value
+        });
+        console.log(details);
+    }
+
+    const handleSubmit = async() => {
+        const docRef = doc(db, 'users', auth.currentUser.uid);
+        await updateDoc(docRef, {bankDetails:details})
+        .then(()=>{console.log('Details Added Successfully')})
+        .catch(()=> console.log('Some error Occured'));
+    }
+    
     return (
         <div className='bg-[#2e9afe] h-full p-4 sm:h-[700px] md:h-[950px]'>
             <div className="options text-center text-white text-2xl pt-2 font-medium">
@@ -16,32 +46,32 @@ const Bank = () => {
 
             <div className="box mx-2 bg-[#61b2ff] p-2 rounded-md mt-4">
                 <div className='flex gap-2 items-center  text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Full Name' />
+                    <input type="text" onChange={handleChange} name='fullName' value={details.fullName} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Full Name' />
                 </div>
 
                 <div className='flex gap-2 items-center text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Phone Number' />
+                    <input type="text" onChange={handleChange} name='phoneNo' value={details.phoneNo} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Phone Number' />
                 </div>
 
                 <div className='flex gap-2 items-center text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Bank Account' />
+                    <input type="text" onChange={handleChange} name='bankAccount' value={details.bankAccount} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Bank Account' />
                 </div>
 
                 <div className='flex gap-2 items-center text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Bank Name' />
+                    <input type="text" onChange={handleChange} name='bankName' value={details.bankName} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Bank Name' />
                 </div>
 
                 <div className='flex gap-2 items-center text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='IFSC' />
+                    <input type="text" onChange={handleChange} name='ifsc' value={details.ifsc} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='IFSC' />
                 </div>
 
                 <div className='flex gap-2 items-center text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Withdrawal Password' />
+                    <input type="text" onChange={handleChange} name='wpwd' value={details.wpwd} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Withdrawal Password' />
                 </div>
             </div>
 
             <div>
-                <button className='bg-[#2e9afe] text-white text-lg mt-5 mb-20 rounded-lg shadow-xl block w-full py-2 shadow-[#7899de]'>Confirm</button>
+                <button onClick={handleSubmit} className='bg-[#2e9afe] text-white text-lg mt-5 mb-20 rounded-lg shadow-xl block w-full py-2 shadow-[#7899de]'>Confirm</button>
             </div>
         </div>
     )

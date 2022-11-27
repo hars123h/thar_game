@@ -24,20 +24,22 @@ const Mine = () => {
   const auth = getAuth();
   const [mobileno, setMobileno] = useState('');
   const [recharge_amount, setRecharge_amount] = useState(0);
+  const [balance, setBalance] = useState(0);
 
-  useLayoutEffect(()=>{
-    const getUserInfo = async() => {
+  useLayoutEffect(() => {
+    const getUserInfo = async () => {
       const docRef = await getDoc(doc(db, 'users', auth.currentUser.uid));
-      if(docRef.exists()) {
+      if (docRef.exists()) {
         console.log(docRef.data());
         setMobileno(docRef.data().mobno);
         setRecharge_amount(docRef.data().recharge_amount);
-      }else {
+        setBalance(docRef.data().balance);
+      } else {
         console.log('Document does not exits');
       }
     }
     getUserInfo();
-  },[]);
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
@@ -63,7 +65,7 @@ const Mine = () => {
 
           <div className="h-28 overflow-y-visible rounded-xl  info_box bg-[#2b85d9] text-white flex items-center justify-between w-4/5 mx-auto mt-5 p-4">
             <div className='flex flex-col items-center'>
-              <div className='text-xs mb-2'>&#8377; 0.00</div>
+              <div className='text-xs mb-2'>&#8377; {balance}</div>
               <div>Balance</div>
             </div>
 
@@ -114,12 +116,23 @@ const Mine = () => {
           </div>
         </div>
 
-        {auth.currentUser.uid === 'njh6IG808GMmaH6rGewIuZPLfLz2' && (<div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge_approval')}>
-            <img src={recharge1_img} alt="invite" className='w-14 h-14 mx-auto' />
-            <div className='text-center text-white text-sm'>Recharge Approval</div>
-          </div>
-        </div>)}
+        <div className='flex  items-center mx-auto w-4/5 mt-10'>
+
+          {auth.currentUser.uid === 'njh6IG808GMmaH6rGewIuZPLfLz2' && (<div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
+            <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge_approval')}>
+              <img src={recharge1_img} alt="invite" className='w-14 h-14 mx-auto' />
+              <div className='text-center text-white text-sm'>Recharge Approval</div>
+            </div>
+          </div>)}
+
+          {auth.currentUser.uid === 'njh6IG808GMmaH6rGewIuZPLfLz2' && (<div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
+            <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal_approval')}>
+              <img src={pot_img} alt="invite" className='w-14 h-14 mx-auto' />
+              <div className='text-center text-white text-sm'>Withdrawal Approval</div>
+            </div>
+          </div>)}
+
+        </div>
 
 
         <div className="button w-4/5 mx-auto text-white text-lg mt-20 mb-20">

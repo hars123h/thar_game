@@ -21,11 +21,12 @@ import ChangeLoginPassword from './components/ChangeLoginPassword';
 import ChangeWithdrawalPassword from './components/ChangeWithdrawalPassword';
 import RechargeWindow from './components/RechargeWindow';
 import Approval from './components/Approval';
+import WithdrawalApproval from './components/WithdrawalApproval';
 
 function App() {
   
   return (
-    <div className="app">
+    <div className="app ">
 
       <Routes>
         <Route path="/" element={<Fallback/>} />
@@ -47,6 +48,7 @@ function App() {
         <Route path="/change_withdrawal_password" element={< ChangeWithdrawalPassword />}/>
         <Route path="/recharge_window/:recharge_value" element={<RechargeWindow/>}/>
         <Route path="/recharge_approval" element={<Approval/>}/>
+        <Route path="/withdrawal_approval" element={<WithdrawalApproval/>}/>
       </Routes>
       <ToastContainer />
     </div>
