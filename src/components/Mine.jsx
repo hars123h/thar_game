@@ -16,6 +16,7 @@ import { useLayoutEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import db from '../firebase/config';
 import { useState } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
 
 
 const Mine = () => {
@@ -25,6 +26,9 @@ const Mine = () => {
   const [mobileno, setMobileno] = useState('');
   const [recharge_amount, setRecharge_amount] = useState(0);
   const [balance, setBalance] = useState(0);
+  const [originalwpwd, setOriginalwpwd] = useState(null);
+  const [originalpwd, setOriginalpwd] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useLayoutEffect(() => {
     const getUserInfo = async () => {
@@ -34,11 +38,15 @@ const Mine = () => {
         setMobileno(docRef.data().mobno);
         setRecharge_amount(docRef.data().recharge_amount);
         setBalance(docRef.data().balance);
+        setOriginalwpwd(docRef.data().wpwd);
+        setOriginalpwd(docRef.data().pwd);
       } else {
         console.log('Document does not exits');
       }
     }
-    getUserInfo();
+    setLoading(true);
+    getUserInfo()
+    .then(() => setLoading(false));
   }, []);
 
   const handleSignOut = () => {
@@ -53,6 +61,18 @@ const Mine = () => {
     <div>
 
       <div className='flex flex-col'>
+
+        {loading && (<div className='flex flex-col justify-center items-center  h-screen bg-gray-50 z-10 opacity-90'>
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="2"
+            animationDuration="0.75"
+            width="96"
+            visible={true}
+          />
+          <div>Loading...</div>
+        </div>)}
+
         <div className="top bg-[#2e9afe] h-56">
 
           <div className="info pt-10 pl-10 flex items-center justify-start">
@@ -83,7 +103,7 @@ const Mine = () => {
 
 
         <ul className=' list-none flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <li className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal')}>
+          <li className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
             <img src={pot_img} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Withdrawl</div>
           </li>
@@ -110,7 +130,7 @@ const Mine = () => {
             <div className='text-center text-white text-sm'>Record</div>
           </div>
 
-          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/settings')}>
+          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/settings', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
             <img src={setting_img} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Settings</div>
           </div>

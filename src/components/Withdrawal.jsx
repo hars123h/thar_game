@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 import { getAuth } from 'firebase/auth';
 import { doc, getDoc, collection, addDoc, Timestamp } from 'firebase/firestore';
 import db from '../firebase/config.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {toast} from 'react-toastify';
 
 const Withdrawal = () => {
 
     const navigate = useNavigate();
+    const loc = useLocation();
     const auth = getAuth();
     const [balance, setBalance] = useState();
     const [wpassword, setWpassword] = useState('');
@@ -20,7 +21,6 @@ const Withdrawal = () => {
         bankAccount:'',
         bankName:'',
         ifsc:'',
-        wpwd:'',
     });
     useEffect(() => {
         const getDetails = async () => {
@@ -50,7 +50,7 @@ const Withdrawal = () => {
 
     const handleWithdrawal = async () => {
 
-        if(wpassword === details.wpwd) {
+        if(wpassword === loc.state.withdrawalPassword) {
             console.log({ withdrawalAmount: wamount, ...details, user_id:auth.currentUser.uid, status:'pending' });
         try {
             const docRef1 = await addDoc(collection(db, "withdrawals"), { withdrawalAmount: wamount, ...details, user_id:auth.currentUser.uid, time:Timestamp.now(), status:'pending' });
@@ -63,7 +63,7 @@ const Withdrawal = () => {
         }
         }else {
             toast('Withdrawal Password is incorrect');
-            console.log(wpassword, details.wpwd);
+            console.log(wpassword, loc.state.withdrawalPassword);
         }
         
     }
