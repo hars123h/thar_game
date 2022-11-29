@@ -28,7 +28,7 @@ const Withdrawal = () => {
             if (docRef.exists()) {
                 if(!docRef.data().bankDetails) {
                     toast('Fill bank details first!');
-                    navigate('/bank');
+                    navigate('/bank', { state: { withdrawalPassword: loc.state.withdrawalPassword, loginPassword: loc.state.loginPassword } });
                 } else {
                     setDetails(docRef.data().bankDetails);
                     docRef.data().balance?setBalance(docRef.data().balance):setBalance(0);

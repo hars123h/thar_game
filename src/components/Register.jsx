@@ -26,7 +26,7 @@ const Register = () => {
             console.log(userCredential);
             try {
                 console.log(auth.currentUser.uid);
-                setDoc(doc(db, "users", auth.currentUser.uid), {mobno, pwd, wpwd, invt});
+                setDoc(doc(db, "users", auth.currentUser.uid), {mobno, pwd, wpwd, invt, time:new Date(), balance:0, recharge_amount: 0});
                 console.log("Document written successfully");
               } catch (e) {
                 console.error("Error adding document: ", e);

@@ -34,7 +34,7 @@ const Bank = () => {
         if (loc.state.withdrawalPassword === wpwd) {
             const docRef = doc(db, 'users', auth.currentUser.uid);
             await updateDoc(docRef, { bankDetails: details })
-                .then(() => { console.log('Details Added Successfully') })
+                .then(() => { console.log('Details Added Successfully'); toast('Bank details added successfully!'); navigate('/mine'); })
                 .catch(() => console.log('Some error Occured'));
         } else {
             toast('Incorrect withdrawal password!');

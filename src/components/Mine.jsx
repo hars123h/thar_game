@@ -40,6 +40,7 @@ const Mine = () => {
         setBalance(docRef.data().balance);
         setOriginalwpwd(docRef.data().wpwd);
         setOriginalpwd(docRef.data().pwd);
+        console.log(new Date(((docRef.data().time.toDate()))));
       } else {
         console.log('Document does not exits');
       }
@@ -85,17 +86,17 @@ const Mine = () => {
 
           <div className="h-28 overflow-y-visible rounded-xl  info_box bg-[#2b85d9] text-white flex items-center justify-between w-4/5 mx-auto mt-5 p-4">
             <div className='flex flex-col items-center'>
-              <div className='text-xs mb-2'>&#8377; {balance}</div>
+              <div className='text-xs mb-2'>&#8377; {new Intl.NumberFormat().format(balance)}</div>
               <div>Balance</div>
             </div>
 
             <div className='flex flex-col items-center'>
-              <div className='text-xs mb-2'>&#8377;{parseFloat(recharge_amount)}</div>
+              <div className='text-xs mb-2'>&#8377;{new Intl.NumberFormat().format(recharge_amount)}</div>
               <div>Recharge</div>
             </div>
 
             <div className='flex flex-col items-center'>
-              <div className='text-xs mb-2'>&#8377; 0</div>
+              <div className='text-xs mb-2'>&#8377; {new Intl.NumberFormat().format(0)}</div>
               <div>Earning</div>
             </div>
           </div>

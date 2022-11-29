@@ -106,9 +106,9 @@ const Record = () => {
                         <div key={id} className="bg-blue-400 rounded-lg shadow-md p-2 text-white mt-2 mx-2">
                             <div className='flex justify-between items-center'>
                                 <div className='flex flex-col gap-1'>
-                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Recharge Value:</span> &#8377;{element.recharge_value}</div>
+                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Recharge Value:</span> &#8377;{new Intl.NumberFormat().format(element.recharge_value)}</div>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Ref No:</span> {element.refno}</div>
-                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Status:</span> {element.status}</div>
+                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Status:</span> {String(element.status)}</div>
                                 </div>
 
                             </div>
@@ -121,7 +121,7 @@ const Record = () => {
                         <div key={id} className="bg-blue-400 rounded-lg shadow-md p-2 text-white mt-2 mx-2">
                             <div className='flex justify-between items-center'>
                                 <div className='flex flex-col gap-1'>
-                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Withdrawal Amount:</span> &#8377;{element.withdrawalAmount}</div>
+                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Withdrawal Amount:</span> &#8377;{new Intl.NumberFormat().format(element.withdrawalAmount)}</div>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Status:</span> {element.status}</div>
                                 </div>
                             </div>
