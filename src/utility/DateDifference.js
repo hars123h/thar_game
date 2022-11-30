@@ -1,13 +1,13 @@
-const DateDifference = (Date1, Date2) => {
+const DateDifference = (date1, date2) => {
 
-    var date1 = new Date(Date1);
-    var date2 = new Date(Date2);
     
     // To calculate the time difference of two dates
     var Difference_In_Time = date2.getTime() - date1.getTime();
       
     // To calculate the no. of days between two dates
-    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
+
+    console.log(Difference_In_Days);
 
     return Difference_In_Days;
 }

@@ -64,8 +64,8 @@ const Home = () => {
         }else if(quantity<=0) {
             toast('Please a positive value!', {autoClose:1000});
         }else {
-            // console.log({...currPlan, quantity});
-            setCurrPlan({...currPlan, quantity});
+            //console.log({...currPlan, quantity});
+            //setCurrPlan({...currPlan, quantity});
             if(quantity*(currPlan.plan_amount)>userDetails.balance) {
                 toast("You don't have enough balance to make this purchase", {autoClose:1000});
             }else {
@@ -74,7 +74,9 @@ const Home = () => {
                     balance:increment(-1*(quantity*(currPlan.plan_amount))),
                     plans_purchased: arrayUnion({
                         ...currPlan,
+                        quantity: quantity,
                         date_purchased: new Date().toDateString(),
+                        date_till_rewarded: new Date(),
                         time:new Date()
                     })
                 }).then(()=>{

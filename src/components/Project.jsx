@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, } from 'react-router-dom';
 import db from '../firebase/config';
 import { RotatingLines } from 'react-loader-spinner';
+import DateDifference from '../utility/DateDifference.js';
 
 
 
@@ -70,8 +71,15 @@ const Project = () => {
                 userDetails && userDetails?.plans_purchased && (
                     userDetails.plans_purchased.map((element, index) => {
                         return (
-                            <div key={index}>
-                                {console.log(element, index)}
+                            <div key={index} className='mx-auto w-[90%] mt-2 border-2 border-gray-200 p-2 rounded-lg shadow-lg'>
+                                <div>Plan Name: {element.plan_name}</div>
+                                <div>Start Date: {element.date_purchased}</div>
+                                <div>Plan Amount: {element.plan_amount}</div>
+                                <div>Plan Type: {element.plan_type}</div>
+                                <div>Plan Cycle: {element.plan_cycle}</div>
+                                <div>Plan Daily Earning: {element.plan_daily_earning}</div>
+                                <div>Quantity: {element.quantity}</div>
+                                <div>Current Earning: {DateDifference(new Date(element.time.toDate()), new Date())*element.quantity*element.plan_daily_earning}</div>
                             </div>
                         )
                     })
