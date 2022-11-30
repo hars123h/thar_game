@@ -1,13 +1,10 @@
 import { getAuth } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, increment, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, } from 'react-router-dom';
 import db from '../firebase/config';
 import { RotatingLines } from 'react-loader-spinner';
 import DateDifference from '../utility/DateDifference.js';
-
-
-
 
 
 const Project = () => {
@@ -18,20 +15,50 @@ const Project = () => {
 
     const getUserDetails = async () => {
         const docRef = doc(db, 'users', auth.currentUser.uid);
-        await getDoc(docRef).then(doc => {
-            if (doc.exists()) {
+        await getDoc(docRef).then(document => {
+            if (document.exists()) {
                 //console.log(doc.data());
-                setUserDetails(doc.data());
+                setUserDetails(document.data());
+                // if(doc.data()?.plans_purchased) {
+                //     setPlans_details(doc.data().plans_purchased);
+                // }
+                if (document.data().plans_purchased) {
+                    var earn = 0;
+                    var temp = document.data().plans_purchased.map((element) => {
+                        // console.log(element.time, element.date_till_rewarded);
+                        // console.log(DateDifference(new Date(element.time.seconds), new Date(element.date_till_rewarded.seconds)));
+                        var days = DateDifference(new Date(element.time.seconds), new Date(element.date_till_rewarded.seconds));
+                        earn = earn + (days * element.quantity * element.plan_daily_earning);
+                        return {
+                            ...element,
+                            date_till_rewarded: new Date()
+                        }
+                    });
+                    const docRef1 = doc(db, 'users', auth.currentUser.uid);
+                    updateDoc(docRef1, {
+                        earning: increment(earn),
+                        balance: increment(earn),
+                        plans_purchased: temp
+                    })
+                        .then(() => console.log('Reward successfully updated'))
+                        .catch(error => console.log('Some error Occured'));
+                }
             } else {
                 console.log('Data not found');
             }
             setLoading(false);
-        }).catch(error => console.log('Some error occured', error));
+
+        }).then(() => {
+            console.log('This is working');
+            //console.log(plans_details);
+        })
+            .catch(error => console.log('Some error occured', error));
     }
 
     useEffect(() => {
         setLoading(true);
         getUserDetails();
+        console.log('User Effect Ran');
     }, []);
 
     if (loading) {
@@ -50,6 +77,8 @@ const Project = () => {
             </div>
         )
     }
+
+
 
     return (
         <div className='h-screen bg-[#2e9afe]'>
@@ -79,12 +108,18 @@ const Project = () => {
                                 <div>Plan Cycle: {element.plan_cycle}</div>
                                 <div>Plan Daily Earning: {element.plan_daily_earning}</div>
                                 <div>Quantity: {element.quantity}</div>
-                                <div>Current Earning: {DateDifference(new Date(element.time.toDate()), new Date())*element.quantity*element.plan_daily_earning}</div>
+                                <div>Current Earning: {DateDifference(new Date(element.time.toDate()), new Date()) * element.quantity * element.plan_daily_earning}</div>
                             </div>
                         )
                     })
                 )
             }
+
+            {!userDetails?.plans_purchased && (
+                <div className='text-2xl text-white text-center w-[90%] mx-auto p-3 m-3 border-2 border-gray-300 rounded-lg shadow-lg'>
+                    No data to show!
+                </div>
+            )}
         </div>
     )
 }

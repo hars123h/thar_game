@@ -12,7 +12,7 @@ import btm_prof from '../images/btm_prof.png';
 import { useNavigate } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import {toast} from 'react-toastify';
-import {arrayUnion, doc, getDoc, increment, Timestamp, updateDoc} from 'firebase/firestore';
+import {arrayUnion, doc, getDoc, increment, updateDoc} from 'firebase/firestore';
 import db from '../firebase/config.js';
 import {getAuth} from 'firebase/auth';
 
@@ -96,8 +96,6 @@ const Home = () => {
         openModal();
         setCurrPlan({plan_name, plan_type, plan_amount, plan_daily_earning, plan_cycle});
     }
-
-    
 
     return (
         <div>
