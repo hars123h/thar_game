@@ -28,6 +28,7 @@ const Mine = () => {
   const [balance, setBalance] = useState(0);
   const [originalwpwd, setOriginalwpwd] = useState(null);
   const [originalpwd, setOriginalpwd] = useState(null);
+  const [earning, setEarning] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useLayoutEffect(() => {
@@ -38,6 +39,7 @@ const Mine = () => {
         setMobileno(docRef.data().mobno);
         setRecharge_amount(docRef.data().recharge_amount);
         setBalance(docRef.data().balance);
+        setEarning(docRef.data().earning);
         setOriginalwpwd(docRef.data().wpwd);
         setOriginalpwd(docRef.data().pwd);
         console.log(new Date(((docRef.data().time.toDate()))));
@@ -47,7 +49,7 @@ const Mine = () => {
     }
     setLoading(true);
     getUserInfo()
-    .then(() => setLoading(false));
+      .then(() => setLoading(false));
   }, []);
 
   const handleSignOut = () => {
@@ -58,21 +60,25 @@ const Mine = () => {
     });
   }
 
+  if (loading) {
+    return (
+      <div className='flex flex-col justify-center items-center  h-screen bg-gray-50 z-10 opacity-90'>
+        <RotatingLines
+          strokeColor="grey"
+          strokeWidth="2"
+          animationDuration="0.75"
+          width="96"
+          visible={true}
+        />
+        <div>Loading...</div>
+      </div>
+    )
+  }
+
   return (
     <div>
 
       <div className='flex flex-col'>
-
-        {loading && (<div className='flex flex-col justify-center items-center  h-screen bg-gray-50 z-10 opacity-90'>
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="2"
-            animationDuration="0.75"
-            width="96"
-            visible={true}
-          />
-          <div>Loading...</div>
-        </div>)}
 
         <div className="top bg-[#2e9afe] h-56">
 
@@ -96,7 +102,7 @@ const Mine = () => {
             </div>
 
             <div className='flex flex-col items-center'>
-              <div className='text-xs mb-2'>&#8377; {new Intl.NumberFormat().format(0)}</div>
+              <div className='text-xs mb-2'>&#8377; {new Intl.NumberFormat().format(earning)}</div>
               <div>Earning</div>
             </div>
           </div>

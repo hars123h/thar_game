@@ -5,6 +5,7 @@ import { useNavigate, } from 'react-router-dom';
 import db from '../firebase/config';
 import { RotatingLines } from 'react-loader-spinner';
 import DateDifference from '../utility/DateDifference.js';
+import {toast} from 'react-toastify';
 
 
 const Project = () => {
@@ -17,24 +18,29 @@ const Project = () => {
         const docRef = doc(db, 'users', auth.currentUser.uid);
         await getDoc(docRef).then(document => {
             if (document.exists()) {
-                //console.log(doc.data());
                 setUserDetails(document.data());
-                // if(doc.data()?.plans_purchased) {
-                //     setPlans_details(doc.data().plans_purchased);
-                // }
+                if(('plans_purchaed' in document.data())===false) {
+                    toast('Please buy a plan first!');
+                    navigate('/mine');
+                }
                 if (document.data().plans_purchased) {
                     var earn = 0;
                     var temp = document.data().plans_purchased.map((element) => {
-                        // console.log(element.time, element.date_till_rewarded);
-                        // console.log(DateDifference(new Date(element.time.seconds), new Date(element.date_till_rewarded.seconds)));
-                        var days = DateDifference(new Date(element.time.seconds), new Date(element.date_till_rewarded.seconds));
+                        var days = DateDifference(new Date(element.date_till_rewarded), new Date());
+                        console.log(days, element);
+                        if (days > element.plan_cycle) {
+                            return {
+                                ...element
+                            }
+                        }
                         earn = earn + (days * element.quantity * element.plan_daily_earning);
                         return {
                             ...element,
-                            date_till_rewarded: new Date()
+                            date_till_rewarded: new Date().toDateString()
                         }
                     });
                     const docRef1 = doc(db, 'users', auth.currentUser.uid);
+
                     updateDoc(docRef1, {
                         earning: increment(earn),
                         balance: increment(earn),
@@ -42,6 +48,7 @@ const Project = () => {
                     })
                         .then(() => console.log('Reward successfully updated'))
                         .catch(error => console.log('Some error Occured'));
+
                 }
             } else {
                 console.log('Data not found');
@@ -50,7 +57,6 @@ const Project = () => {
 
         }).then(() => {
             console.log('This is working');
-            //console.log(plans_details);
         })
             .catch(error => console.log('Some error occured', error));
     }
@@ -58,7 +64,8 @@ const Project = () => {
     useEffect(() => {
         setLoading(true);
         getUserDetails();
-        console.log('User Effect Ran');
+        console.log(userDetails);
+        console.log('Use Effect Ran');
     }, []);
 
     if (loading) {
@@ -96,24 +103,26 @@ const Project = () => {
                 <div className='h-[40px] flex items-center justify-center w-1/2 text-center text-white'>Completed</div>
             </div>
 
-            {
-                userDetails && userDetails?.plans_purchased && (
-                    userDetails.plans_purchased.map((element, index) => {
-                        return (
-                            <div key={index} className='mx-auto w-[90%] mt-2 border-2 border-gray-200 p-2 rounded-lg shadow-lg'>
-                                <div>Plan Name: {element.plan_name}</div>
-                                <div>Start Date: {element.date_purchased}</div>
-                                <div>Plan Amount: {element.plan_amount}</div>
-                                <div>Plan Type: {element.plan_type}</div>
-                                <div>Plan Cycle: {element.plan_cycle}</div>
-                                <div>Plan Daily Earning: {element.plan_daily_earning}</div>
-                                <div>Quantity: {element.quantity}</div>
-                                <div>Current Earning: {DateDifference(new Date(element.time.toDate()), new Date()) * element.quantity * element.plan_daily_earning}</div>
-                            </div>
-                        )
-                    })
-                )
-            }
+            <div className='overflow-y-scroll h-[600px] mx-auto w-[95%] m-4'>
+                {
+                    userDetails && ('plans_purchased' in userDetails) && (
+                        userDetails.plans_purchased.map((element, index) => {
+                            return (
+                                <div key={index} className='mx-auto w-[90%] mt-2 border-2 border-gray-200 p-2 rounded-lg shadow-lg'>
+                                    <div>Plan Name: {element.plan_name}</div>
+                                    <div>Start Date: {element.date_purchased}</div>
+                                    <div>Plan Amount: {element.plan_amount}</div>
+                                    <div>Plan Type: {element.plan_type}</div>
+                                    <div>Plan Cycle: {element.plan_cycle}</div>
+                                    <div>Plan Daily Earning: {element.plan_daily_earning}</div>
+                                    <div>Quantity: {element.quantity}</div>
+                                    <div>Current Earning: {DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning}</div>
+                                </div>
+                            )
+                        })
+                    )
+                }
+            </div>
 
             {!userDetails?.plans_purchased && (
                 <div className='text-2xl text-white text-center w-[90%] mx-auto p-3 m-3 border-2 border-gray-300 rounded-lg shadow-lg'>

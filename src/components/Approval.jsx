@@ -1,5 +1,5 @@
 import React from 'react';
-import { collection, getDocs, doc, updateDoc, increment } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc, increment, arrayUnion } from 'firebase/firestore';
 import db from '../firebase/config.js'
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -19,10 +19,11 @@ const Approval = () => {
         var temp_Data = [];
         var idx = 0;
         docSnap.forEach((doc) => {
+            //console.log(doc.data(), 'this is the doc data');
             if(doc.data().status==='pending') {
                 temp_Data = [...temp_Data, { ...doc.data(), 'recharge_id': docSnap._snapshot.docChanges[idx].doc.key.path.segments[6] }];
             }
-            console.log(temp_Data);
+            //console.log(temp_Data);
             idx += 1;
         });
         //_snapshot.docChanges[0].doc.key
@@ -30,15 +31,20 @@ const Approval = () => {
     }
 
     // This is the rate at which the polling is done to update and get the new Data
-    useInterval(getRecharges_list, 10000);
+    useInterval(getRecharges_list, 20000);
 
     useEffect(() => {
         getRecharges_list();
     }, []);
 
-    const updateStatus = async (recharge_id, new_status, recharge_value, user_id) => {
+    const updateStatus = async (recharge_id, new_status, recharge_value, user_id, element) => {
         const docRef = doc(db, 'recharges', recharge_id);
         const docRef2 = doc(db, 'users', user_id);
+        console.log(element);
+        
+
+        //console.log(user_id, parent_id, grand_parent_id);
+
         await updateDoc(docRef, {
             status: new_status
         }).then(() => {
@@ -47,6 +53,17 @@ const Approval = () => {
                 recharge_amount: increment(recharge_value),
                 balance:increment(recharge_value)
             });
+            updateDoc(doc(db, 'users', element.parent_id), {
+                balance:increment(0.1*recharge_value),
+                directRecharge:increment(0.1*recharge_value),
+                directMember:arrayUnion(user_id)
+            });
+            updateDoc(doc(db, 'users', element.grand_parent_int), {
+                balance:increment(0.05*recharge_value),
+                indirectRecharge:increment(0.05*recharge_value),
+                indirectMember:arrayUnion(user_id)
+            });
+
             getRecharges_list();
         }).catch((error) => {
             console.log('Some Error Occured');
@@ -85,8 +102,8 @@ const Approval = () => {
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Status:</span> {element.status}</div>
                                 </div>
                                 <div className='flex gap-1'>
-                                    <button className='bg-green-500 text-sm shadow-lg rounded-lg p-2' onClick={() => updateStatus(element.recharge_id, 'confirmed', element.recharge_value, element.user_id)}>Confirm</button>
-                                    <button className='bg-red-500 text-sm shadow-lg rounded-lg p-2 ml-2' onClick={() => updateStatus(element.recharge_id, 'declined', element.recharge_value, element.user_id)}>Decline</button>
+                                    <button className='bg-green-500 text-sm shadow-lg rounded-lg p-2' onClick={() => updateStatus(element.recharge_id, 'confirmed', element.recharge_value, element.user_id, element)}>Confirm</button>
+                                    <button className='bg-red-500 text-sm shadow-lg rounded-lg p-2 ml-2' onClick={() => updateStatus(element.recharge_id, 'declined', element.recharge_value, element.user_id, element)}>Decline</button>
                                 </div>
                             </div>
                         </div>

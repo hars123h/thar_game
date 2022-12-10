@@ -22,6 +22,7 @@ import ChangeWithdrawalPassword from './components/ChangeWithdrawalPassword';
 import RechargeWindow from './components/RechargeWindow';
 import Approval from './components/Approval';
 import WithdrawalApproval from './components/WithdrawalApproval';
+import RegisterInvite from './components/RegisterInvite';
 
 function App() {
   
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Fallback/>} />
         <Route path="/register" element={<Register/>}/>
+        <Route path="/register/invite_code/:invite_code" element={<RegisterInvite />}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgot" element={<ForgotPassword/>}/>
         <Route path="/home" element={<Home/>}/>

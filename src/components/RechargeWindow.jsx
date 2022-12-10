@@ -2,11 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import db from '../firebase/config.js';
-// import app from '../firebase/config.js';
 import {getAuth} from 'firebase/auth';
-import { collection, addDoc, Timestamp } from "firebase/firestore";
-// import { getFirestore } from "firebase/firestore";
+import { collection, addDoc, Timestamp, doc, getDoc } from "firebase/firestore";
 import {toast} from 'react-toastify';
+import { useEffect, useLayoutEffect } from 'react';
 
 
 const RechargeWindow = () => {
@@ -15,15 +14,35 @@ const RechargeWindow = () => {
     const [refno, setRefno] = useState('');
     const navigate = useNavigate();
     const auth = getAuth();
-    // const db2 = getFirestore(app);
+    const [userDetails, setUserDetails] = useState(null);
 
-    console.log(auth.currentUser.email.substring(0,9));
+    const getUserDetails = async() => {
+        const  user_info = await getDoc(doc(db, 'users', auth.currentUser.uid));
+        setUserDetails(user_info.data());
+    }
+
+    useEffect(()=>{
+        getUserDetails();
+    },[]);
+
+
 
     const handleRecharge = async () => {
         console.log({ refno, recharge_value, status: 'pending' });
+
         try {
-            const docRef1 = await addDoc(collection(db, "recharges"), { refno, recharge_value, status: 'pending', user_id: auth.currentUser.uid, mobno:auth.currentUser.email.substring(0,10), time:Timestamp.now() });
+            const docRef1 = await addDoc(collection(db, "recharges"), { 
+                refno, 
+                recharge_value, 
+                status: 'pending', 
+                user_id: auth.currentUser.uid, 
+                mobno:auth.currentUser.email.substring(0,10), 
+                time:Timestamp.now(),
+                parent_id: userDetails.parent_id,
+                grand_parent_int: userDetails.grand_parent_id
+             });
             const docRef2 = await addDoc(collection(db, 'users', auth.currentUser.uid, 'placed_recharges'), {recharge_id:docRef1.id, time:Timestamp.now()});
+            
             console.log("Document written with ID: ", docRef1.id, docRef2.id);
             toast('Request Placed Successfully!',{autoClose:1000});
             navigate('/record');

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import hp_logo from '../images/hp_logo.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import referralCodeGenerator from 'referral-code-generator'
 import db from '../firebase/config.js';
@@ -8,15 +8,16 @@ import { setDoc, doc, updateDoc, query, collection, where, getDocs } from "fireb
 
 
 
-const Register = () => {
+const RegisterInvite = () => {
 
     const navigate = useNavigate();
+    const {invite_code} = useParams();
     const auth = getAuth();
     const [mobno, setMobno] = useState('');
     const [pwd, setpwd] = useState('');
     const [cpwd, setCpwd] = useState('');
     const [wpwd, setwpwd] = useState('');
-    const [invt, setInvt] = useState('');
+    const [invt, setInvt] = useState(invite_code);
 
     const handleRegister = async () => {
         console.log({ mobno, pwd, cpwd, wpwd, invt });
@@ -108,4 +109,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default RegisterInvite

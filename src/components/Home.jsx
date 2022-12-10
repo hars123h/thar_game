@@ -11,10 +11,10 @@ import btm_team from '../images/btm_tem.png';
 import btm_prof from '../images/btm_prof.png';
 import { useNavigate } from 'react-router-dom';
 import ReactModal from 'react-modal';
-import {toast} from 'react-toastify';
-import {arrayUnion, doc, getDoc, increment, updateDoc} from 'firebase/firestore';
+import { toast } from 'react-toastify';
+import { arrayUnion, doc, getDoc, increment, updateDoc } from 'firebase/firestore';
 import db from '../firebase/config.js';
-import {getAuth} from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
 
 
@@ -42,48 +42,48 @@ const Home = () => {
         setIsOpen(true);
     }
 
-    const getUserDetails = async() => {
+    const getUserDetails = async () => {
         const docRef = doc(db, 'users', auth.currentUser.uid);
-        await getDoc(docRef).then(doc=>{
-            if(doc.exists()) {
+        await getDoc(docRef).then(doc => {
+            if (doc.exists()) {
                 console.log(doc.data());
                 setUserDetails(doc.data());
-            }else {
+            } else {
                 console.log('Data not found');
             }
-        }).catch(error=>console.log('Some error occured', error));
+        }).catch(error => console.log('Some error occured', error));
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getUserDetails();
-    },[]);
+    }, []);
 
-    const closeModal = async (action) =>{
-        if(action==='cancel') {
+    const closeModal = async (action) => {
+        if (action === 'cancel') {
             setIsOpen(false);
-        }else if(quantity<=0) {
-            toast('Please a positive value!', {autoClose:1000});
-        }else {
+        } else if (quantity <= 0) {
+            toast('Please a positive value!', { autoClose: 1000 });
+        } else {
             //console.log({...currPlan, quantity});
             //setCurrPlan({...currPlan, quantity});
-            if(quantity*(currPlan.plan_amount)>userDetails.balance) {
-                toast("You don't have enough balance to make this purchase", {autoClose:1000});
-            }else {
+            if (quantity * (currPlan.plan_amount) > userDetails.balance) {
+                toast("You don't have enough balance to make this purchase", { autoClose: 1000 });
+            } else {
                 const docRef = doc(db, 'users', auth.currentUser.uid);
                 await updateDoc(docRef, {
-                    balance:increment(-1*(quantity*(currPlan.plan_amount))),
+                    balance: increment(-1 * (quantity * (currPlan.plan_amount))),
                     plans_purchased: arrayUnion({
                         ...currPlan,
                         quantity: quantity,
                         date_purchased: new Date().toDateString(),
-                        date_till_rewarded: new Date(),
-                        time:new Date()
+                        date_till_rewarded: new Date().toDateString(),
+                        time: new Date().toDateString()
                     })
-                }).then(()=>{
+                }).then(() => {
                     console.log('Product successfully purchased');
                     toast('Plan purchased!');
                     navigate('/project');
-                }).catch((error)=>{
+                }).catch((error) => {
                     console.log('Some error occured', error);
                     toast('Some error occured, try again after some time');
                 })
@@ -94,7 +94,7 @@ const Home = () => {
 
     const handleClick = (plan_name, plan_type, plan_amount, plan_daily_earning, plan_cycle) => {
         openModal();
-        setCurrPlan({plan_name, plan_type, plan_amount, plan_daily_earning, plan_cycle});
+        setCurrPlan({ plan_name, plan_type, plan_amount, plan_daily_earning, plan_cycle });
     }
 
     return (
@@ -102,21 +102,21 @@ const Home = () => {
             <Slider />
 
             <div>
-            <ReactModal
-                isOpen={modalIsOpen}
-                style={customStyles}
-                contentLabel="Enter Project Quantity"
-                ariaHideApp={false}
-                
-            >
-                <h1 className='text-gray-600 mb-3 text-xl'>Choose a quantity</h1>
-                <input type="number" onChange={e=>setQuantity(e.target.value)} name="quantity" id="qnty" placeholder='Enter a Quantity' className='outline-none rounded-lg border-2 border-gray-400 focus:border-blue-500 p-3'/>
-                <h6 className='text-red-500 text-xs mb-3'>*only positive values</h6>
-                <div>
-                    <button onClick={()=>closeModal('ok')} className='bg-blue-500 text-white px-2 py-1 rounded-lg shadow-md w-[64px]'>ok</button>
-                    <button onClick={()=>closeModal('cancel')} className='bg-red-500 text-white px-2 py-1 rounded-lg shadow-md w-[64px] ml-2'>cancel</button>
-                </div>
-            </ReactModal>
+                <ReactModal
+                    isOpen={modalIsOpen}
+                    style={customStyles}
+                    contentLabel="Enter Project Quantity"
+                    ariaHideApp={false}
+
+                >
+                    <h1 className='text-gray-600 mb-3 text-xl'>Choose a quantity</h1>
+                    <input type="number" onChange={e => setQuantity(e.target.value)} name="quantity" id="qnty" placeholder='Enter a Quantity' className='outline-none rounded-lg border-2 border-gray-400 focus:border-blue-500 p-3' />
+                    <h6 className='text-red-500 text-xs mb-3'>*only positive values</h6>
+                    <div>
+                        <button onClick={() => closeModal('ok')} className='bg-blue-500 text-white px-2 py-1 rounded-lg shadow-md w-[64px]'>ok</button>
+                        <button onClick={() => closeModal('cancel')} className='bg-red-500 text-white px-2 py-1 rounded-lg shadow-md w-[64px] ml-2'>cancel</button>
+                    </div>
+                </ReactModal>
             </div>
 
             {/*Marquee Implementation*/}
@@ -133,10 +133,12 @@ const Home = () => {
             {/*Navigation Bar 1*/}
             <div className="bg-[#7dc1ff] rounded-lg text-white relative flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 sm:w-3/5 lg:w-3/5 overflow-y-hidden">
                 <div className="flex flex-row justify-around items-center w-full py-2">
-                    <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
-                        <img src={headphone_img} alt="online" className='w-10' />
-                        <div>Online</div>
-                    </div>
+                    <a href="https://t.me/interviewtcs" className=' no-underline text-white cursor-pointer'>
+                        <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
+                            <img src={headphone_img} alt="online" className='w-10' />
+                            <div>Online</div>
+                        </div>
+                    </a>
 
                     <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
                         <img src={download_img} alt="app_dwd" className='w-10' />
@@ -181,7 +183,7 @@ const Home = () => {
                 </div>
             </div>
 
-            
+
 
             {/*Navigation Bar 2*/}
             <div className="fixed bottom-0 z-10 bg-white rounded-none text-[#757575] flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">

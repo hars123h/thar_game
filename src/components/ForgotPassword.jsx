@@ -1,9 +1,23 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+// import sendMessages from '../utility/OTP.js';
+// import otpGenerator from 'otp-generator';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const ForgotPassword = () => {
 
     const navigate = useNavigate();
+    const [mobno, setMobno] = useState('');
+
+    const handleMessage = () => {
+        // if(mobno.length==10) {
+        //     const otp = otpGenerator.generate(6, { digits: true, lowerCaseAlphabets:false, upperCaseAlphabets: false, specialChars: false });
+        //     sendMessages('the otp to retrieve your password is ', "+919140493078", otp);
+        // }else {
+        //     toast('Invalid Mobile No, please type a valid number');
+        // }
+    }
 
     return (
         <div className='bg-[#0096D5] h-screen'>
@@ -14,8 +28,8 @@ const ForgotPassword = () => {
                 Find Password</div>
             <div className="box mb-20 border-2 m-auto border-gray-200 bg-[#d3d6fe] rounded-3xl border-solid lg:w-3/5 w-4/5 shadow-xl shadow-[#95c2ec] p-4 w-50% flex flex-col">
                 <div className="no_phone mb-3 flex items-center bg-white border-2 border-gray-100 rounded-full ">
-                    <input type="text" className='p-2 w-full outline-none rounded-full' placeholder='Phone number' name="phoneno" id="phoneno" />
-                    <div className='opt w-10 bg-[#0096D5] mr-4 text-xs cursor-pointer p-2 shadow-md rounded-2xl text-white text-center'>OTP</div>
+                    <input onChange={(e)=>setMobno(e.target.value)}  type="number" className='p-2 w-full outline-none rounded-full' placeholder='Phone number' name="phoneno" id="phoneno" />
+                    <div onClick={handleMessage} className='opt w-10 bg-[#0096D5] mr-4 text-xs cursor-pointer p-2 shadow-md rounded-2xl text-white text-center'>OTP</div>
                 </div>
 
 
