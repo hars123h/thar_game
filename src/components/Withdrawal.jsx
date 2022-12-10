@@ -69,7 +69,7 @@ const Withdrawal = () => {
     }
 
     return (
-        <div className='bg-[#2e9afe] flex flex-col p-4 sm:h-[700px] md:h-[950px]'>
+        <div className='bg-[#2e9afe] flex flex-col p-4 sm:h-[1000px] md:h-[950px]'>
             <div className="options text-center text-white text-lg pt-2 font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate('/home')} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute left-2  storke-white top-5 cursor-pointer">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -111,9 +111,9 @@ const Withdrawal = () => {
                     <div className='text-black'>{details.ifsc}</div>
                 </div>
 
-                <div className="balance flex justify-between text-[#87a1c3] text-xl p-3 border-[#87a1c3] border-b-2">
-                    <div className="wpwd">Withdrawal Password:</div>
-                    <div><input type="password" onChange={e=>setWpassword(e.target.value)} placeholder='Enter Withdrawal Password' className='outline-none bg-[#d3d6fe] w-[250px]' /></div>
+                <div className="balance flex justify-between text-[#87a1c3] sm:text-md md:text-xl p-3 border-[#87a1c3] border-b-2">
+                    <div className="wpwd w-2/3">Withdrawal Password:</div>
+                    <input type="password" onChange={e=>setWpassword(e.target.value)} placeholder='Enter Password' className='outline-none bg-[#d3d6fe] w-1/3' />
                 </div>
 
             </div>

@@ -5,7 +5,7 @@ import { useNavigate, } from 'react-router-dom';
 import db from '../firebase/config';
 import { RotatingLines } from 'react-loader-spinner';
 import DateDifference from '../utility/DateDifference.js';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 const Project = () => {
@@ -19,7 +19,7 @@ const Project = () => {
         await getDoc(docRef).then(document => {
             if (document.exists()) {
                 setUserDetails(document.data());
-                if(('plans_purchased' in document.data())===false) {
+                if (('plans_purchased' in document.data()) === false) {
                     toast('Please buy a plan first!');
                     navigate('/mine');
                 }
@@ -88,7 +88,7 @@ const Project = () => {
 
 
     return (
-        <div className='h-screen bg-[#2e9afe]'>
+        <div className='md:h-screen xs:h-[1200px] bg-[#2e9afe]'>
 
             <div className="options text-center bg-[#2e9afe] text-white text-md pt-5 font-normal pb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate(-1)} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute left-2  storke-white top-5 cursor-pointer">
@@ -103,20 +103,23 @@ const Project = () => {
                 <div className='h-[40px] flex items-center justify-center w-1/2 text-center text-white'>Completed</div>
             </div>
 
-            <div className='overflow-y-scroll h-[600px] mx-auto w-[95%] m-4'>
+            <div className='overflow-y-scroll h-[600px] mx-auto w-[95%] mt-2 p-2'>
                 {
                     userDetails && ('plans_purchased' in userDetails) && (
                         userDetails.plans_purchased.map((element, index) => {
                             return (
-                                <div key={index} className='mx-auto w-[90%] mt-2 border-2 border-gray-200 p-2 rounded-lg shadow-lg'>
-                                    <div>Plan Name: {element.plan_name}</div>
-                                    <div>Start Date: {element.date_purchased}</div>
-                                    <div>Plan Amount: {element.plan_amount}</div>
-                                    <div>Plan Type: {element.plan_type}</div>
-                                    <div>Plan Cycle: {element.plan_cycle}</div>
-                                    <div>Plan Daily Earning: {element.plan_daily_earning}</div>
-                                    <div>Quantity: {element.quantity}</div>
-                                    <div>Current Earning: {DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning}</div>
+                                <div key={index} className='mx-auto w-[90%] mt-2 border-x-2 border-white border-b-2  rounded-lg shadow-lg text-white'>
+                                    <div className="text-lg p-3 text-[#2e9afe] font-semibold bg-white rounded-t-lg">Plan Details</div>
+                                    <div className='p-3'>
+                                        <div className='mb-1'>Plan Name: {element.plan_name}</div>
+                                        <div className='mb-1'>Start Date: {element.date_purchased}</div>
+                                        <div className='mb-1'>Plan Amount: &#8377;{element.plan_amount}</div>
+                                        <div className='mb-1'>Plan Type: {element.plan_type}</div>
+                                        <div className='mb-1'>Plan Cycle: {element.plan_cycle}</div>
+                                        <div className='mb-1'>Plan Daily Earning: &#8377;{element.plan_daily_earning}</div>
+                                        <div className='mb-1'>Quantity: {element.quantity}</div>
+                                        <div className='mb-1'>Current Earning: &#8377;{DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning}</div>
+                                    </div>
                                 </div>
                             )
                         })

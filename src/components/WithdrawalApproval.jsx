@@ -19,7 +19,7 @@ const WithdrawalApproval = () => {
         var temp_Data = [];
         var idx = 0;
         docSnap.forEach((doc) => {
-            if(doc.data().status==='pending') {
+            if (doc.data().status === 'pending') {
                 temp_Data = [...temp_Data, { ...doc.data(), 'withdrawal_id': docSnap._snapshot.docChanges[idx].doc.key.path.segments[6] }];
             }
             console.log(temp_Data);
@@ -43,9 +43,11 @@ const WithdrawalApproval = () => {
             status: new_status
         }).then(() => {
             console.log('Withdrawal Status Approved', new_status);
-            updateDoc(docRef2, {
-                balance:increment(-Number(withdrawal_value))
-            });
+            if (new_status === 'confirmed') {
+                updateDoc(docRef2, {
+                    balance: increment(-Number(withdrawal_value))
+                });
+            }
             getWithdrawals_list();
         }).catch((error) => {
             console.log('Some Error Occured');

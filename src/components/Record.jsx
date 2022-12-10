@@ -58,7 +58,7 @@ const Record = () => {
     }, []);
 
     return (
-        <div className=' bg-[#2e9afe] pb-3 h-screen'>
+        <div className=' bg-[#2e9afe] pb-3 sm:h-[1000px] md:h-screen'>
 
             <div className="options text-center text-white flex gap-2 items-center p-2  bg-[#2a9afe] text-lg pt-2 font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate('/mine')} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6  storke-white  cursor-pointer">

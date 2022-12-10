@@ -20,7 +20,7 @@ const Approval = () => {
         var idx = 0;
         docSnap.forEach((doc) => {
             //console.log(doc.data(), 'this is the doc data');
-            if(doc.data().status==='pending') {
+            if (doc.data().status === 'pending') {
                 temp_Data = [...temp_Data, { ...doc.data(), 'recharge_id': docSnap._snapshot.docChanges[idx].doc.key.path.segments[6] }];
             }
             //console.log(temp_Data);
@@ -41,7 +41,7 @@ const Approval = () => {
         const docRef = doc(db, 'recharges', recharge_id);
         const docRef2 = doc(db, 'users', user_id);
         console.log(element);
-        
+
 
         //console.log(user_id, parent_id, grand_parent_id);
 
@@ -49,20 +49,22 @@ const Approval = () => {
             status: new_status
         }).then(() => {
             console.log('Recharge Status Approved', new_status);
-            updateDoc(docRef2, {
-                recharge_amount: increment(recharge_value),
-                balance:increment(recharge_value)
-            });
-            updateDoc(doc(db, 'users', element.parent_id), {
-                balance:increment(0.1*recharge_value),
-                directRecharge:increment(0.1*recharge_value),
-                directMember:arrayUnion(user_id)
-            });
-            updateDoc(doc(db, 'users', element.grand_parent_int), {
-                balance:increment(0.05*recharge_value),
-                indirectRecharge:increment(0.05*recharge_value),
-                indirectMember:arrayUnion(user_id)
-            });
+            if (new_status === 'confirmed') {
+                updateDoc(docRef2, {
+                    recharge_amount: increment(recharge_value),
+                    balance: increment(recharge_value)
+                });
+                updateDoc(doc(db, 'users', element.parent_id), {
+                    balance: increment(0.1 * recharge_value),
+                    directRecharge: increment(0.1 * recharge_value),
+                    directMember: arrayUnion(user_id)
+                });
+                updateDoc(doc(db, 'users', element.grand_parent_int), {
+                    balance: increment(0.05 * recharge_value),
+                    indirectRecharge: increment(0.05 * recharge_value),
+                    indirectMember: arrayUnion(user_id)
+                });
+            }
 
             getRecharges_list();
         }).catch((error) => {
