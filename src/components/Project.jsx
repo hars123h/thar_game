@@ -19,7 +19,7 @@ const Project = () => {
         await getDoc(docRef).then(document => {
             if (document.exists()) {
                 setUserDetails(document.data());
-                if(('plans_purchaed' in document.data())===false) {
+                if(('plans_purchased' in document.data())===false) {
                     toast('Please buy a plan first!');
                     navigate('/mine');
                 }
