@@ -59,9 +59,14 @@ const Approval = () => {
                     directRecharge: increment(0.1 * recharge_value),
                     directMember: arrayUnion(user_id)
                 });
-                updateDoc(doc(db, 'users', element.grand_parent_int), {
-                    balance: increment(0.05 * recharge_value),
-                    indirectRecharge: increment(0.05 * recharge_value),
+                updateDoc(doc(db, 'users', element.grand_parent_id), {
+                    balance: increment(0.03 * recharge_value),
+                    indirectRecharge: increment(0.03 * recharge_value),
+                    indirectMember: arrayUnion(user_id)
+                });
+                updateDoc(doc(db, 'users', element.great_grand_parent_id), {
+                    balance: increment(0.02*recharge_value),
+                    indirectRecharge: increment(0.02*recharge_value),
                     indirectMember: arrayUnion(user_id)
                 });
             }

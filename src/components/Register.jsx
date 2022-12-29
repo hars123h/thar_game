@@ -59,10 +59,19 @@ const Register = () => {
                         return qw;
                     }).then((qw) => {
                         const newRef2 = doc(db, 'users', auth.currentUser.uid);
-                        console.log(qw, 'this is the last then');
+                        
                         updateDoc(newRef2, {
                             grand_parent_id: qw._snapshot.docChanges[0].doc.key.path.segments[6],
                         });
+                        const new_qw = getDocs(query(collection(db, "users"), where("user_invite", "==", qw._snapshot.docChanges[0].doc.data.value.mapValue.fields.parent_invt.stringValue)));
+                        return new_qw;
+                    }).then((new_qw)=>{
+                        const newRef3 = doc(db, 'users', auth.currentUser.uid);
+                        //console.log(qw, 'this is the last then');
+                        console.log(new_qw);
+                        updateDoc(newRef3, {
+                            great_grand_parent_id:new_qw._snapshot.docChanges[0].doc.key.path.segments[6],
+                        })
                     });
                     console.log("Document written successfully");
                 } catch (e) {

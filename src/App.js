@@ -13,6 +13,7 @@ import Invite from './components/Invite';
 import Record from './components/Record';
 import Project from './components/Project';
 import {Routes, Route } from 'react-router-dom';
+import Dashboard from './components/Dashboard';
 import Fallback from './components/Fallback';
 import Withdrawal from './components/Withdrawal';
 import Settings from './components/Settings';
@@ -23,6 +24,15 @@ import RechargeWindow from './components/RechargeWindow';
 import Approval from './components/Approval';
 import WithdrawalApproval from './components/WithdrawalApproval';
 import RegisterInvite from './components/RegisterInvite';
+import Withdrawals from './components/Withdrawals';
+import User from './components/User';
+import Transactions from './components/Transactions';
+import Access from './components/Access';
+import Feedback from './components/Feedback';
+import AmountSetup from './components/AmountSetup';
+import DashboardLogin from './components/DashboardLogin';
+import AdminLogout from './components/AdminLogout';
+
 
 function App() {
   
@@ -40,6 +50,7 @@ function App() {
         <Route path="/team" element={<Team/>}/>
         <Route path="/mine" element={<Mine/>}/>
         <Route path="/recharge" element={<Recharge/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/invite" element={<Invite/>}/>
         <Route path="/record" element={<Record/>}/>
         <Route path="/project" element={<Project/>}/>
@@ -51,6 +62,17 @@ function App() {
         <Route path="/recharge_window/:recharge_value" element={<RechargeWindow/>}/>
         <Route path="/recharge_approval" element={<Approval/>}/>
         <Route path="/withdrawal_approval" element={<WithdrawalApproval/>}/>
+        <Route path="admin/Login" element={<DashboardLogin/>} />
+        <Route path="/admin/Dashboard" element={<Dashboard/>}/>
+        <Route path="/admin/Withdrawals" element={<Withdrawals/>}/>
+        <Route path="/admin/Amount Setup" element={<AmountSetup/>}/>
+        <Route path="/admin/User" element={<User/>}/>
+        <Route path="/admin/Transactions" element={<Transactions/>}/>
+        <Route path="/admin/Access" element={<Access/>}/>
+        <Route path="/admin/Feedback" element={<Feedback/>}/>
+        <Route path="/admin/Logout" element={<AdminLogout/>}/>
+
+
       </Routes>
       <ToastContainer />
     </div>
