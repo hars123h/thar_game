@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -20,7 +20,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Box } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {collection, doc, getDocs, orderBy, query} from 'firebase/firestore';
+import { useState } from 'react';
+import db from '../firebase/config.js';
 
 const drawerWidth = 240;
 
@@ -85,6 +88,24 @@ export default function Feedback() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
+    const [feedbacks, setFeedbacks] = useState([]);
+    const navigate = useNavigate();
+
+    const getData = async() => {
+        const data = await getDocs(query(collection(db, 'feedback'), orderBy('date', 'desc')));
+        var temp = [];
+        data.forEach((doc)=>{
+            temp = [...temp, doc.data()];
+        });
+        setFeedbacks(temp);
+    }
+
+    useEffect(()=>{
+        if(localStorage.getItem('name')===null) {
+            navigate('/admin/Login');
+        }
+        getData();
+    },[]);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -168,15 +189,15 @@ export default function Feedback() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {[].map((row) => (
+                            {feedbacks.map((row) => (
                                 <TableRow
                                     key={row.name}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell align="right">{row.calories}</TableCell>
-                                    <TableCell align="right">{row.fat}</TableCell>
-                                    <TableCell align="right">{row.carbs}</TableCell>
-                                    <TableCell align="right">{row.protein}</TableCell>
+                                    <TableCell align="left">{row.mobileNumber}</TableCell>
+                                    <TableCell align="left">{row.type}</TableCell>
+                                    <TableCell align="left">{row.description}</TableCell>
+                                    <TableCell align="left">{row.date}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

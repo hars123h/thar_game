@@ -19,7 +19,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Box, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { collection, getDocs, doc, updateDoc, increment } from 'firebase/firestore';
 import db from '../firebase/config.js'
@@ -93,7 +93,7 @@ export default function Withdrawals() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
     const [status, setStatus] = useState('pending');
-
+    const navigate = useNavigate();
     const [withdrawal_list, setwithdrawal_list] = useState(null);
 
     const getWithdrawals_list = async () => {
@@ -117,6 +117,9 @@ export default function Withdrawals() {
     useInterval(getWithdrawals_list, 10000);
 
     useEffect(() => {
+        if(localStorage.getItem('name')===null) {
+            navigate('/admin/Login');
+        }
         getWithdrawals_list();
     }, []);
 

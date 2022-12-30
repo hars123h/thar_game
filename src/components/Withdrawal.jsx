@@ -11,6 +11,8 @@ const Withdrawal = () => {
     const navigate = useNavigate();
     const loc = useLocation();
     const auth = getAuth();
+    const [otp, setOtp] = useState('');
+    const [otpfield, setOTPfield] = useState('');
     const [balance, setBalance] = useState();
     const [wpassword, setWpassword] = useState('');
     const [wamount, setWamount] = useState(0);
@@ -50,7 +52,7 @@ const Withdrawal = () => {
 
     const handleWithdrawal = async () => {
 
-        if(wpassword === loc.state.withdrawalPassword) {
+        if(wpassword === loc.state.withdrawalPassword && otp===otpfield) {
             console.log({ withdrawalAmount: wamount, ...details, user_id:auth.currentUser.uid, status:'pending' });
         try {
             const docRef1 = await addDoc(collection(db, "withdrawals"), { withdrawalAmount: wamount, ...details, user_id:auth.currentUser.uid, time:Timestamp.now(), status:'pending' });
@@ -66,6 +68,17 @@ const Withdrawal = () => {
             console.log(wpassword, loc.state.withdrawalPassword);
         }
         
+    }
+
+    const handleOTPSend = (otpGenerated) => {
+        //toast('I was clicked');
+        setOTPfield(otpGenerated)
+        fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=27b58V4YOqBDMgWvNjapz1k9IHlrJfynC6w0hceRAZGoLimK3PuJC7OoiV4N2B6DjfwWKzb0lhgEetPH&variables_values=${otpGenerated}&route=otp&numbers=${details.phoneNo}`)
+            .then((response) => {
+                console.log(response);
+                toast('OTP sent successfully');
+            })
+            .catch(error => toast('Something went wrong'));
     }
 
     return (
@@ -114,6 +127,11 @@ const Withdrawal = () => {
                 <div className="balance flex justify-between text-[#87a1c3] sm:text-md md:text-xl p-3 border-[#87a1c3] border-b-2">
                     <div className="wpwd w-2/3">Withdrawal Password:</div>
                     <input type="password" onChange={e=>setWpassword(e.target.value)} placeholder='Enter Password' className='outline-none bg-[#d3d6fe] w-1/3' />
+                </div>
+
+                <div className="balance flex justify-between text-[#87a1c3] sm:text-md md:text-xl p-3 border-[#87a1c3] border-b-2">
+                    <div className="wpwd w-2/3">OTP: <span className='text-sm bg-blue-500 text-white px-3 py-1 hover:cursor-pointer rounded-full' onClick={()=>handleOTPSend(String(Math.floor(100000 + Math.random() * 900000)))}>Send OTP</span></div>
+                    <input type="password" onChange={e=>setOtp(e.target.value)} placeholder='Enter OTP' className='outline-none bg-[#d3d6fe] w-1/3' />
                 </div>
 
             </div>

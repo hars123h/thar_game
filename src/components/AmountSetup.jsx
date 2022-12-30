@@ -19,7 +19,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Box, TextField, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 
 const drawerWidth = 240;
 
@@ -84,7 +86,14 @@ export default function AmountSetup() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
+    const navigate = useNavigate();
 
+
+    useEffect(()=>{
+        if(localStorage.getItem('name')===null) {
+            navigate('/admin/Login');
+        }
+    },[]);
 
     const handleDrawerOpen = () => {
         setOpen(true);

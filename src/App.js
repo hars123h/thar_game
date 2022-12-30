@@ -32,6 +32,7 @@ import Feedback from './components/Feedback';
 import AmountSetup from './components/AmountSetup';
 import DashboardLogin from './components/DashboardLogin';
 import AdminLogout from './components/AdminLogout';
+import ClientFeedback from './components/ClientFeedback';
 
 
 function App() {
@@ -57,12 +58,13 @@ function App() {
         <Route path="/withdrawal" element={<Withdrawal/>}/>
         <Route path="/settings" element={<Settings/>}/>
         <Route path="/bank" element={<Bank/>}/>
+        <Route path="/user_feedback" element={<ClientFeedback/>}/>
         <Route path="/change_login_password" element={< ChangeLoginPassword />}/>
         <Route path="/change_withdrawal_password" element={< ChangeWithdrawalPassword />}/>
         <Route path="/recharge_window/:recharge_value" element={<RechargeWindow/>}/>
         <Route path="/recharge_approval" element={<Approval/>}/>
         <Route path="/withdrawal_approval" element={<WithdrawalApproval/>}/>
-        <Route path="admin/Login" element={<DashboardLogin/>} />
+        <Route path="/admin/Login" element={<DashboardLogin/>} />
         <Route path="/admin/Dashboard" element={<Dashboard/>}/>
         <Route path="/admin/Withdrawals" element={<Withdrawals/>}/>
         <Route path="/admin/Amount Setup" element={<AmountSetup/>}/>

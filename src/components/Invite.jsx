@@ -51,7 +51,7 @@ const Invite = () => {
             </p>
 
             <div className='p-3 font-bold cursor-pointer'>
-                <CopyToClipboard text={"http://localhost:3000/register/invite_code/${userDetails.user_invite}"} onCopy={() => toast('Copied to clipboard')}>
+                <CopyToClipboard text={`http://localhost:3000/register/invite_code/${userDetails.user_invite}`} onCopy={() => toast('Copied to clipboard')}>
                     <span>Invite Link: click to copy</span>
                 </CopyToClipboard>
             </div>

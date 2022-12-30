@@ -19,7 +19,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Box, Button, TextField } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { useState } from 'react';
@@ -28,6 +28,7 @@ import { addDoc, collection, deleteDoc, getDoc, getDocs, doc } from 'firebase/fi
 import db from '../firebase/config';
 import { toast } from 'react-toastify'
 import { Delete } from '@material-ui/icons';
+
 
 const drawerWidth = 240;
 
@@ -91,6 +92,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Access() {
     const classes = useStyles();
     const theme = useTheme();
+    const navigate = useNavigate();
     const [details, setDetails] = useState({
         name: '',
         email: '',
@@ -121,6 +123,9 @@ export default function Access() {
 
     useEffect(() => {
         getControllers();
+        if(localStorage.getItem('name')===null) {
+            navigate('/admin/Login');
+        }
 
     }, []);
 

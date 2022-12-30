@@ -20,7 +20,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Box, InputAdornment, TextField } from '@material-ui/core';
 import { Search, Visibility, Block, Edit } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { collection, getDocs, doc, updateDoc, increment } from 'firebase/firestore';
@@ -94,6 +94,7 @@ export default function User() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
     const [rows, setRows] = useState([]);
+    const navigate = useNavigate();
 
     const getUsers = async () => {
         const querySnapshot = await getDocs(collection(db, "users"));
@@ -106,6 +107,9 @@ export default function User() {
     }
 
     useEffect(() => {
+        if(localStorage.getItem('name')===null) {
+            navigate('/admin/Login');
+        }
         getUsers();
     }, []);
 

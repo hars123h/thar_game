@@ -19,13 +19,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Box } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Check, Close } from '@material-ui/icons';
 import { collection, getDocs, doc, updateDoc, increment, arrayUnion } from 'firebase/firestore';
 import db from '../firebase/config.js'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 // import { RotatingLines } from 'react-loader-spinner';
 import useInterval from '../hooks/useInterval.js';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
@@ -122,6 +121,9 @@ export default function Transactions() {
     useInterval(getRecharges_list, 20000);
 
     useEffect(() => {
+        if(localStorage.getItem('name')===null) {
+            navigate('/admin/Login');
+        }
         getRecharges_list();
     }, []);
 

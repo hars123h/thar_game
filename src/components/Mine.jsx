@@ -143,6 +143,14 @@ const Mine = () => {
           </div>
         </div>
 
+        <div className="flex justify-around items-center mx-auto w-4/5 mt-10">
+          <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/user_feedback')}>
+            <img src={doc_img} alt="invite" className='w-14 h-14 mx-auto' />
+            <div className='text-center text-white text-sm'>Feedback</div>
+          </div>
+        </div>
+
+
         <div className='flex  items-center mx-auto w-4/5 mt-10'>
 
           {auth.currentUser.uid === 'njh6IG808GMmaH6rGewIuZPLfLz2' && (<div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
