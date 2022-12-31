@@ -77,7 +77,7 @@ const Bank = () => {
                 </div>
             </div>
 
-            <div>
+            <div className='mb-[1000px]'>
                 <button onClick={handleSubmit} className='bg-[#2e9afe] text-white text-lg mt-5 mb-20 rounded-lg shadow-xl block w-full py-2 shadow-[#7899de]'>Confirm</button>
             </div>
         </div>
