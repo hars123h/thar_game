@@ -1,14 +1,22 @@
 import React, {useState} from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AmountContext } from '../App';
 
 
 const Recharge = () => {
 
   const [recharge_value, setRecharge_Value] = useState(0);
   const navigate = useNavigate();
+  const amountDetails = useContext(AmountContext);
 
   const handleRecharge = () => {
     if(parseInt(recharge_value)) {
+        if(amountDetails.amount>recharge_value) {
+            toast(`Amount should be greater than ₹${amountDetails.amount}`);
+            return;
+        }
         navigate(`/recharge_window/${recharge_value}`);
     }else {
         alert('Enter a valid recharge amount');

@@ -6,12 +6,15 @@ import {getAuth} from 'firebase/auth';
 import { collection, addDoc, Timestamp, doc, getDoc } from "firebase/firestore";
 import {toast} from 'react-toastify';
 import { useEffect, useLayoutEffect } from 'react';
+import { useContext } from 'react';
+import { AmountContext } from '../App.js';
 
 
 const RechargeWindow = () => {
 
     const { recharge_value } = useParams();
     const [refno, setRefno] = useState('');
+    const amountDetails  = useContext(AmountContext);
     const navigate = useNavigate();
     const auth = getAuth();
     const [userDetails, setUserDetails] = useState(null);
@@ -72,7 +75,7 @@ const RechargeWindow = () => {
                 <div className="step_one flex flex-col gap-1">
                     <div className='text-md'>1.Copy UPI information</div>
                     <div className='flex rounded-md items-center justify-between gap-2  p-2 border-2 border-[#52A8F2]'>
-                        <div className='text-yellow-500 font-bold'>seed2233@axisbank</div>
+                        <div className='text-yellow-500 font-bold'>{amountDetails.upi_id}</div>
                         <div className='text-lg font-bold text-[#52A8F2] cursor-pointer'>Copy</div>
                     </div>
                 </div>

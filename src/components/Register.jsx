@@ -6,6 +6,8 @@ import referralCodeGenerator from 'referral-code-generator'
 import db from '../firebase/config.js';
 import { setDoc, doc, updateDoc, query, collection, where, getDocs } from "firebase/firestore";
 import { toast } from 'react-toastify';
+import { useContext } from 'react';
+import { AmountContext } from '../App';
 
 
 const Register = () => {
@@ -19,6 +21,7 @@ const Register = () => {
     const [cpwd, setCpwd] = useState('');
     const [wpwd, setwpwd] = useState('');
     const [invt, setInvt] = useState('');
+    const amountDetails = useContext(AmountContext);
 
     const handleRegister = async () => {
         if(otp!==otpfield) {
@@ -37,7 +40,7 @@ const Register = () => {
                         pwd,
                         wpwd,
                         time: new Date(),
-                        balance: 0,
+                        balance: amountDetails.invite_bonus,
                         recharge_amount: 0,
                         earning: 0,
                         user_invite: referralCodeGenerator.alphaNumeric('lowercase', 5, 2),

@@ -18,16 +18,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { Box, InputAdornment, TextField } from '@material-ui/core';
-import { Search, Visibility, Block, Edit } from '@material-ui/icons';
+import { Box, Button, InputAdornment, TextField, Modal } from '@material-ui/core';
+import { Search, Visibility, Block, Edit, Close } from '@material-ui/icons';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
-import { collection, getDocs, doc, updateDoc, increment } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc, increment, addDoc } from 'firebase/firestore';
 import db from '../firebase/config.js'
 import { useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
-import { RotatingLines } from 'react-loader-spinner';
 import { useState } from 'react';
 
 const drawerWidth = 240;
@@ -89,33 +87,55 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
+
 export default function User() {
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = useState(false);
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [new_balance, setNew_balance] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
+    const [CurrBalanceId, setCurrBalanceId] = useState(null);
+    const [CurrBalance, setCurrBalance] = useState(0);
+    const [searchField, setSearchField] = useState('');
 
     const getUsers = async () => {
         const querySnapshot = await getDocs(collection(db, "users"));
         var temp = [];
         var idx = 0;
-        //console.log(querySnapshot);
-        //_snapshot.docChanges[0].doc.key.path.segments[6]
         querySnapshot.forEach((doc) => {
-            //console.log(doc.id, " => ", doc.data());
-            temp = [...temp, {...doc.data(), user_id:querySnapshot._snapshot.docChanges[idx].doc.key.path.segments[6]}];
-            idx+=1;
+            temp = [...temp, { ...doc.data(), user_id: querySnapshot._snapshot.docChanges[idx].doc.key.path.segments[6] }];
+            idx += 1;
+        });
+        setRows(temp);
+    }
+
+    const getUsers_cstm = async () => {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        var temp = [];
+        var idx = 0;
+        querySnapshot.forEach((doc) => {
+            if(doc.data().mobno.search(searchField)!==-1 || searchField==='') {
+                temp = [...temp, { ...doc.data(), user_id: querySnapshot._snapshot.docChanges[idx].doc.key.path.segments[6] }];
+            }
+            idx += 1;
         });
         setRows(temp);
     }
 
     useEffect(() => {
-        if(localStorage.getItem('name')===null) {
+        if (localStorage.getItem('name') === null) {
             navigate('/admin/Login');
         }
         getUsers();
     }, []);
+
+    useEffect(()=>{
+        getUsers_cstm();
+    },[searchField]);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -124,6 +144,32 @@ export default function User() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const updateBalance = async () => {
+        if (new_balance >= 0) {
+            const response = await updateDoc(doc(db, 'users', CurrBalanceId), {
+                balance: new_balance
+            })
+                .then(() => {
+                    toast('Balance Updated Successfully!');
+                    getUsers();
+                    setNew_balance(0);
+                    setIsVisible(false);
+                    setCurrBalanceId('');
+                    document.getElementById('balance_input').value = 0;
+                })
+                .catch((err) => toast('Something went wrong', err))
+        }
+
+    }
+
+    const blockUser = async(UserId) => {
+        await addDoc(collection(db, 'blockedUsers'), {
+            mobileNumber:UserId
+        })
+        .then(()=>toast('User Blocked'))
+        .catch((error)=>toast('Something went wrong'));
+    }
 
     return (
         <div className={classes.root}>
@@ -194,6 +240,7 @@ export default function User() {
                         placeholder='Search'
                         variant='outlined'
                         fullWidth
+                        onChange={e=>setSearchField(e.target.value)}
                         InputProps={
                             {
                                 endAdornment:
@@ -219,7 +266,7 @@ export default function User() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows.map((row) => (
+                                {rows.map((row, row_index) => (
                                     <TableRow
                                         key={row.name}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -229,14 +276,25 @@ export default function User() {
                                         </TableCell>
                                         <TableCell align="right">{row.user_invite}</TableCell>
                                         <TableCell align="right">Yes</TableCell>
-                                        <TableCell align="right">{"Rs."+row.balance}</TableCell>
+                                        <TableCell align="right">{"Rs." + row.balance}</TableCell>
                                         <TableCell align="right">
-                                            <Box sx={{display:'flex', justifyContent:"end"}}>
+                                            <Box sx={{ display: 'flex', justifyContent: "end" }}>
+                                                <IconButton onClick={() => {
+                                                    navigate('/admin/user_details', { state: row })
+                                                }}><Visibility /></IconButton>
+                                                <IconButton onClick={() => {
+                                                    console.log(row.user_id);
+                                                    setIsVisible(true);
+                                                    setCurrBalanceId(row.user_id);
+                                                    setCurrBalance(row.balance)
+                                                }}><Edit />
+
+                                                </IconButton>
                                                 <IconButton onClick={()=>{
-                                                    navigate('/admin/user_details', {state:row})
-                                                }}><Visibility/></IconButton>
-                                                <IconButton><Edit/></IconButton>
+                                                    blockUser(row.mobno)
+                                                }}><Block/></IconButton>
                                             </Box>
+
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -244,8 +302,24 @@ export default function User() {
                         </Table>
                     </TableContainer>
                 </Box>
-
             </main>
+            <div className={`border-2 border-gray-200 rounded-lg text-white p-4 ${isVisible ? 'visible' : 'invisible'} 
+            absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-400`}>
+                <div className="text-right">
+                    <Close onClick={() => { setIsVisible(false); setNew_balance(0) }} />
+                </div>
+                <h1 className='mb-2 text-xl'>Update Wallet balance</h1>
+                <input onChange={(e) => setNew_balance(e.target.value)} type="number" name="balance" id="balance_input" placeholder='Enter New Balance' className='p-2 rounded-lg text-black outline-none mt-2' />
+                <div className='flex gap-2 mt-4'>
+                    <button className='bg-green-500 p-2 rounded-lg' onClick={() => {
+                        updateBalance();
+                    }}>Ok</button>
+                    <button className='bg-red-400 p-2 rounded-lg' onClick={() => {
+                        setIsVisible(false);
+                        setNew_balance(0);
+                    }}>Cancel</button>
+                </div>
+            </div>
         </div>
     );
 }

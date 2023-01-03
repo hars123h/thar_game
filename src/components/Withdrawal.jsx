@@ -5,12 +5,16 @@ import { doc, getDoc, collection, addDoc, Timestamp } from 'firebase/firestore';
 import db from '../firebase/config.js';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {toast} from 'react-toastify';
+import { useContext } from 'react';
+import { AmountContext } from '../App.js';
+
 
 const Withdrawal = () => {
 
     const navigate = useNavigate();
     const loc = useLocation();
     const auth = getAuth();
+    const amountDetails = useContext(AmountContext)
     const [otp, setOtp] = useState('');
     const [otpfield, setOTPfield] = useState('');
     const [balance, setBalance] = useState();
@@ -45,17 +49,24 @@ const Withdrawal = () => {
     const handleWithdrawalAmount = (e) => {
         if(e.target.value>balance || e.target.value==='') {
             toast('Withdrawal amount should be smaller or equal to balance');
-        }else {
+        }
+        else {
             setWamount(e.target.value);
         }
     }
 
     const handleWithdrawal = async () => {
 
+        if((Number(wamount)+Number(amountDetails.withdrawal_fee))<Number(amountDetails.mwamount)) {
+            toast(`Amount should be greater than ${amountDetails.mwamount}`);
+            //console.log(wamount, amountDetails.amount);
+            return;
+        }
+
         if(wpassword === loc.state.withdrawalPassword && otp===otpfield) {
             console.log({ withdrawalAmount: wamount, ...details, user_id:auth.currentUser.uid, status:'pending' });
         try {
-            const docRef1 = await addDoc(collection(db, "withdrawals"), { withdrawalAmount: wamount, ...details, user_id:auth.currentUser.uid, time:Timestamp.now(), status:'pending' });
+            const docRef1 = await addDoc(collection(db, "withdrawals"), { withdrawalAmount: (Number(wamount)+Number(amountDetails.withdrawal_fee)), ...details, user_id:auth.currentUser.uid, time:Timestamp.now(), status:'pending' });
             const docRef2 = await addDoc(collection(db, 'users', auth.currentUser.uid, 'withdrawals'), {withdrawals_id:docRef1.id, time:Timestamp.now()});
             console.log("Document written with ID: ", docRef1.id, docRef2.id);
             toast('Withdrawal request placed successfully!',{autoClose:1000});
@@ -91,7 +102,7 @@ const Withdrawal = () => {
             </div>
 
             <div className="part1 bg-[#d3d6fe] p-3 rounded-lg mx-3 mt-5">
-                <div className='text-[#2e9afe] px-2 my-1  rounded-full border border-[#2e9afe] inline'>Tax 10%</div>
+                <div className='text-[#2e9afe] px-2 my-1  rounded-full border border-[#2e9afe] inline'>Withdrawal Fee Rs{amountDetails.withdrawal_fee}</div>
                 <div className='flex items-center justify-start gap-2 my-1'>
                     <div className='text-[#2e9afe] text-3xl'>&#8377;</div>
                     <div className="value"> <input type="number" onChange={handleWithdrawalAmount} className='w-full text-2xl outline-none bg-[#d3d6fe] py-2' placeholder='Amount' /></div>
@@ -138,7 +149,7 @@ const Withdrawal = () => {
 
             <div className="part1 bg-[#d3d6fe] p-3 rounded-lg mx-3 mt-5 flex flex-col gap-3">
                 <div className='text-[#ff0000] text-sm'>* The time of withdrawal and arrival is subject to the real-time processing time of the local bank, and the normal arrival time is 10 minutes to 24 hours.</div>
-                <div className='text-[#ff0000] text-sm'>* A single minimum withdrawal amount of not less than Rs 120.</div>
+                <div className='text-[#ff0000] text-sm'>* A single minimum withdrawal amount of not less than Rs{amountDetails.mwamount}.</div>
                 <div className='text-[#ff0000] text-sm'>* Withdrawal time is 09:00-21:00 every day.</div>
             </div>
 

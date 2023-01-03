@@ -28,6 +28,8 @@ import { useState } from 'react';
 // import { RotatingLines } from 'react-loader-spinner';
 import useInterval from '../hooks/useInterval.js';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { useContext } from 'react';
+import { AmountContext } from '../App.js';
 
 
 
@@ -95,6 +97,7 @@ export default function Transactions() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
+    const amountDetails = useContext(AmountContext);
 
     const [recharge_list, setRecharge_list] = useState(null);
     const navigate = useNavigate();
@@ -142,21 +145,21 @@ export default function Transactions() {
             if (new_status === 'confirmed') {
                 updateDoc(docRef2, {
                     recharge_amount: increment(recharge_value),
-                    balance: increment(recharge_value)
+                    balance: increment(Number(recharge_value)+Number(amountDetails.recharge_bonus))
                 });
                 updateDoc(doc(db, 'users', element.parent_id), {
-                    balance: increment(0.1 * recharge_value),
-                    directRecharge: increment(0.1 * recharge_value),
+                    balance: increment((amountDetails.level1_percent/100) * recharge_value),
+                    directRecharge: increment((amountDetails.level1_percent/100) * recharge_value),
                     directMember: arrayUnion(user_id)
                 });
                 updateDoc(doc(db, 'users', element.grand_parent_id), {
-                    balance: increment(0.03 * recharge_value),
-                    indirectRecharge: increment(0.03 * recharge_value),
+                    balance: increment((amountDetails.level2_percent/100) * recharge_value),
+                    indirectRecharge: increment((amountDetails.level2_percent/100)* recharge_value),
                     indirectMember: arrayUnion(user_id)
                 });
                 updateDoc(doc(db, 'users', element.great_grand_parent_id), {
-                    balance: increment(0.02 * recharge_value),
-                    indirectRecharge: increment(0.02 * recharge_value),
+                    balance: increment((amountDetails.level3_percent/100)*recharge_value),
+                    indirectRecharge: increment((amountDetails.level3_percent/100)*recharge_value),
                     indirectMember: arrayUnion(user_id)
                 });
             }

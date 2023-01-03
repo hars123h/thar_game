@@ -5,6 +5,10 @@ import lock_img from '../images/lock_img.png';
 import {useNavigate} from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import db from '../firebase/config';
+import { toast } from 'react-toastify';
 
 
 // rgb(232, 240, 254) #E8F0FE
@@ -16,19 +20,36 @@ const Login = () => {
     const auth = getAuth();
     const [mobno, setmobno] = useState('');
     const [pwd, setpwd] = useState('');
+    const [bloackedUsers, setBlockedUsers] = useState([]);
+
+    useEffect(()=>{
+        getBlockedUsers();
+    },[]);
+
+    const getBlockedUsers = async() => {
+        const dataRes = await getDocs(collection(db, 'blockedUsers'));
+        var temp = [];
+        dataRes.forEach((doc)=>{
+            //console.log(doc.data());
+            temp.push(doc.data().mobileNumber);
+            setBlockedUsers(temp);
+        });
+    }
 
     const handleSignIn = () => {
+        if(bloackedUsers.includes(String(mobno))) {
+            toast('You are blocked by the administrator!');
+            return;
+        }
         const new_mobno = mobno + '@gmail.com';
         signInWithEmailAndPassword(auth, new_mobno, pwd)
         .then((userCredential)=>{
-            console.log(auth.currentUser.uid);
             navigate('/home');
         })
         .catch(error=>{
             console.log(error.message, error.code);
         });
     }
-
 
     return (
         <div>
