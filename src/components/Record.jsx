@@ -109,6 +109,13 @@ const Record = () => {
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Recharge Value:</span> &#8377;{new Intl.NumberFormat().format(element.recharge_value)}</div>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Ref No:</span> {element.refno}</div>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Status:</span> {String(element.status)}</div>
+                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Data:</span> {new Date(element.time.seconds * 1000).toLocaleString('en-US', {
+                                        
+                                        day: 'numeric',
+                                        month: "2-digit",
+                                        year: "numeric"
+                                    })}</div>
+
                                 </div>
 
                             </div>
@@ -123,6 +130,12 @@ const Record = () => {
                                 <div className='flex flex-col gap-1'>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Withdrawal Amount:</span> &#8377;{new Intl.NumberFormat().format(element.withdrawalAmount)}</div>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Status:</span> {element.status}</div>
+                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Data:</span> {new Date(element.time.seconds * 1000).toLocaleString('en-US', {
+                                        
+                                        day: 'numeric',
+                                        month: "2-digit",
+                                        year: "numeric"
+                                    })}</div>
                                 </div>
                             </div>
                         </div>

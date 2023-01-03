@@ -99,9 +99,13 @@ export default function User() {
     const getUsers = async () => {
         const querySnapshot = await getDocs(collection(db, "users"));
         var temp = [];
+        var idx = 0;
+        //console.log(querySnapshot);
+        //_snapshot.docChanges[0].doc.key.path.segments[6]
         querySnapshot.forEach((doc) => {
-            console.log(doc.id, " => ", doc.data());
-            temp = [...temp, doc.data()];
+            //console.log(doc.id, " => ", doc.data());
+            temp = [...temp, {...doc.data(), user_id:querySnapshot._snapshot.docChanges[idx].doc.key.path.segments[6]}];
+            idx+=1;
         });
         setRows(temp);
     }
@@ -228,9 +232,10 @@ export default function User() {
                                         <TableCell align="right">{"Rs."+row.balance}</TableCell>
                                         <TableCell align="right">
                                             <Box sx={{display:'flex', justifyContent:"end"}}>
-                                                <IconButton><Visibility/></IconButton>
+                                                <IconButton onClick={()=>{
+                                                    navigate('/admin/user_details', {state:row})
+                                                }}><Visibility/></IconButton>
                                                 <IconButton><Edit/></IconButton>
-                                                <IconButton><Block/></IconButton>
                                             </Box>
                                         </TableCell>
                                     </TableRow>

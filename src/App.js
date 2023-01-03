@@ -33,7 +33,7 @@ import AmountSetup from './components/AmountSetup';
 import DashboardLogin from './components/DashboardLogin';
 import AdminLogout from './components/AdminLogout';
 import ClientFeedback from './components/ClientFeedback';
-
+import UserDetails from './components/UserDetails';
 
 function App() {
   
@@ -73,7 +73,7 @@ function App() {
         <Route path="/admin/Access" element={<Access/>}/>
         <Route path="/admin/Feedback" element={<Feedback/>}/>
         <Route path="/admin/Logout" element={<AdminLogout/>}/>
-
+        <Route path="/admin/user_details" element={<UserDetails/>} />
 
       </Routes>
       <ToastContainer />

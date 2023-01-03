@@ -13,6 +13,7 @@ const Project = () => {
     const auth = getAuth();
     const [userDetails, setUserDetails] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [current_tab, setCurrent_tab] = useState('earning');
 
     const getUserDetails = async () => {
         const docRef = doc(db, 'users', auth.currentUser.uid);
@@ -99,33 +100,61 @@ const Project = () => {
 
 
             <div className='records w-full flex bg-[#d3d6fe] items-center'>
-                <div className='h-[40px] flex items-center justify-center w-1/2 text-center border-b-4 font-semibold border-[#0172fe] text-[#0172fe]'>Earning</div>
-                <div className='h-[40px] flex items-center justify-center w-1/2 text-center text-white'>Completed</div>
+                <div onClick={() => setCurrent_tab('earning')} className={`h-[40px] flex items-center justify-center w-1/2 text-center border-b-4 font-semibold ${current_tab === 'earning' ? 'border-[#0172fe] text-[#0172fe]' : 'text-white'}`}>Earning</div>
+                <div onClick={() => setCurrent_tab('completed')} className={`h-[40px] flex items-center justify-center w-1/2 text-center border-b-4 ${current_tab === 'completed' ? 'border-[#0172fe] text-[#0172fe]' : 'text-white'}`}>Completed</div>
             </div>
 
             <div className='overflow-y-scroll h-[600px] mx-auto w-[95%] mt-2 p-2'>
                 {
-                    userDetails && ('plans_purchased' in userDetails) && (
+                    current_tab === 'earning' && userDetails && ('plans_purchased' in userDetails) && (
                         userDetails.plans_purchased.map((element, index) => {
-                            return (
-                                <div key={index} className='mx-auto w-[90%] mt-2 border-x-2 border-white border-b-2  rounded-lg shadow-lg text-white'>
-                                    <div className="text-lg p-3 text-[#2e9afe] font-semibold bg-white rounded-t-lg">Plan Details</div>
-                                    <div className='p-3'>
-                                        <div className='mb-1'>Plan Name: {element.plan_name}</div>
-                                        <div className='mb-1'>Start Date: {element.date_purchased}</div>
-                                        <div className='mb-1'>Plan Amount: &#8377;{element.plan_amount}</div>
-                                        <div className='mb-1'>Plan Type: {element.plan_type}</div>
-                                        <div className='mb-1'>Plan Cycle: {element.plan_cycle}</div>
-                                        <div className='mb-1'>Plan Daily Earning: &#8377;{element.plan_daily_earning}</div>
-                                        <div className='mb-1'>Quantity: {element.quantity}</div>
-                                        <div className='mb-1'>Current Earning: &#8377;{DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning}</div>
+                            if (element.plan_daily_earning * element.plan_cycle !== DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning) {
+                                return (
+                                    <div key={index} className='mx-auto w-[90%] mt-2 border-x-2 border-white border-b-2  rounded-lg shadow-lg text-white'>
+                                        <div className="text-lg p-3 text-[#2e9afe] font-semibold bg-white rounded-t-lg">Plan Details</div>
+                                        <div className='p-3'>
+                                            <div className='mb-1'>Plan Name: {element.plan_name}</div>
+                                            <div className='mb-1'>Start Date: {element.date_purchased}</div>
+                                            <div className='mb-1'>Plan Amount: &#8377;{element.plan_amount}</div>
+                                            <div className='mb-1'>Plan Type: {element.plan_type}</div>
+                                            <div className='mb-1'>Plan Cycle: {element.plan_cycle}</div>
+                                            <div className='mb-1'>Plan Daily Earning: &#8377;{element.plan_daily_earning}</div>
+                                            <div className='mb-1'>Quantity: {element.quantity}</div>
+                                            <div className='mb-1'>Current Earning: &#8377;{DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            )
+                                )
+                            }
+                        })
+                    )
+                }
+
+                {
+                    userDetails && ('plans_purchased' in userDetails) && (
+                        current_tab === 'completed' && userDetails.plans_purchased.map((element, index) => {
+                            if (element.plan_daily_earning * element.plan_cycle === DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning) {
+                                return (
+                                    <div key={index} className='mx-auto w-[90%] mt-2 border-x-2 border-white border-b-2  rounded-lg shadow-lg text-white'>
+                                        <div className="text-lg p-3 text-[#2e9afe] font-semibold bg-white rounded-t-lg">Plan Details</div>
+                                        <div className='p-3'>
+                                            <div className='mb-1'>Plan Name: {element.plan_name}</div>
+                                            <div className='mb-1'>Start Date: {element.date_purchased}</div>
+                                            <div className='mb-1'>Plan Amount: &#8377;{element.plan_amount}</div>
+                                            <div className='mb-1'>Plan Type: {element.plan_type}</div>
+                                            <div className='mb-1'>Plan Cycle: {element.plan_cycle}</div>
+                                            <div className='mb-1'>Plan Daily Earning: &#8377;{element.plan_daily_earning}</div>
+                                            <div className='mb-1'>Quantity: {element.quantity}</div>
+                                            <div className='mb-1'>Current Earning: &#8377;{DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning}</div>
+                                        </div>
+                                    </div>
+                                )
+                            }
                         })
                     )
                 }
             </div>
+
+
 
             {!userDetails?.plans_purchased && (
                 <div className='text-2xl text-white text-center w-[90%] mx-auto p-3 m-3 border-2 border-gray-300 rounded-lg shadow-lg'>
