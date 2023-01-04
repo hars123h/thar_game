@@ -63,10 +63,10 @@ const Home = () => {
         const docRef = doc(db, 'users', auth.currentUser.uid);
         await getDoc(docRef).then(doc => {
             if (doc.exists()) {
-                console.log(doc.data());
+                //console.log(doc.data());
                 setUserDetails(doc.data());
             } else {
-                console.log('Data not found');
+                //console.log('Data not found');
             }
         }).catch(error => console.log('Some error occured', error));
     }
@@ -97,7 +97,7 @@ const Home = () => {
                         time: new Date().toDateString()
                     })
                 }).then(() => {
-                    console.log('Product successfully purchased');
+                    //console.log('Product successfully purchased');
                     toast('Plan purchased!');
                     navigate('/project');
                 }).catch((error) => {
@@ -179,24 +179,24 @@ const Home = () => {
                 <div className='text-center bg-[#0096D5] mx-1 text-white text-lg font-medium py-2'>Big Plans</div>
 
                 <div className='grid grid-cols-2'>
-                    <Card product_image={product_img1}  handleClick={handleClick} plan_name={"Thar Plan 1"} plan_cycle={90} plan_daily_earning={90} plan_amount={600} plan_type={'Big Plan'} />
-                    <Card product_image={product_img2} handleClick={handleClick} plan_name={"Thar Plan 2"} plan_cycle={90} plan_daily_earning={260} plan_amount={2000} plan_type={'Big Plan'} />
-                    <Card product_image={product_img3} handleClick={handleClick} plan_name={"Thar Plan 3"} plan_cycle={90} plan_daily_earning={410} plan_amount={3000} plan_type={'Big Plan'} />
-                    <Card product_image={product_img4} handleClick={handleClick} plan_name={"Thar Plan 4"} plan_cycle={90} plan_daily_earning={810} plan_amount={5000} plan_type={'Big Plan'} />
+                    <Card product_image={product_img1}  handleClick={handleClick} plan_name={"Sstone Plan 1"} plan_cycle={90} plan_daily_earning={90} plan_amount={600} plan_type={'Big Plan'} />
+                    <Card product_image={product_img2} handleClick={handleClick} plan_name={"Sstone Plan 2"} plan_cycle={90} plan_daily_earning={260} plan_amount={2000} plan_type={'Big Plan'} />
+                    <Card product_image={product_img3} handleClick={handleClick} plan_name={"Sstone Plan 3"} plan_cycle={90} plan_daily_earning={410} plan_amount={3000} plan_type={'Big Plan'} />
+                    <Card product_image={product_img4} handleClick={handleClick} plan_name={"Sstone Plan 4"} plan_cycle={90} plan_daily_earning={810} plan_amount={5000} plan_type={'Big Plan'} />
                     {/* Some Plans will unlock after using the website for some days */}
-                    <Card product_image={product_img5} handleClick={handleClick} plan_name={"Thar Plan 5"} plan_cycle={90} plan_daily_earning={2000} plan_amount={10000} plan_type={'Big Plan'} />
-                    <Card product_image={product_img6} handleClick={handleClick} plan_name={"Thar Plan 6"} plan_cycle={90} plan_daily_earning={4000} plan_amount={18000} plan_type={'Big Plan'} />
-                    <Card product_image={product_img7} handleClick={handleClick} plan_name={"Thar Plan 7"} plan_cycle={90} plan_daily_earning={12000} plan_amount={35000} plan_type={'Big Plan'} />
-                    <Card product_image={product_img8} handleClick={handleClick} plan_name={"Thar Plan 8"} plan_cycle={90} plan_daily_earning={25000} plan_amount={55000} plan_type={'Big Plan'} />
+                    <Card product_image={product_img5} handleClick={handleClick} plan_name={"Sstone Plan 5"} plan_cycle={90} plan_daily_earning={2000} plan_amount={10000} plan_type={'Big Plan'} />
+                    <Card product_image={product_img6} handleClick={handleClick} plan_name={"Sstone Plan 6"} plan_cycle={90} plan_daily_earning={4000} plan_amount={18000} plan_type={'Big Plan'} />
+                    <Card product_image={product_img7} handleClick={handleClick} plan_name={"Sstone Plan 7"} plan_cycle={90} plan_daily_earning={12000} plan_amount={35000} plan_type={'Big Plan'} />
+                    <Card product_image={product_img8} handleClick={handleClick} plan_name={"Sstone Plan 8"} plan_cycle={90} plan_daily_earning={25000} plan_amount={55000} plan_type={'Big Plan'} />
 
                 </div>
                 <div className='text-center bg-[#0096D5] mx-1 text-white text-lg font-medium py-2' >Short Plans</div>
                 <div className='grid grid-cols-2'>
-                    <Card product_image={product_img9} handleClick={handleClick} plan_name={"Thar Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
-                    <Card product_image={product_img10} handleClick={handleClick} plan_name={"Thar Plan 10"} plan_cycle={3} plan_daily_earning={500} plan_amount={1000} plan_type={'Short Plan'} />
-                    <Card product_image={product_img11} handleClick={handleClick} plan_name={"Thar Plan 11"} plan_cycle={2} plan_daily_earning={2800} plan_amount={3500} plan_type={'Short Plan'} />
-                    <Card product_image={product_img12} handleClick={handleClick} plan_name={"Thar Plan 12"} plan_cycle={2} plan_daily_earning={4800} plan_amount={7000} plan_type={'Short Plan'} />
-                    <Card product_image={product_img13} handleClick={handleClick} plan_name={"Thar Plan 13"} plan_cycle={2} plan_daily_earning={15000} plan_amount={20000} plan_type={'Short Plan'} />
+                    <Card product_image={product_img9} handleClick={handleClick} plan_name={"Sstone Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
+                    <Card product_image={product_img10} handleClick={handleClick} plan_name={"Sstone Plan 10"} plan_cycle={3} plan_daily_earning={500} plan_amount={1000} plan_type={'Short Plan'} />
+                    <Card product_image={product_img11} handleClick={handleClick} plan_name={"Sstone Plan 11"} plan_cycle={2} plan_daily_earning={2800} plan_amount={3500} plan_type={'Short Plan'} />
+                    <Card product_image={product_img12} handleClick={handleClick} plan_name={"Sstone Plan 12"} plan_cycle={2} plan_daily_earning={4800} plan_amount={7000} plan_type={'Short Plan'} />
+                    <Card product_image={product_img13} handleClick={handleClick} plan_name={"Sstone Plan 13"} plan_cycle={2} plan_daily_earning={15000} plan_amount={20000} plan_type={'Short Plan'} />
                 </div>
             </div>
 

@@ -20,7 +20,7 @@ const ForgotPassword = () => {
         }
         fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=27b58V4YOqBDMgWvNjapz1k9IHlrJfynC6w0hceRAZGoLimK3PuJC7OoiV4N2B6DjfwWKzb0lhgEetPH&variables_values=${otpfield}&route=otp&numbers=${mobno}`)
             .then((response) => {
-                console.log(response);
+                //console.log(response);
                 toast('OTP sent successfully');
             })
             .catch(error => toast('Something went wrong'));
@@ -39,7 +39,7 @@ const ForgotPassword = () => {
             setOtp('');
             setOTPfield('');
             navigate('/login');
-            console.log(data);
+            //console.log(data);
         }
     }
 

@@ -64,11 +64,11 @@ const Withdrawal = () => {
         }
 
         if(wpassword === loc.state.withdrawalPassword && otp===otpfield) {
-            console.log({ withdrawalAmount: wamount, ...details, user_id:auth.currentUser.uid, status:'pending' });
+            //console.log({ withdrawalAmount: wamount, ...details, user_id:auth.currentUser.uid, status:'pending' });
         try {
             const docRef1 = await addDoc(collection(db, "withdrawals"), { withdrawalAmount: (Number(wamount)+Number(amountDetails.withdrawal_fee)), ...details, user_id:auth.currentUser.uid, time:Timestamp.now(), status:'pending' });
             const docRef2 = await addDoc(collection(db, 'users', auth.currentUser.uid, 'withdrawals'), {withdrawals_id:docRef1.id, time:Timestamp.now()});
-            console.log("Document written with ID: ", docRef1.id, docRef2.id);
+            //console.log("Document written with ID: ", docRef1.id, docRef2.id);
             toast('Withdrawal request placed successfully!',{autoClose:1000});
             navigate('/record');
         } catch (e) {
@@ -76,7 +76,7 @@ const Withdrawal = () => {
         }
         }else {
             toast('Withdrawal Password is incorrect');
-            console.log(wpassword, loc.state.withdrawalPassword);
+            //console.log(wpassword, loc.state.withdrawalPassword);
         }
         
     }
@@ -86,7 +86,7 @@ const Withdrawal = () => {
         setOTPfield(otpGenerated)
         fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=27b58V4YOqBDMgWvNjapz1k9IHlrJfynC6w0hceRAZGoLimK3PuJC7OoiV4N2B6DjfwWKzb0lhgEetPH&variables_values=${otpGenerated}&route=otp&numbers=${details.phoneNo}`)
             .then((response) => {
-                console.log(response);
+                //console.log(response);
                 toast('OTP sent successfully');
             })
             .catch(error => toast('Something went wrong'));

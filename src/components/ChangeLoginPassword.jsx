@@ -22,7 +22,7 @@ const ChangeLoginPassword = () => {
             await updatePassword(auth.currentUser, newpwd)
                 .then(() => {
                     updateDoc(docRef, { pwd: newpwd }).then(() => {
-                        console.log('Password Update successfully');
+                        //console.log('Password Update successfully');
                         toast('Password reset successfully!');
                         setCnfNewPwd(''); setNewpwd(''); setOldpwd('');
                         navigate('/mine');

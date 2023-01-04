@@ -26,7 +26,7 @@ const ClientFeedback = () => {
             toast('Enter Details First!');
         }
 
-        console.log(details);
+        //console.log(details);
 
     }
 

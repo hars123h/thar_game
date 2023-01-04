@@ -21,7 +21,7 @@ const DashboardLogin = () => {
                 localStorage.setItem('password',doc.data().passoword);
                 localStorage.setItem('access',doc.data().access);
             });
-            console.log(localStorage);
+            //console.log(localStorage);
             navigate('/admin/Dashboard');
         }else {
             toast('Invalid Email/Password!');

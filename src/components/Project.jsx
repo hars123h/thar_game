@@ -28,7 +28,7 @@ const Project = () => {
                     var earn = 0;
                     var temp = document.data().plans_purchased.map((element) => {
                         var days = DateDifference(new Date(element.date_till_rewarded), new Date());
-                        console.log(days, element);
+                        //console.log(days, element);
                         if (days > element.plan_cycle) {
                             return {
                                 ...element
@@ -57,7 +57,7 @@ const Project = () => {
             setLoading(false);
 
         }).then(() => {
-            console.log('This is working');
+            //console.log('This is working');
         })
             .catch(error => console.log('Some error occured', error));
     }
@@ -65,8 +65,8 @@ const Project = () => {
     useEffect(() => {
         setLoading(true);
         getUserDetails();
-        console.log(userDetails);
-        console.log('Use Effect Ran');
+        //console.log(userDetails);
+        //console.log('Use Effect Ran');
     }, []);
 
     if (loading) {

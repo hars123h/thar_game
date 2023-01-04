@@ -36,14 +36,14 @@ const Mine = () => {
     const getUserInfo = async () => {
       const docRef = await getDoc(doc(db, 'users', auth.currentUser.uid));
       if (docRef.exists()) {
-        console.log(docRef.data());
+        //console.log(docRef.data());
         setMobileno(docRef.data().mobno);
         setRecharge_amount(docRef.data().recharge_amount);
         setBalance(docRef.data().balance);
         setEarning(docRef.data().earning);
         setOriginalwpwd(docRef.data().wpwd);
         setOriginalpwd(docRef.data().pwd);
-        console.log(new Date(((docRef.data().time.toDate()))));
+        //console.log(new Date(((docRef.data().time.toDate()))));
       } else {
         console.log('Document does not exits');
       }

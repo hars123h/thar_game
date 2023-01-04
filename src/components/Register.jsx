@@ -29,13 +29,13 @@ const Register = () => {
             toast('Wrong OTP entered!');
             return;
         }
-        console.log({ mobno, pwd, cpwd, wpwd, invt });
+        //console.log({ mobno, pwd, cpwd, wpwd, invt });
         const new_mobno = mobno + '@gmail.com';
         createUserWithEmailAndPassword(auth, new_mobno, pwd)
             .then((userCredential) => {
-                console.log(userCredential);
+                //console.log(userCredential);
                 try {
-                    console.log(auth.currentUser.uid);
+                    //console.log(auth.currentUser.uid);
                     setDoc(doc(db, "users", auth.currentUser.uid), {
                         mobno,
                         pwd,
@@ -57,7 +57,7 @@ const Register = () => {
                         return q;
                     }).then((q) => {
                         const newRef = doc(db, 'users', auth.currentUser.uid);
-                        console.log(q);
+                        //console.log(q);
                         updateDoc(newRef, {
                             parent_id: q._snapshot.docChanges[0].doc.key.path.segments[6],
                             grand_parent_int: q._snapshot.docChanges[0].doc.data.value.mapValue.fields.parent_invt
@@ -78,12 +78,12 @@ const Register = () => {
                     }).then((new_qw)=>{
                         const newRef3 = doc(db, 'users', auth.currentUser.uid);
                         //console.log(qw, 'this is the last then');
-                        console.log(new_qw);
+                        //console.log(new_qw);
                         updateDoc(newRef3, {
                             great_grand_parent_id:new_qw._snapshot.docChanges[0].doc.key.path.segments[6],
                         })
                     });
-                    console.log("Document written successfully");
+                    //console.log("Document written successfully");
                 } catch (e) {
                     console.error("Error adding document: ", e);
                 }
@@ -97,7 +97,7 @@ const Register = () => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
+                //console.log(errorCode, errorMessage);
             });
 
     }
@@ -107,7 +107,7 @@ const Register = () => {
         setOTPfield(otpGenerated)
         fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=27b58V4YOqBDMgWvNjapz1k9IHlrJfynC6w0hceRAZGoLimK3PuJC7OoiV4N2B6DjfwWKzb0lhgEetPH&variables_values=${otpGenerated}&route=otp&numbers=${mobno}`)
             .then((response) => {
-                console.log(response);
+                //console.log(response);
                 toast('OTP sent successfully');
             })
             .catch(error => toast('Something went wrong'));
@@ -121,7 +121,7 @@ const Register = () => {
                 </svg>
                 Register</div>
             <div className='text-center'>
-                <img src={siteTheme} alt="hp_logo" className='m-auto md:w-1/5 sm:w-2/5 my-5' />
+                <img src={siteTheme} alt="hp_logo" className='m-auto md:w-1/5 sm:w-1/5 my-5' width={300} />
             </div>
             <div className="box mb-20 border-2 m-auto border-gray-200 rounded-3xl border-solid lg:w-2/5 w-4/5 shadow-xl p-4 w-50% flex flex-col">
                 <input value={mobno} onChange={e => setMobno(e.target.value)} type="text" className='p-2 outline-none mb-2 border-2 border-gray-100 rounded-full' placeholder='Phone number' name="phoneno" id="phoneno" />

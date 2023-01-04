@@ -8,7 +8,7 @@ const Settings = () => {
 
     const navigate = useNavigate();
     const loc = useLocation();
-    console.log(loc);
+    //console.log(loc);
 
 
     return (

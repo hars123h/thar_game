@@ -28,12 +28,12 @@ const ChangeWithdrawalPassword = () => {
             })
             .catch(error=>toast('Some Error Occured'));
         }else {
-            console.log({new_pwd, cnf_new_pwd, oldpwd});
+            //console.log({new_pwd, cnf_new_pwd, oldpwd});
             toast('Either Old Login Password is incorrect or password do not match, Please Retry!');
         }
     }
 
-    console.log(loc);
+    //console.log(loc);
     return (
         <div className='bg-[#2e9afe] h-full p-4 sm:h-[700px] md:h-[950px]'>
             <div className="options text-center text-white text-2xl pt-2 font-medium">

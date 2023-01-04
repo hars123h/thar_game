@@ -283,7 +283,7 @@ export default function User() {
                                                     navigate('/admin/user_details', { state: row })
                                                 }}><Visibility /></IconButton>
                                                 <IconButton onClick={() => {
-                                                    console.log(row.user_id);
+                                                    //console.log(row.user_id);
                                                     setIsVisible(true);
                                                     setCurrBalanceId(row.user_id);
                                                     setCurrBalance(row.balance)

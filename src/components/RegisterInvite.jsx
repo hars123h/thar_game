@@ -20,13 +20,13 @@ const RegisterInvite = () => {
     const [invt, setInvt] = useState(invite_code);
 
     const handleRegister = async () => {
-        console.log({ mobno, pwd, cpwd, wpwd, invt });
+        //console.log({ mobno, pwd, cpwd, wpwd, invt });
         const new_mobno = mobno + '@gmail.com';
         createUserWithEmailAndPassword(auth, new_mobno, pwd)
             .then((userCredential) => {
-                console.log(userCredential);
+                //console.log(userCredential);
                 try {
-                    console.log(auth.currentUser.uid);
+                    //console.log(auth.currentUser.uid);
                     setDoc(doc(db, "users", auth.currentUser.uid), {
                         mobno,
                         pwd,
@@ -48,7 +48,7 @@ const RegisterInvite = () => {
                         return q;
                     }).then((q) => {
                         const newRef = doc(db, 'users', auth.currentUser.uid);
-                        console.log(q);
+                        //console.log(q);
                         updateDoc(newRef, {
                             parent_id: q._snapshot.docChanges[0].doc.key.path.segments[6],
                             grand_parent_int: q._snapshot.docChanges[0].doc.data.value.mapValue.fields.parent_invt
@@ -60,12 +60,12 @@ const RegisterInvite = () => {
                         return qw;
                     }).then((qw) => {
                         const newRef2 = doc(db, 'users', auth.currentUser.uid);
-                        console.log(qw, 'this is the last then');
+                        //console.log(qw, 'this is the last then');
                         updateDoc(newRef2, {
                             grand_parent_id: qw._snapshot.docChanges[0].doc.key.path.segments[6],
                         });
                     });
-                    console.log("Document written successfully");
+                    //console.log("Document written successfully");
                 } catch (e) {
                     console.error("Error adding document: ", e);
                 }

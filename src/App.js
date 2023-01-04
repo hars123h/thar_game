@@ -53,7 +53,7 @@ function App() {
       //console.log('hello');
       const dataRes = await getDoc(doc(db, 'amounts', 'wgx5GRblXXwhlmx4XYok'));
       if (dataRes.exists()) {
-        console.log(dataRes.data());
+        //console.log(dataRes.data());
         setAmounsts(dataRes.data());
       }
     

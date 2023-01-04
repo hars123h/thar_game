@@ -106,7 +106,7 @@ export default function Withdrawals() {
             if (doc.data().status === status) {
                 temp_Data = [...temp_Data, { ...doc.data(), 'withdrawal_id': docSnap._snapshot.docChanges[idx].doc.key.path.segments[6] }];
             }
-            console.log(temp_Data);
+            //console.log(temp_Data);
             idx += 1;
         });
         //_snapshot.docChanges[0].doc.key
@@ -129,7 +129,7 @@ export default function Withdrawals() {
         await updateDoc(docRef, {
             status: new_status
         }).then(() => {
-            console.log('Withdrawal Status Approved', new_status);
+            //console.log('Withdrawal Status Approved', new_status);
             if (new_status === 'confirmed') {
                 updateDoc(docRef2, {
                     balance: increment(-Number(withdrawal_value))

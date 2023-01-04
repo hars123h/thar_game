@@ -12,9 +12,6 @@ import { toast } from 'react-toastify';
 import siteTheme from '../images/siteTheme.png';
 
 
-// rgb(232, 240, 254) #E8F0FE
-// #f1f1f1
-
 const Login = () => {
 
     const navigate = useNavigate();
@@ -55,7 +52,7 @@ const Login = () => {
     return (
         <div>
             <div className='text-center'>
-                <img src={siteTheme} alt="hp_logo" className='m-auto md:w-1/5 sm:w-2/5 my-5' />
+                <img src={siteTheme} alt="hp_logo" className='m-auto md:w-2/6 sm:w-1/5 my-5' width={300}/>
             </div>
             <div className='flex flex-col m-auto w-3/5'>
                 <div className=" items-center mb-3 p-2 phoneno flex border-none bg-[#f1f1f1] rounded-md">

@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 const Bank = () => {
     const navigate = useNavigate();
     const loc = useLocation();
-    console.log(loc);
+    //console.log(loc);
     const auth = getAuth();
     const [details, setDetails] = useState({
         fullName: '',
@@ -27,15 +27,18 @@ const Bank = () => {
             ...details,
             [e.target.name]: e.target.value
         });
-        console.log(details);
+        //console.log(details);
     }
 
     const handleSubmit = async () => {
         if (loc.state.withdrawalPassword === wpwd) {
             const docRef = doc(db, 'users', auth.currentUser.uid);
             await updateDoc(docRef, { bankDetails: details })
-                .then(() => { console.log('Details Added Successfully'); toast('Bank details added successfully!'); navigate('/mine'); })
-                .catch(() => console.log('Some error Occured'));
+                .then(() => { //console.log('Details Added Successfully'); 
+                    toast('Bank details added successfully!'); 
+                    navigate('/mine'); })
+                .catch(() => console.log('Some error Occured')
+                );
         } else {
             toast('Incorrect withdrawal password!');
         }

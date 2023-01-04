@@ -31,7 +31,7 @@ const RechargeWindow = () => {
 
 
     const handleRecharge = async () => {
-        console.log({ refno, recharge_value, status: 'pending' });
+        //console.log({ refno, recharge_value, status: 'pending' });
 
         try {
             const docRef1 = await addDoc(collection(db, "recharges"), { 
@@ -46,7 +46,7 @@ const RechargeWindow = () => {
              });
             const docRef2 = await addDoc(collection(db, 'users', auth.currentUser.uid, 'placed_recharges'), {recharge_id:docRef1.id, time:Timestamp.now()});
             
-            console.log("Document written with ID: ", docRef1.id, docRef2.id);
+            //console.log("Document written with ID: ", docRef1.id, docRef2.id);
             toast('Request Placed Successfully!',{autoClose:1000});
             navigate('/record');
             setRefno('');

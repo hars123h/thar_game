@@ -44,13 +44,13 @@ const Approval = () => {
     const updateStatus = async (recharge_id, new_status, recharge_value, user_id, element) => {
         const docRef = doc(db, 'recharges', recharge_id);
         const docRef2 = doc(db, 'users', user_id);
-        console.log(element);
+        //console.log(element);
 
 
         await updateDoc(docRef, {
             status: new_status
         }).then(() => {
-            console.log('Recharge Status Approved', new_status);
+            //console.log('Recharge Status Approved', new_status);
             if (new_status === 'confirmed') {
                 updateDoc(docRef2, {
                     recharge_amount: increment(recharge_value),
@@ -75,7 +75,7 @@ const Approval = () => {
 
             getRecharges_list();
         }).catch((error) => {
-            console.log('Some Error Occured');
+            //console.log('Some Error Occured');
         });
     }
 
