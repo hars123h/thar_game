@@ -1,5 +1,5 @@
 import React from 'react';
-import hp_logo from '../images/hp_logo.png';
+// import hp_logo from '../images/hp_logo.png';
 import user_img from '../images/user_img.png';
 import lock_img from '../images/lock_img.png';
 import {useNavigate} from 'react-router-dom';
@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebase/config';
 import { toast } from 'react-toastify';
+import siteTheme from '../images/siteTheme.png';
 
 
 // rgb(232, 240, 254) #E8F0FE
@@ -54,7 +55,7 @@ const Login = () => {
     return (
         <div>
             <div className='text-center'>
-                <img src={hp_logo} alt="hp_logo" className='m-auto md:w-1/5 sm:w-2/5' />
+                <img src={siteTheme} alt="hp_logo" className='m-auto md:w-1/5 sm:w-2/5 my-5' />
             </div>
             <div className='flex flex-col m-auto w-3/5'>
                 <div className=" items-center mb-3 p-2 phoneno flex border-none bg-[#f1f1f1] rounded-md">
