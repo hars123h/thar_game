@@ -10,6 +10,12 @@ import useInterval from '../hooks/useInterval.js';
 import '../styles/record.css';
 
 
+const nameMapper = {
+    confirmed:'success',
+    declined:'declined',
+    pending:'pending'
+}
+
 const Record = () => {
     const navigate = useNavigate();
     const [recharge_list, setRecharge_list] = useState([]);
@@ -108,7 +114,7 @@ const Record = () => {
                                 <div className='flex flex-col gap-1'>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Recharge Value:</span> &#8377;{new Intl.NumberFormat().format(element.recharge_value)}</div>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Ref No:</span> {element.refno}</div>
-                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Status:</span> {String(element.status)}</div>
+                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Status:</span> {nameMapper[String(element.status)]}</div>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-gray-500'>Date:</span> {new Date(element.time.seconds * 1000).toLocaleString('en-US', {
                                         
                                         day: 'numeric',

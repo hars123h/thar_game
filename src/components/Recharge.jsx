@@ -13,7 +13,7 @@ const Recharge = () => {
 
   const handleRecharge = () => {
     if(parseInt(recharge_value)) {
-        if(amountDetails.amount>recharge_value) {
+        if(Number(amountDetails.amount)>Number(recharge_value)) {
             toast(`Amount should be greater than ₹${amountDetails.amount}`);
             return;
         }

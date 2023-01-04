@@ -16,6 +16,7 @@ import { useLayoutEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import db from '../firebase/config';
 import { useState } from 'react';
+import ss_logo from '../images/ss_logo.jpg';
 import { RotatingLines } from 'react-loader-spinner';
 
 
@@ -83,7 +84,7 @@ const Mine = () => {
         <div className="top bg-[#2e9afe] h-56">
 
           <div className="info pt-10 pl-10 flex items-center justify-start">
-            <img src={hp_small} alt="logo" className='w-20 rounded-full' />
+            <div className='flex justify-center items-center'><img src={ss_logo} alt="logo" className='w-20 rounded-full' /></div>
             <div className="user_no flex flex-col text-white ml-5">
               <div className="no text-3xl font-medium">{mobileno}</div>
               <div className='text-xs border-2 border-white py-1 px-2 w-2/5 text-center rounded-lg mt-1'>LV0</div>
