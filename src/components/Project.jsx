@@ -7,6 +7,13 @@ import { RotatingLines } from 'react-loader-spinner';
 import DateDifference from '../utility/DateDifference.js';
 import { toast } from 'react-toastify';
 
+const addDays = (date, days) => {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    //console.log(result);
+    return result;
+  }
+
 
 const Project = () => {
     const navigate = useNavigate();
@@ -27,8 +34,16 @@ const Project = () => {
                 if (document.data().plans_purchased) {
                     var earn = 0;
                     var temp = document.data().plans_purchased.map((element) => {
-                        var days = DateDifference(new Date(element.date_till_rewarded), new Date());
+                        var days = DateDifference(new Date(element.date_till_rewarded), new Date(Math.min(new Date(), addDays(new Date(element.date_purchased), element.plan_cycle))));
+                        var days2 = DateDifference(new Date(element.date_till_rewarded), addDays(new Date(element.date_purchased), element.plan_cycle));
+
+                        // if(element.product_type==='short' && days<element.plan_cycle) {
+                        //     return {
+                        //         ...element
+                        //     }
+                        // }
                         //console.log(days, element);
+
                         if (days > element.plan_cycle) {
                             return {
                                 ...element
@@ -37,7 +52,7 @@ const Project = () => {
                         earn = earn + (days * element.quantity * element.plan_daily_earning);
                         return {
                             ...element,
-                            date_till_rewarded: new Date().toDateString()
+                            date_till_rewarded: new Date(Math.min(new Date(), addDays(new Date(element.date_purchased), element.plan_cycle))).toDateString()
                         }
                     });
                     const docRef1 = doc(db, 'users', auth.currentUser.uid);
@@ -89,7 +104,7 @@ const Project = () => {
 
 
     return (
-        <div className='md:h-screen xs:h-[1200px] bg-[#2e9afe]'>
+        <div className='md:h-screen xs:h-[1200px] bg-[#2e9afe] h-screen'>
 
             <div className="options text-center bg-[#2e9afe] text-white text-md pt-5 font-normal pb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate(-1)} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute left-2  storke-white top-5 cursor-pointer">
@@ -104,11 +119,11 @@ const Project = () => {
                 <div onClick={() => setCurrent_tab('completed')} className={`h-[40px] flex items-center justify-center w-1/2 text-center border-b-4 ${current_tab === 'completed' ? 'border-[#0172fe] text-[#0172fe]' : 'text-white'}`}>Completed</div>
             </div>
 
-            <div className='overflow-y-scroll h-[600px] mx-auto w-[95%] mt-2 p-2'>
+            <div className='overflow-y-scroll h-[800px] mx-auto w-[95%] mt-2 p-2 pb-10'>
                 {
                     current_tab === 'earning' && userDetails && ('plans_purchased' in userDetails) && (
                         userDetails.plans_purchased.map((element, index) => {
-                            if (element.plan_daily_earning * element.plan_cycle !== DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning) {
+                            if (element.plan_daily_earning * element.plan_cycle !== DateDifference(new Date(element.date_purchased), new Date(element.date_till_rewarded)) * element.quantity * element.plan_daily_earning) {
                                 return (
                                     <div key={index} className='mx-auto w-[90%] mt-2 border-x-2 border-white border-b-2  rounded-lg shadow-lg text-white'>
                                         <div className="text-lg p-3 text-[#2e9afe] font-semibold bg-white rounded-t-lg">Plan Details</div>
@@ -120,7 +135,7 @@ const Project = () => {
                                             <div className='mb-1'>Plan Cycle: {element.plan_cycle}</div>
                                             <div className='mb-1'>Plan Daily Earning: &#8377;{element.plan_daily_earning}</div>
                                             <div className='mb-1'>Quantity: {element.quantity}</div>
-                                            <div className='mb-1'>Current Earning: &#8377;{DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning}</div>
+                                            <div className='mb-1'>Current Earning: &#8377;{DateDifference(new Date(element.date_purchased), new Date(element.date_till_rewarded)) * element.quantity * element.plan_daily_earning}</div>
                                         </div>
                                     </div>
                                 )
@@ -132,7 +147,7 @@ const Project = () => {
                 {
                     userDetails && ('plans_purchased' in userDetails) && (
                         current_tab === 'completed' && userDetails.plans_purchased.map((element, index) => {
-                            if (element.plan_daily_earning * element.plan_cycle === DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning) {
+                            if (element.plan_daily_earning * element.plan_cycle === DateDifference(new Date(element.date_purchased), new Date(element.date_till_rewarded)) * element.quantity * element.plan_daily_earning) {
                                 return (
                                     <div key={index} className='mx-auto w-[90%] mt-2 border-x-2 border-white border-b-2  rounded-lg shadow-lg text-white'>
                                         <div className="text-lg p-3 text-[#2e9afe] font-semibold bg-white rounded-t-lg">Plan Details</div>
@@ -144,7 +159,7 @@ const Project = () => {
                                             <div className='mb-1'>Plan Cycle: {element.plan_cycle}</div>
                                             <div className='mb-1'>Plan Daily Earning: &#8377;{element.plan_daily_earning}</div>
                                             <div className='mb-1'>Quantity: {element.quantity}</div>
-                                            <div className='mb-1'>Current Earning: &#8377;{DateDifference(new Date(element.time), new Date()) * element.quantity * element.plan_daily_earning}</div>
+                                            <div className='mb-1'>Current Earning: &#8377;{DateDifference(new Date(element.date_purchased), new Date(element.date_till_rewarded)) * element.quantity * element.plan_daily_earning}</div>
                                         </div>
                                     </div>
                                 )

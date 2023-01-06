@@ -92,6 +92,11 @@ const Withdrawal = () => {
             .catch(error => toast('Something went wrong'));
     }
 
+    const handleWithdrawalAll = () => {
+        document.getElementById('withdrawal_field').value = balance;
+        setWamount(balance);
+    }
+
     return (
         <div className='bg-[#2e9afe] flex flex-col p-4 sm:h-[1000px] md:h-[950px]'>
             <div className="options text-center text-white text-lg pt-2 font-medium">
@@ -102,14 +107,14 @@ const Withdrawal = () => {
             </div>
 
             <div className="part1 bg-[#d3d6fe] p-3 rounded-lg mx-3 mt-5">
-                <div className='text-[#2e9afe] px-2 my-1  rounded-full border border-[#2e9afe] inline'>Withdrawal Fee Rs{amountDetails.withdrawal_fee}</div>
+                <div className='text-[#2e9afe] px-2 my-1  rounded-full border border-[#2e9afe] inline'>Withdrawal Fee &#8377;{amountDetails.withdrawal_fee}</div>
                 <div className='flex items-center justify-start gap-2 my-1'>
                     <div className='text-[#2e9afe] text-3xl'>&#8377;</div>
-                    <div className="value"> <input type="number" onChange={handleWithdrawalAmount} className='w-full text-2xl outline-none bg-[#d3d6fe] py-2' placeholder='Amount' /></div>
+                    <div className="value"> <input type="number" id="withdrawal_field" onChange={handleWithdrawalAmount} className='w-full text-2xl outline-none bg-[#d3d6fe] py-2' placeholder='Amount' /></div>
                 </div>
                 <div className='flex items-center justify-start gap-2 my-1'>
                     <div className="balance text-[#87a1c3] text-sm">Balance &#8377; {balance}</div>
-                    <div className="withdraw text-[#2e9afe] text-sm cursor-pointer">Withdraw all</div>
+                    <div onClick={handleWithdrawalAll} className="withdraw text-[#2e9afe] text-sm cursor-pointer">Withdraw all</div>
                 </div>
             </div>
 
@@ -117,22 +122,22 @@ const Withdrawal = () => {
 
                 <div className="balance flex justify-between text-[#87a1c3] text-xl p-3 border-[#87a1c3] border-b-2">
                     <div className="phoneno">Phone Number:</div>
-                    <div className='text-black'>{details.phoneNo}</div>
+                    <div className='text-black text-sm'>{details.phoneNo}</div>
                 </div>
 
                 <div className="balance flex justify-between text-[#87a1c3] text-xl p-3 border-[#87a1c3] border-b-2">
                     <div className="bnkac">Bank Account:</div>
-                    <div className='text-black'>{details.bankAccount}</div>
+                    <div className='text-black text-sm'>{details.bankAccount}</div>
                 </div>
 
                 <div className="balance flex justify-between text-[#87a1c3] text-xl p-3 border-[#87a1c3] border-b-2">
                     <div className="fullname">Full Name:</div>
-                    <div className='text-black'>{details.fullName}</div>
+                    <div className='text-black text-sm'>{details.fullName}</div>
                 </div>
 
                 <div className="balance flex justify-between text-[#87a1c3] text-xl p-3 border-[#87a1c3] border-b-2">
                     <div className="ifsc">IFSC:</div>
-                    <div className='text-black'>{details.ifsc}</div>
+                    <div className='text-black text-sm'>{details.ifsc}</div>
                 </div>
 
                 <div className="balance flex justify-between text-[#87a1c3] sm:text-md md:text-xl p-3 border-[#87a1c3] border-b-2">

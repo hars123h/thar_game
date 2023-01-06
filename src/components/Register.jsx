@@ -50,7 +50,9 @@ const Register = () => {
                         directRecharge:0,
                         indirectRecharge:0,
                         directMember:[],
-                        indirectMember:[]
+                        indirectMember:[],
+                        boughtLong:0,
+                        showShort:0
                     }).then(() => {
                         const usersRef = collection(db, "users");
                         const q = getDocs(query(usersRef, where('user_invite', '==', invt)));

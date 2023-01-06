@@ -8,7 +8,7 @@ import {toast} from 'react-toastify';
 import { useEffect, useLayoutEffect } from 'react';
 import { useContext } from 'react';
 import { AmountContext } from '../App.js';
-
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const RechargeWindow = () => {
 
@@ -32,6 +32,11 @@ const RechargeWindow = () => {
 
     const handleRecharge = async () => {
         //console.log({ refno, recharge_value, status: 'pending' });
+
+        if(refno.length!==12) {
+            toast('Enter a valid Ref No. of 12 digits');
+            return;
+        }
 
         try {
             const docRef1 = await addDoc(collection(db, "recharges"), { 
@@ -76,7 +81,10 @@ const RechargeWindow = () => {
                     <div className='text-md'>1.Copy UPI information</div>
                     <div className='flex rounded-md items-center justify-between gap-2  p-2 border-2 border-[#52A8F2]'>
                         <div className='text-yellow-500 font-bold'>{amountDetails.upi_id}</div>
+                        <CopyToClipboard text={`${amountDetails.upi_id}`} onCopy={() => toast('Copied to clipboard')}>
                         <div className='text-lg font-bold text-[#52A8F2] cursor-pointer'>Copy</div>
+                </CopyToClipboard>
+                        
                     </div>
                 </div>
 

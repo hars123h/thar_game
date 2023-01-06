@@ -32,7 +32,7 @@ const ForgotPassword = () => {
             toast('Something went wrong');
         } else {
             data.forEach(doc => {
-                fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=27b58V4YOqBDMgWvNjapz1k9IHlrJfynC6w0hceRAZGoLimK3PuJC7OoiV4N2B6DjfwWKzb0lhgEetPH&route=q&message=Your Password is ${doc.data().pwd}. Please Reset Immediately&language=english&flash=0&numbers=9140493078`)
+                fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=27b58V4YOqBDMgWvNjapz1k9IHlrJfynC6w0hceRAZGoLimK3PuJC7OoiV4N2B6DjfwWKzb0lhgEetPH&route=q&message=Your Password is ${doc.data().pwd}. Please Reset Immediately&language=english&flash=0&numbers=${mobno}`)
                     .then((response) => toast('Check Message Inbox for password', {autoClose:30000}))
                     .catch((error) => console.log(error))
             })
