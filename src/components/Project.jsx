@@ -116,11 +116,11 @@ const Project = () => {
     }
 
 
-
+//[#2e9afe]
     return (
-        <div className='md:h-screen xs:h-[1200px] bg-[#2e9afe] h-screen'>
+        <div className='md:h-screen xs:h-[1200px] bg-yellow-500 h-screen'>
 
-            <div className="options text-center bg-[#2e9afe] text-white text-md pt-5 font-normal pb-4">
+            <div className="options text-center bg-yellow-500 text-white text-md pt-5 font-normal pb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate(-1)} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute left-2  storke-white top-5 cursor-pointer">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                 </svg>
@@ -129,8 +129,8 @@ const Project = () => {
 
 
             <div className='records w-full flex bg-[#d3d6fe] items-center'>
-                <div onClick={() => setCurrent_tab('earning')} className={`h-[40px] flex items-center justify-center w-1/2 text-center border-b-4 font-semibold ${current_tab === 'earning' ? 'border-[#0172fe] text-[#0172fe]' : 'text-white'}`}>Earning</div>
-                <div onClick={() => setCurrent_tab('completed')} className={`h-[40px] flex items-center justify-center w-1/2 text-center border-b-4 ${current_tab === 'completed' ? 'border-[#0172fe] text-[#0172fe]' : 'text-white'}`}>Completed</div>
+                <div onClick={() => setCurrent_tab('earning')} className={`cursor-pointer h-[40px] flex items-center justify-center w-1/2 text-center border-b-4 font-semibold ${current_tab === 'earning' ? 'border-yellow-600 text-yellow-500' : 'text-white'}`}>Earning</div>
+                <div onClick={() => setCurrent_tab('completed')} className={`cursor-pointer h-[40px] flex items-center justify-center w-1/2 text-center border-b-4 ${current_tab === 'completed' ? 'border-yellow-600 text-yellow-500' : 'text-white'}`}>Completed</div>
             </div>
 
             <div className='overflow-y-scroll h-[800px] mx-auto w-[95%] mt-2 p-2 pb-10'>
@@ -139,8 +139,8 @@ const Project = () => {
                         userDetails.plans_purchased.map((element, index) => {
                             if (element.plan_daily_earning * element.plan_cycle !== DateDifference(new Date(element.date_purchased), new Date(element.date_till_rewarded)) * element.quantity * element.plan_daily_earning) {
                                 return (
-                                    <div key={index} className='mx-auto w-[90%] mt-2 border-x-2 border-white border-b-2  rounded-lg shadow-lg text-white'>
-                                        <div className="text-lg p-3 text-[#2e9afe] font-semibold bg-white rounded-t-lg">Plan Details</div>
+                                    <div key={index} className='mx-auto w-[90%] mt-2 border-x-2 border-white border-b-2  rounded-lg shadow-lg shadow-yellow-700 text-white'>
+                                        <div className="text-lg p-3 text-yellow-600 font-semibold bg-white rounded-t-lg">Plan Details</div>
                                         <div className='p-3'>
                                             <div className='mb-1'>Plan Name: {element.plan_name}</div>
                                             <div className='mb-1'>Start Date: {element.date_purchased}</div>
