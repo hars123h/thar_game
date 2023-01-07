@@ -10,6 +10,8 @@ import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebase/config';
 import { toast } from 'react-toastify';
 import siteTheme from '../images/siteTheme.png';
+import latest_logo from '../images/latest_logo.jpg';
+
 
 
 const Login = () => {
@@ -52,7 +54,7 @@ const Login = () => {
     return (
         <div>
             <div className='text-center'>
-                <img src={siteTheme} alt="hp_logo" className='m-auto md:w-2/6 sm:w-1/5 my-5' width={300}/>
+                <img src={latest_logo} alt="hp_logo" className='m-auto md:w-2/6 sm:w-1/5 my-5' width={300}/>
             </div>
             <div className='flex flex-col m-auto w-3/5'>
                 <div className=" items-center mb-3 p-2 phoneno flex border-none bg-[#f1f1f1] rounded-md">

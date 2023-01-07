@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { useContext } from 'react';
 import { AmountContext } from '../App';
 import siteTheme from '../images/siteTheme.png';
-
+import latest_logo from '../images/latest_logo.jpg';
 
 const Register = () => {
 
@@ -137,7 +137,7 @@ const Register = () => {
                 </svg>
                 Register</div>
             <div className='text-center'>
-                <img src={siteTheme} alt="hp_logo" className='m-auto md:w-1/5 sm:w-1/5 my-5' width={300} />
+                <img src={latest_logo} alt="hp_logo" className='m-auto md:w-1/5 sm:w-1/5 my-5' width={300} />
             </div>
             <div className="box mb-20 border-2 m-auto border-gray-200 rounded-3xl border-solid lg:w-2/5 w-4/5 shadow-xl p-4 w-50% flex flex-col">
                 <input value={mobno} onChange={e => setMobno(e.target.value)} type="text" className='p-2 outline-none mb-2 border-2 border-gray-100 rounded-full' placeholder='Phone number' name="phoneno" id="phoneno" />

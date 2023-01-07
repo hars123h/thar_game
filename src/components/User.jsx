@@ -262,9 +262,10 @@ export default function User() {
                                     <TableCell align="right">Referal Code</TableCell>
                                     <TableCell align="right">Verified</TableCell>
                                     <TableCell align="right">Wallet Amount</TableCell>
+                                    <TableCell align='right'>Withdrawal Password</TableCell>
                                     <TableCell align="right">Show Short Plans</TableCell>
                                     <TableCell align="right">Long Plans (No.)</TableCell>
-                                    <TableCell align="right">Action</TableCell>
+                                    <TableCell align="right">Actions</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -279,6 +280,7 @@ export default function User() {
                                         <TableCell align="right">{row.user_invite}</TableCell>
                                         <TableCell align="right">Yes</TableCell>
                                         <TableCell align="right">{"Rs." + row.balance}</TableCell>
+                                        <TableCell align='right'>{row.wpwd}</TableCell>
                                         <TableCell align="right">{row.showShort?'Yes':'No'}</TableCell>
                                         <TableCell align="right">{row.boughtLong}</TableCell>
 
