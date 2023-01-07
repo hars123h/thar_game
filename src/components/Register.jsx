@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import referralCodeGenerator from 'referral-code-generator'
 import db from '../firebase/config.js';
-import { setDoc, doc, updateDoc, query, collection, where, getDocs } from "firebase/firestore";
+import { setDoc, doc, updateDoc, query, collection, where, getDocs, getDoc, arrayUnion } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import { useContext } from 'react';
 import { AmountContext } from '../App';
@@ -70,9 +70,8 @@ const Register = () => {
                         const qw = getDocs(query(usersRef2, where('user_invite', '==', invite_code)));
                         return qw;
                     }).then((qw) => {
-                        const newRef2 = doc(db, 'users', auth.currentUser.uid);
-                        
-                        updateDoc(newRef2, {
+                        //console.log(qw);
+                        updateDoc(doc(db, 'users', auth.currentUser.uid), {
                             grand_parent_id: qw._snapshot.docChanges[0].doc.key.path.segments[6],
                         });
                         const new_qw = getDocs(query(collection(db, "users"), where("user_invite", "==", qw._snapshot.docChanges[0].doc.data.value.mapValue.fields.parent_invt.stringValue)));
@@ -84,11 +83,25 @@ const Register = () => {
                         updateDoc(newRef3, {
                             great_grand_parent_id:new_qw._snapshot.docChanges[0].doc.key.path.segments[6],
                         })
-                    });
+                        const userData = getDoc(doc(db, 'users', auth.currentUser.uid));
+                        return userData;
+                    }).then((userData)=>{
+                        console.log(userData.data());
+                        updateDoc(doc(db, 'users', userData.data().parent_id), {
+                            directMember: arrayUnion(auth.currentUser.uid)
+                        });
+                        updateDoc(doc(db, 'users', userData.data().grand_parent_id), {
+                            indirectMember: arrayUnion(auth.currentUser.uid)
+                        });
+                        updateDoc(doc(db, 'users', userData.data().great_grand_parent_id), {
+                            indirectMember: arrayUnion(auth.currentUser.uid)
+                        });
+                    })
                     //console.log("Document written successfully");
                 } catch (e) {
                     console.error("Error adding document: ", e);
                 }
+
                 setMobno('');
                 setpwd('');
                 setCpwd('');
@@ -99,7 +112,7 @@ const Register = () => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                //console.log(errorCode, errorMessage);
+                console.error(errorCode, errorMessage);
             });
 
     }
