@@ -12,7 +12,7 @@ const addDays = (date, days) => {
     result.setDate(result.getDate() + days);
     //console.log(result);
     return result;
-  }
+}
 
 
 const Project = () => {
@@ -43,6 +43,20 @@ const Project = () => {
                         //     }
                         // }
                         //console.log(days, element);
+
+                        if(element.product_type==='short') {
+                            if(days===element.plan_cycle) {
+                                earn = (days * element.quantity * element.plan_daily_earning);
+                                return {
+                                    ...element,
+                                    date_till_rewarded: new Date(Math.min(new Date(), addDays(new Date(element.date_purchased), element.plan_cycle))).toDateString()
+                                }
+                            }else {
+                                return {
+                                    ...element
+                                }
+                            }
+                        }
 
                         if (days > element.plan_cycle) {
                             return {

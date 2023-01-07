@@ -262,6 +262,8 @@ export default function User() {
                                     <TableCell align="right">Referal Code</TableCell>
                                     <TableCell align="right">Verified</TableCell>
                                     <TableCell align="right">Wallet Amount</TableCell>
+                                    <TableCell align="right">Show Short Plans</TableCell>
+                                    <TableCell align="right">Long Plans (No.)</TableCell>
                                     <TableCell align="right">Action</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -277,8 +279,17 @@ export default function User() {
                                         <TableCell align="right">{row.user_invite}</TableCell>
                                         <TableCell align="right">Yes</TableCell>
                                         <TableCell align="right">{"Rs." + row.balance}</TableCell>
+                                        <TableCell align="right">{row.showShort?'Yes':'No'}</TableCell>
+                                        <TableCell align="right">{row.boughtLong}</TableCell>
+
                                         <TableCell align="right">
                                             <Box sx={{ display: 'flex', justifyContent: "end" }}>
+                                                <Button color="secondary" size='small' variant='contained' onClick={()=>{
+                                                    updateDoc(doc(db, 'users', row.user_id), {
+                                                        showShort:row.showShort===1?0:1
+                                                    });
+                                                    getUsers();
+                                                }}>Toggle Short Plans</Button>
                                                 <IconButton onClick={() => {
                                                     navigate('/admin/user_details', { state: row })
                                                 }}><Visibility /></IconButton>
