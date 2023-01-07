@@ -22,7 +22,7 @@ import product_img3 from '../images/product_img3.jpg';
 import product_img4 from '../images/product_img4.jpg';
 import download_image from '../images/download_image.png';
 import product_img5 from '../images/product_img5.jpg';
-import product_img6 from '../images/product_img6.jpg';
+import product_img17 from '../images/product_img17.jpg';
 import product_img7 from '../images/product_img7.jpg';
 import product_img8 from '../images/product_img8.jpg';
 import recharge_image from '../images/recharge_image.png';
@@ -197,7 +197,7 @@ const Home = () => {
                     <Card product_type={"long"} product_image={product_img4} handleClick={handleClick} plan_name={"Sstone Plan 4"} plan_cycle={90} plan_daily_earning={810} plan_amount={5000} plan_type={'Big Plan'} />
                     {/* Some Plans will unlock after using the website for some days */}
                     <Card product_type={"long"} product_image={product_img5} handleClick={handleClick} plan_name={"Sstone Plan 5"} plan_cycle={90} plan_daily_earning={2000} plan_amount={10000} plan_type={'Big Plan'} />
-                    <Card product_type={"long"} product_image={product_img6} handleClick={handleClick} plan_name={"Sstone Plan 6"} plan_cycle={90} plan_daily_earning={4000} plan_amount={18000} plan_type={'Big Plan'} />
+                    <Card product_type={"long"} product_image={product_img17} handleClick={handleClick} plan_name={"Sstone Plan 6"} plan_cycle={90} plan_daily_earning={4000} plan_amount={18000} plan_type={'Big Plan'} />
                     <Card product_type={"long"} product_image={product_img7} handleClick={handleClick} plan_name={"Sstone Plan 7"} plan_cycle={90} plan_daily_earning={12000} plan_amount={35000} plan_type={'Big Plan'} />
                     <Card product_type={"long"} product_image={product_img8} handleClick={handleClick} plan_name={"Sstone Plan 8"} plan_cycle={90} plan_daily_earning={25000} plan_amount={55000} plan_type={'Big Plan'} />
 

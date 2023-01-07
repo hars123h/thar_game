@@ -6,7 +6,7 @@ import React from 'react';
 const Card = ({product_type, product_image, plan_name, plan_type, plan_amount, plan_daily_earning, plan_cycle, handleClick}) => {
   return (
     <div className='mx-1 mb-1'>
-        <img src={product_image} alt="comp_img" className='border-2 border-gray-200 shadow-lg' />
+        <img src={product_image} alt="comp_img" className='border-2 border-gray-200 shadow-lg' width={600} />
         <div className="info  bg-yellow-500 p-2 text-sm">
           
             <div className="title text-white font-bold">{plan_name}</div>
