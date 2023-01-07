@@ -47,7 +47,7 @@ const RechargeWindow = () => {
                 mobno:auth.currentUser.email.substring(0,10), 
                 time:Timestamp.now(),
                 parent_id: userDetails.parent_id,
-                grand_parent_int: userDetails.grand_parent_id
+                grand_parent_int: userDetails.grand_parent_id?userDetails.grand_parent_id:''
              });
             const docRef2 = await addDoc(collection(db, 'users', auth.currentUser.uid, 'placed_recharges'), {recharge_id:docRef1.id, time:Timestamp.now()});
             

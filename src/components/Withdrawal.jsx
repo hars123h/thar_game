@@ -47,19 +47,31 @@ const Withdrawal = () => {
     }, []);
 
     const handleWithdrawalAmount = (e) => {
-        if(e.target.value>balance || e.target.value==='') {
-            toast('Withdrawal amount should be smaller or equal to balance');
-        }
-        else {
-            setWamount(e.target.value);
-        }
+        // if(e.target.value>balance || e.target.value==='') {
+        //     toast('Withdrawal amount should be smaller or equal to balance');
+        // }
+        // else {
+        //     setWamount(Number(e.target.value));
+        // }
+        setWamount(e.target.value);
     }
 
     const handleWithdrawal = async () => {
 
+        if(Number(wamount)===false || Number(wamount)<=0) {
+            toast('Enter a valid number');
+            return;
+        }
+
         if((Number(wamount)+Number(amountDetails.withdrawal_fee))<Number(amountDetails.mwamount)) {
+            console.log((Number(wamount)+Number(amountDetails.withdrawal_fee)), Number(amountDetails.mwamount));
             toast(`Amount should be greater than ${amountDetails.mwamount}`);
             //console.log(wamount, amountDetails.amount);
+            return;
+        }
+
+        if(((Number(wamount)+Number(amountDetails.withdrawal_fee))>Number(balance))) {
+            toast('You dont have enough balance');
             return;
         }
 

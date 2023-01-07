@@ -91,6 +91,13 @@ const Home = () => {
                 toast("You don't have enough balance to make this purchase", { autoClose: 1000 });
             } else {
                 const docRef = doc(db, 'users', auth.currentUser.uid);
+                console.log({
+                    ...currPlan,
+                    quantity: quantity,
+                    date_purchased: new Date().toDateString(),
+                    date_till_rewarded: new Date().toDateString(),
+                    time: new Date().toDateString()
+                });
                 await updateDoc(docRef, {
                     balance: increment(-1 * (quantity * (currPlan.plan_amount))),
                     boughtLong:increment(currPlan.product_type==='long'?1:0),
