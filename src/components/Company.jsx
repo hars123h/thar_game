@@ -6,7 +6,8 @@ import siteTheme from '../images/siteTheme.png';
 const Company = () => {
     const navigate = useNavigate();
     return (
-        <div className='bg-[#2e9afe] h-full p-4'>
+        <div className='bg-yellow-500 h-full p-4'>
+            {/* [#2e9afe] */}
             <div className="options text-center text-white text-lg pt-2 font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate('/home')} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute left-2  storke-white top-5 cursor-pointer">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -19,7 +20,9 @@ const Company = () => {
             </div>
 
             <div className=" cpy_info sm:w-4/5 lg:w-3/4 mx-auto mt-5">
-                <div className='shadow-lg text-center bg-white h-10 flex justify-center items-center text-lg font-medium rounded-lg shadow-gray-200 text-[#2e9afe]'>Company Profile</div>
+                
+                {/*  [#2e9afe]*/}
+                <div className='shadow-lg text-center bg-white h-10 flex justify-center items-center text-lg font-medium rounded-lg shadow-yellow-300 text-yellow-600'>Company Profile</div>
             </div>
 
             <div className="part sm:w-4/5 lg:w-3/4 mx-auto text-white mt-4">

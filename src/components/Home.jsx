@@ -15,23 +15,27 @@ import { toast } from 'react-toastify';
 import { arrayUnion, doc, getDoc, increment, updateDoc } from 'firebase/firestore';
 import db from '../firebase/config.js';
 import { getAuth } from 'firebase/auth';
-
+import headset1 from '../images/headset1.png';
 import product_img1 from '../images/product_img1.jpg';
 import product_img2 from '../images/product_img2.jpg';
 import product_img3 from '../images/product_img3.jpg';
 import product_img4 from '../images/product_img4.jpg';
-
+import download_image from '../images/download_image.png';
 import product_img5 from '../images/product_img5.jpg';
 import product_img6 from '../images/product_img6.jpg';
 import product_img7 from '../images/product_img7.jpg';
 import product_img8 from '../images/product_img8.jpg';
-
+import recharge_image from '../images/recharge_image.png';
 import product_img9 from '../images/product_img9.jpg';
 import product_img10 from '../images/product_img10.jpg';
 import product_img11 from '../images/product_img11.jpg';
 import product_img12 from '../images/product_img12.jpg';
-
+import invite_image from '../images/invite_image.png';
 import product_img13 from '../images/product_img13.jpg';
+import paper_image from '../images/paper_image.png';
+import buildingNew from '../images/buildingNew.png';
+import homeNew from '../images/homeNew.png';
+import teamNew from '../images/teamNew.png';
 
 
 
@@ -138,7 +142,7 @@ const Home = () => {
             </div>
 
             {/*Marquee Implementation*/}
-            <div className="bg-[#0096D5] rounded-lg text-white relative flex overflow-x-hidden h-10 mx-auto mt-2 border-2 border-gray-100 sm:w-3/5 lg:w-3/5 overflow-y-hidden">
+            <div className="bg-yellow-500 rounded-lg text-white relative flex overflow-x-hidden h-10 mx-auto mt-2 border-2 border-gray-100 sm:w-3/5 lg:w-3/5 overflow-y-hidden">
                 <div className="py-12 animate-marquee flex flex-col whitespace-nowrap">
                     <span className="mx-4 text-sm">91915*****05 Member withdrawl 100000 Rs</span>
                     <span className="mx-4 text-sm">91702*****84 Member withdrawl 30000 Rs</span>
@@ -149,27 +153,27 @@ const Home = () => {
             </div>
 
             {/*Navigation Bar 1*/}
-            <div className="bg-[#7dc1ff] rounded-lg text-white relative flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 sm:w-3/5 lg:w-3/5 overflow-y-hidden">
+            <div className="bg-yellow-500 rounded-lg text-white relative flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 sm:w-3/5 lg:w-3/5 overflow-y-hidden">
                 <div className="flex flex-row justify-around items-center w-full py-2">
                     <a href="https://t.me/interviewtcs" className=' no-underline text-white cursor-pointer'>
                         <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
-                            <img src={headphone_img} alt="online" className='w-10' />
+                            <img src={headset1} alt="online" className='w-10' />
                             <div>Online</div>
                         </div>
                     </a>
 
                     <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
-                        <img src={download_img} alt="app_dwd" className='w-10' />
+                        <img src={download_image} alt="app_dwd" className='w-10' />
                         <div>App</div>
                     </div>
 
                     <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
-                        <img src={recharge_img} alt="recharge" className='w-10' onClick={() => navigate('/recharge')} />
+                        <img src={recharge_image} alt="recharge" className='w-10' onClick={() => navigate('/recharge')} />
                         <div>Recharge</div>
                     </div>
 
                     <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
-                        <img src={invite_img} alt="invite" className='w-10' onClick={() => navigate('/invite')} />
+                        <img src={invite_image} alt="invite" className='w-10' onClick={() => navigate('/invite')} />
                         <div>Invite</div>
                     </div>
                 </div>
@@ -177,7 +181,7 @@ const Home = () => {
 
             {/*Plans Cards*/}
             <div className="card_grid grid grid-cols-1 sm:w-3/5 lg:w-3/5 mx-auto mt-2 mb-20">
-                <div className='text-center bg-[#0096D5] mx-1 text-white text-lg font-medium py-2'>Big Plans</div>
+                <div className='text-center bg-yellow-500 mx-1 text-white text-lg font-medium py-2'>Big Plans</div>
 
                 <div className='grid grid-cols-2'>
                     <Card product_type={"long"} product_image={product_img1}  handleClick={handleClick} plan_name={"Sstone Plan 1"} plan_cycle={90} plan_daily_earning={90} plan_amount={600} plan_type={'Big Plan'} />
@@ -191,7 +195,8 @@ const Home = () => {
                     <Card product_type={"long"} product_image={product_img8} handleClick={handleClick} plan_name={"Sstone Plan 8"} plan_cycle={90} plan_daily_earning={25000} plan_amount={55000} plan_type={'Big Plan'} />
 
                 </div>
-                <div className='text-center bg-[#0096D5] mx-1 text-white text-lg font-medium py-2' >
+                {/* [#0096D5] */}
+                <div className='text-center bg-yellow-500 mx-1 text-white text-lg font-medium py-2' >
                     Short Plans
                     <br />
                     {
@@ -210,25 +215,25 @@ const Home = () => {
 
 
             {/*Navigation Bar 2*/}
-            <div className="fixed bottom-0 z-10 bg-white rounded-none text-[#757575] flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
+            <div className="fixed bottom-0 z-10 bg-yellow-500 rounded-none text-white flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
                 <div className="flex flex-row justify-around items-center w-full py-2">
                     <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
-                        <img src={btm_home} alt="online" className='w-8' />
+                        <img src={homeNew} alt="online" className='w-8' />
                         <div>Home</div>
                     </div>
 
                     <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={() => navigate('/company')}>
-                        <img src={btm_cpy} alt="app_dwd" className='w-8' />
+                        <img src={buildingNew} alt="app_dwd" className='w-8' />
                         <div>Company</div>
                     </div>
 
                     <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={() => navigate('/team')}>
-                        <img src={btm_team} alt="recharge" className='w-8' />
+                        <img src={teamNew} alt="recharge" className='w-8' />
                         <div>Team</div>
                     </div>
 
                     <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={() => navigate('/mine')}>
-                        <img src={btm_prof} alt="invite" className='w-8' />
+                        <img src={paper_image} alt="invite" className='w-8' />
                         <div>Mine</div>
                     </div>
                 </div>

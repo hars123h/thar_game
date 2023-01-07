@@ -43,9 +43,9 @@ const Bank = () => {
             toast('Incorrect withdrawal password!');
         }
     }
-
+//[#2e9afe]
     return (
-        <div className='bg-[#2e9afe] h-full p-4 sm:h-[700px] md:h-[950px]'>
+        <div className='bg-yellow-500 h-full p-4 sm:h-[700px] md:h-[950px]'>
             <div className="options text-center text-white text-2xl pt-2 font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate('/settings', { state: { withdrawalPassword: loc.state.withdrawalPassword, loginPassword: loc.state.loginPassword } })} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute left-2  storke-white top-5 cursor-pointer">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -53,35 +53,35 @@ const Bank = () => {
                 My Bank
             </div>
 
-
-            <div className="box mx-2 bg-[#61b2ff] p-2 rounded-md mt-4">
-                <div className='flex gap-2 items-center  text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" onChange={handleChange} name='fullName' value={details.fullName} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Full Name' />
+{/* #757575 */}
+            <div className="box mx-2 bg-yellow-400 text-white p-2 rounded-md mt-4">
+                <div className='flex gap-2 items-center  text-md p-3 m-1  cursor-pointer'>
+                    <input type="text" onChange={handleChange} name='fullName' value={details.fullName} className='outline-none w-full bg-inherit placeholder-white' placeholder='Full Name' />
                 </div>
 
-                <div className='flex gap-2 items-center text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" onChange={handleChange} name='phoneNo' value={details.phoneNo} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Phone Number' />
+                <div className='flex gap-2 items-center text-md p-3 m-1  cursor-pointer'>
+                    <input type="text" onChange={handleChange} name='phoneNo' value={details.phoneNo} className='outline-none w-full bg-inherit placeholder-white' placeholder='Phone Number' />
                 </div>
 
-                <div className='flex gap-2 items-center text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" onChange={handleChange} name='bankAccount' value={details.bankAccount} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Bank Account' />
+                <div className='flex gap-2 items-center text-md p-3 m-1  cursor-pointer'>
+                    <input type="text" onChange={handleChange} name='bankAccount' value={details.bankAccount} className='outline-none w-full bg-inherit placeholder-white' placeholder='Bank Account' />
                 </div>
 
-                <div className='flex gap-2 items-center text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" onChange={handleChange} name='bankName' value={details.bankName} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Bank Name' />
+                <div className='flex gap-2 items-center text-md p-3 m-1  cursor-pointer'>
+                    <input type="text" onChange={handleChange} name='bankName' value={details.bankName} className='outline-none w-full bg-inherit placeholder-white' placeholder='Bank Name' />
                 </div>
 
-                <div className='flex gap-2 items-center text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" onChange={handleChange} name='ifsc' value={details.ifsc} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='IFSC' />
+                <div className='flex gap-2 items-center text-md p-3 m-1  cursor-pointer'>
+                    <input type="text" onChange={handleChange} name='ifsc' value={details.ifsc} className='outline-none w-full bg-inherit placeholder-white' placeholder='IFSC' />
                 </div>
 
-                <div className='flex gap-2 items-center text-lg p-3 m-1  cursor-pointer'>
-                    <input type="text" onChange={(e) => setPwd(e.target.value)} name='wpwd' value={wpwd} className='outline-none w-full bg-inherit placeholder-[#757575]' placeholder='Withdrawal Password' />
+                <div className='flex gap-2 items-center text-md p-3 m-1  cursor-pointer'>
+                    <input type="text" onChange={(e) => setPwd(e.target.value)} name='wpwd' value={wpwd} className='outline-none w-full bg-inherit placeholder-white' placeholder='Withdrawal Password' />
                 </div>
             </div>
 
             <div className='mb-[1000px]'>
-                <button onClick={handleSubmit} className='bg-[#2e9afe] text-white text-lg mt-5 mb-20 rounded-lg shadow-xl block w-full py-2 shadow-[#7899de]'>Confirm</button>
+                <button onClick={handleSubmit} className='bg-yellow-400 text-white text-lg mt-5 mb-20 rounded-lg shadow-xl block w-full py-2 shadow-yellow-200'>Confirm</button>
             </div>
         </div>
     )

@@ -114,10 +114,10 @@ const Register = () => {
             })
             .catch(error => toast('Something went wrong'));
     }
-
+//[#0096D5]
     return (
         <div>
-            <div className='text-center bg-[#0096D5] font-sans text-white pt-2 text-lg 
+            <div className='text-center bg-yellow-500 font-sans text-white pt-2 text-lg 
         pb-2'> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute left-2 cursor-pointer hover:bg-white hover:stroke-black hover:rounded-full transition rounded-full ease-in-out delay-150 duration-200">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -129,14 +129,15 @@ const Register = () => {
                 <input value={mobno} onChange={e => setMobno(e.target.value)} type="text" className='p-2 outline-none mb-2 border-2 border-gray-100 rounded-full' placeholder='Phone number' name="phoneno" id="phoneno" />
                 <div className='flex border-2 border-gray-100 rounded-full mb-2'>
                     <input type="text" onChange={e=>setOtp(e.target.value)}  className='p-2 w-[90%] outline-none rounded-full' placeholder='OTP' name="otp" id="otp"/>
-                    <button className='bg-blue-500 text-white text-xs mr-1 px-4 my-1  rounded-full' onClick={()=>handleOTPSend(String(Math.floor(100000 + Math.random() * 900000)))}>OTP</button>
+                    <button className='bg-yellow-500 text-white text-xs mr-1 px-4 my-1  rounded-full' onClick={()=>handleOTPSend(String(Math.floor(100000 + Math.random() * 900000)))}>OTP</button>
                 </div>
                 <input value={pwd} onChange={e => setpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-gray-100 rounded-full' placeholder='Please enter login password' name="passowrd" id="pass" />
                 <input value={cpwd} onChange={e => setCpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-gray-100 rounded-full' placeholder='Please confirm the login password' name="cnfpass" id="cnfpass" />
                 <input value={wpwd} onChange={e => setwpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-gray-100 rounded-full' placeholder="Please enter the Withdrawal password" name="withpassword" id="wthpass" />
                 <input value={invt} onChange={e => setInvt(e.target.value)} type="text" className='p-2 mb-2  outline-none border-2 border-gray-100 rounded-full' placeholder='Invitation code' name="invite_code" id="inv_code" />
-                <button onClick={handleRegister} className='bg-[#0096D5] text-white pt-1 pb-1 rounded-full text-lg'>Register</button>
-                <div onClick={() => navigate('/login')} className='cursor-pointer text-center text-[#00704A] mt-2 p-2 mb-2 border-2 border-gray-100 rounded-full'>
+                {/*[#0096D5] [#00704A]*/}
+                <button onClick={handleRegister} className='bg-yellow-500 text-white pt-1 pb-1 rounded-full text-lg'>Register</button>
+                <div onClick={() => navigate('/login')} className='cursor-pointer text-center text-gray-500 mt-2 p-2 mb-2 border-2 border-gray-100 rounded-full'>
                     Already have an account, log in
                 </div>
             </div>

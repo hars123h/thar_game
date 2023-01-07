@@ -29,9 +29,9 @@ const ClientFeedback = () => {
         //console.log(details);
 
     }
-
+//[#2e9afe]
     return (
-        <div className=' bg-[#2e9afe] h-screen flex flex-col text-white font-light p-5'>
+        <div className=' bg-yellow-500 h-screen flex flex-col text-white font-light p-5'>
             <div className="top p-3 cursor-pointer flex">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate(-1)} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />

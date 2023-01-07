@@ -64,15 +64,15 @@ const Login = () => {
                     <img src={lock_img} alt="user" className='h-5 border-r-2 pr-2 border-solid border-gray-300' />
                     <input value={pwd} onChange={(e)=>setpwd(e.target.value)} type="password" placeholder='Login password' name="password" id="pwrd" className='pl-1 bg-[#f1f1f1] outline-none overflow-x-scroll' />
                 </div>
-
+{/*[#0096D5] */}
                 <div className='mt-16'>
-                    <button onClick={handleSignIn} className='bg-[#0096D5] w-full pt-2 pb-2 text-lg text-white rounded-md shadow-md shadow-[#0096D5]
+                    <button onClick={handleSignIn} className='bg-yellow-500 w-full pt-2 pb-2 text-lg text-white rounded-md shadow-md shadow-yellow-400
                     '>Login</button>
                 </div>
-
+{/*[#379EFE] */}
                 <div className="options flex justify-between mt-2">
-                    <div className='text-[#379EFE] cursor-pointer' onClick={()=>navigate('/register')}>Register</div>
-                    <div className='cursor-pointer text-[#379EFE] ' onClick={()=>navigate('/forgot')}>Forget password?</div>
+                    <div className='text-yellow-500 cursor-pointer' onClick={()=>navigate('/register')}>Register</div>
+                    <div className='cursor-pointer text-yellow-500 ' onClick={()=>navigate('/forgot')}>Forget password?</div>
                 </div>
 
             </div>
