@@ -30,6 +30,7 @@ import useInterval from '../hooks/useInterval.js';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { useContext } from 'react';
 import { AmountContext } from '../App.js';
+import { RotatingLines } from 'react-loader-spinner';
 
 
 
@@ -98,6 +99,7 @@ export default function Transactions() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
     const amountDetails = useContext(AmountContext);
+    const [loading, setLoading] = useState(false);
 
     const [recharge_list, setRecharge_list] = useState(null);
     const navigate = useNavigate();
@@ -134,14 +136,13 @@ export default function Transactions() {
         const docRef = doc(db, 'recharges', recharge_id);
         const docRef2 = doc(db, 'users', user_id);
         //console.log(element);
-
-
         //console.log(user_id, parent_id, grand_parent_id);
-
         await updateDoc(docRef, {
             status: new_status
         }).then(() => {
             //console.log('Recharge Status Approved', new_status);
+            setLoading(true);
+            console.log('in This section');
             if (new_status === 'confirmed') {
                 updateDoc(docRef2, {
                     recharge_amount: increment(recharge_value),
@@ -162,12 +163,15 @@ export default function Transactions() {
                     indirectRecharge: increment((amountDetails.level3_percent/100)*recharge_value),
                     indirectMember: arrayUnion(user_id)
                 });
+                setLoading(false);
             }
-
             getRecharges_list();
+            
         }).catch((error) => {
-            console.log('Some Error Occured');
+            console.log('Some Error Occured', error);
+            setLoading(false);
         });
+        
     }
 
     const handleDrawerOpen = () => {
@@ -268,7 +272,7 @@ export default function Transactions() {
                                         <TableCell align="right">{row.refno}</TableCell>
                                         <TableCell align="right">Rs.{row.recharge_value}</TableCell>
                                         <TableCell align="right">{row.status}</TableCell>
-                                        <TableCell align="right">
+                                        {loading===true?<RotatingLines />:<TableCell align="right">
                                             {row.status === 'pending' && (
                                                 <Box>
                                                     <IconButton onClick={() => updateStatus(row.recharge_id, 'confirmed', row.recharge_value, row.user_id, row)}><Check /></IconButton>
@@ -276,6 +280,7 @@ export default function Transactions() {
                                                 </Box>
                                             )}
                                         </TableCell>
+                                        }
                                     </TableRow>
                                 ))}
                             </TableBody>
