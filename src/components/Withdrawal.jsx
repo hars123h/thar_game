@@ -119,7 +119,7 @@ const Withdrawal = () => {
             </div>
 
             <div className="part1 bg-[#d3d6fe] p-3 rounded-lg mx-3 mt-5">
-                <div className='text-yellow-600 px-2 my-1  rounded-full border border-yellow-600 inline'>Withdrawal Fee &#8377;{amountDetails.withdrawal_fee}</div>
+                <div className='text-yellow-600 px-2 my-1  rounded-full border border-yellow-600 inline'>Withdrawal Fee {amountDetails.withdrawal_fee}%</div>
                 <div className='flex items-center justify-start gap-2 my-1'>
                     <div className='text-yellow-600 text-3xl'>&#8377;</div>
                     <div className="value"> <input type="number" id="withdrawal_field" onChange={handleWithdrawalAmount} className='w-full text-2xl outline-none bg-[#d3d6fe] py-2' placeholder='Amount' /></div>
@@ -166,8 +166,8 @@ const Withdrawal = () => {
 
             <div className="part1 bg-[#d3d6fe] p-3 rounded-lg mx-3 mt-5 flex flex-col gap-3">
                 <div className='text-amber-800 text-sm'>* The time of withdrawal and arrival is subject to the real-time processing time of the local bank, and the normal arrival time is 10 minutes to 24 hours.</div>
-                <div className='text-amber-800 text-sm'>* A single minimum withdrawal amount of not less than Rs{amountDetails.mwamount}.</div>
-                <div className='text-amber-800 text-sm'>* Withdrawal time is 09:00-21:00 every day.</div>
+                <div className='text-amber-800 text-sm'>* A single minimum withdrawal amount of not less than Rs {amountDetails.mwamount}.</div>
+                <div className='text-amber-800 text-sm'>* Withdrawal time is 09:30-19:00 every day.</div>
             </div>
 {/* [#2e9afe] */}
             <div>
