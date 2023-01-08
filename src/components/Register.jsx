@@ -8,7 +8,6 @@ import { setDoc, doc, updateDoc, query, collection, where, getDocs, getDoc, arra
 import { toast } from 'react-toastify';
 import { useContext } from 'react';
 import { AmountContext } from '../App';
-import siteTheme from '../images/siteTheme.png';
 import latest_logo from '../images/latest_logo.jpg';
 
 
@@ -42,7 +41,7 @@ const Register = () => {
                         pwd,
                         wpwd,
                         time: new Date(),
-                        balance: amountDetails.invite_bonus,
+                        balance: Number(amountDetails.invite_bonus),
                         recharge_amount: 0,
                         earning: 0,
                         user_invite: referralCodeGenerator.alphaNumeric('lowercase', 5, 2),

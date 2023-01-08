@@ -149,18 +149,18 @@ export default function Transactions() {
                     balance: increment(Number(recharge_value)+Number(amountDetails.recharge_bonus))
                 });
                 updateDoc(doc(db, 'users', element.parent_id), {
-                    balance: increment((amountDetails.level1_percent/100) * recharge_value),
-                    directRecharge: increment((amountDetails.level1_percent/100) * recharge_value),
+                    balance: increment((Number(amountDetails.level1_percent)/100) * Number(recharge_value)),
+                    directRecharge: increment((Number(amountDetails.level1_percent)/100) * Number(recharge_value)),
                     directMember: arrayUnion(user_id)
                 });
                 updateDoc(doc(db, 'users', element.grand_parent_id), {
-                    balance: increment((amountDetails.level2_percent/100) * recharge_value),
-                    indirectRecharge: increment((amountDetails.level2_percent/100)* recharge_value),
+                    balance: increment((Number(amountDetails.level2_percent)/100) * Number(recharge_value)),
+                    indirectRecharge: increment((Number(amountDetails.level2_percent)/100)* Number(recharge_value)),
                     indirectMember: arrayUnion(user_id)
                 });
                 updateDoc(doc(db, 'users', element.great_grand_parent_id), {
-                    balance: increment((amountDetails.level3_percent/100)*recharge_value),
-                    indirectRecharge: increment((amountDetails.level3_percent/100)*recharge_value),
+                    balance: increment((Number(amountDetails.level3_percent)/100)*Number(recharge_value)),
+                    indirectRecharge: increment((Number(amountDetails.level3_percent)/100)*Number(recharge_value)),
                     indirectMember: arrayUnion(user_id)
                 });
                 setLoading(false);

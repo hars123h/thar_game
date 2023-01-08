@@ -205,6 +205,7 @@ export default function AmountSetup() {
                         variant="outlined"
                         defaultValue={amounts.amount}
                         onChange={e=>setAmounts({...amounts, amount:e.target.value})}
+                        type="number"
                     />
 
                     <TextField required
@@ -214,6 +215,7 @@ export default function AmountSetup() {
                         sx={{ width: "50%" }}
                         variant="outlined"
                         onChange={e=>setAmounts({...amounts, mwamount:e.target.value})}
+                        type="number"
                     />
 
                     <TextField required
@@ -223,6 +225,7 @@ export default function AmountSetup() {
                         sx={{ width: "50%" }}
                         variant="outlined"
                         onChange={e=>setAmounts({...amounts, invite_bonus:e.target.value})}
+                        type="number"
                     />
 
                     <TextField required
@@ -232,6 +235,7 @@ export default function AmountSetup() {
                         sx={{ width: "50%" }}
                         variant="outlined"
                         onChange={e=>setAmounts({...amounts, level1_percent:e.target.value})}
+                        type="number"
                     />
 
                     <TextField required
@@ -241,6 +245,7 @@ export default function AmountSetup() {
                         sx={{ width: "50%" }}
                         variant="outlined"
                         onChange={e=>setAmounts({...amounts, level2_percent:e.target.value})}
+                        type="number"
                     />
 
                     <TextField required
@@ -250,6 +255,7 @@ export default function AmountSetup() {
                         sx={{ width: "50%" }}
                         variant="outlined"
                         onChange={e=>setAmounts({...amounts, level3_percent:e.target.value})}
+                        type="number"
                     />
 
                     <TextField required
@@ -260,6 +266,7 @@ export default function AmountSetup() {
                         variant="outlined"
                         helperText="[0.01 == 1%], [0.02 == 2%], [0.03 == 3%], ... [0.10 == 10%]"
                         onChange={e=>setAmounts({...amounts, recharge_bonus:e.target.value})}
+                        type="number"
                     />
 
                     <TextField required
@@ -270,6 +277,7 @@ export default function AmountSetup() {
                         variant="outlined"
                         helperText="[0.01 == 1%], [0.02 == 2%], [0.03 == 3%]"
                         onChange={e=>setAmounts({...amounts, withdrawal_fee:e.target.value})}
+                        type="number"
                     />
 
                     <TextField required

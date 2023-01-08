@@ -135,7 +135,7 @@ const Record = () => {
                             <div className='flex justify-between items-center'>
                                 <div className='flex flex-col gap-1'>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-white'>Withdrawal Amount:</span> &#8377;{new Intl.NumberFormat().format(element.withdrawalAmount)}</div>
-                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-white'>Status:</span> {element.status}</div>
+                                    <div className='text-white text-md overflow-clip'><span className='font-bold text-white'>Status:</span> {nameMapper[String(element.status)]}</div>
                                     <div className='text-white text-md overflow-clip'><span className='font-bold text-white'>Date:</span> {new Date(element.time.seconds * 1000).toLocaleString('en-US', {
                                         
                                         day: 'numeric',
