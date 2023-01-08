@@ -142,6 +142,7 @@ export default function Transactions() {
         }).then(() => {
             //console.log('Recharge Status Approved', new_status);
             setLoading(true);
+            console.log(element);
             console.log('in This section');
             if (new_status === 'confirmed') {
                 updateDoc(docRef2, {
