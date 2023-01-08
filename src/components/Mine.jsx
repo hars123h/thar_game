@@ -121,41 +121,41 @@ const Mine = () => {
 
 {/*#7dc1ff */}
         <ul className=' list-none flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <li className='bg-yellow-500 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
+          <li className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
             <img src={money_bag} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Withdrawl</div>
           </li>
 
-          <li className='bg-yellow-500 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge')}>
+          <li className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge')}>
             <img src={recharge_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Recharge</div>
           </li>
 
-          <li className='bg-yellow-500 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/project')}>
+          <li className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/project')}>
             <img src={book_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Project</div>
           </li>
         </ul>
 
         <div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <div className='bg-yellow-500 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/invite')}>
+          <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/invite')}>
             <img src={invite_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Invite</div>
           </div>
 
-          <div className='bg-yellow-500 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/record')}>
+          <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/record')}>
             <img src={paper_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Record</div>
           </div>
 
-          <div className='bg-yellow-500 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/settings', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
+          <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/settings', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
             <img src={adminSetting} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Settings</div>
           </div>
         </div>
 
         <div className="flex justify-around items-center mx-auto w-4/5 mt-10">
-          <div className='bg-yellow-500 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/user_feedback')}>
+          <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/user_feedback')}>
             <img src={paper_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Feedback</div>
           </div>
