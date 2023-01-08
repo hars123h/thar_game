@@ -272,7 +272,7 @@ export default function User() {
                                     recharges && recharges.map((element) => {
                                         return (
                                             <TableRow>
-                                                <TableCell>{location.state.bankDetails.fullName}</TableCell>
+                                                <TableCell>{location.state.bankDetails.fullName?location.state.bankDetails.fullName:''}</TableCell>
                                                 <TableCell>{element.mobno}</TableCell>
                                                 <TableCell>{element.refno}</TableCell>
                                                 <TableCell><span className='font-bold'>{String(element.status).toUpperCase()}</span></TableCell>
