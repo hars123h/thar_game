@@ -126,7 +126,7 @@ export default function Transactions() {
     useInterval(getRecharges_list, 20000);
 
     useEffect(() => {
-        if(localStorage.getItem('name')===null) {
+        if (localStorage.getItem('name') === null) {
             navigate('/admin/Login');
         }
         getRecharges_list();
@@ -137,42 +137,43 @@ export default function Transactions() {
         const docRef2 = doc(db, 'users', user_id);
         //console.log(element);
         //console.log(user_id, parent_id, grand_parent_id);
+        setLoading(true);
         await updateDoc(docRef, {
             status: new_status
         }).then(() => {
             //console.log('Recharge Status Approved', new_status);
-            setLoading(true);
-            console.log(element);
-            console.log('in This section');
+
+            //console.log(element);
+            //console.log('in This section');
             if (new_status === 'confirmed') {
                 updateDoc(docRef2, {
                     recharge_amount: increment(recharge_value),
-                    balance: increment(Number(recharge_value)+Number(amountDetails.recharge_bonus))
+                    balance: increment(Number(recharge_value) + Number(amountDetails.recharge_bonus))
                 });
                 updateDoc(doc(db, 'users', element.parent_id), {
-                    balance: increment((Number(amountDetails.level1_percent)/100) * Number(recharge_value)),
-                    directRecharge: increment((Number(amountDetails.level1_percent)/100) * Number(recharge_value)),
+                    balance: increment((Number(amountDetails.level1_percent) / 100) * Number(recharge_value)),
+                    directRecharge: increment((Number(amountDetails.level1_percent) / 100) * Number(recharge_value)),
                     directMember: arrayUnion(user_id)
                 });
                 updateDoc(doc(db, 'users', element.grand_parent_id), {
-                    balance: increment((Number(amountDetails.level2_percent)/100) * Number(recharge_value)),
-                    indirectRecharge: increment((Number(amountDetails.level2_percent)/100)* Number(recharge_value)),
+                    balance: increment((Number(amountDetails.level2_percent) / 100) * Number(recharge_value)),
+                    indirectRecharge: increment((Number(amountDetails.level2_percent) / 100) * Number(recharge_value)),
                     indirectMember: arrayUnion(user_id)
                 });
                 updateDoc(doc(db, 'users', element.great_grand_parent_id), {
-                    balance: increment((Number(amountDetails.level3_percent)/100)*Number(recharge_value)),
-                    indirectRecharge: increment((Number(amountDetails.level3_percent)/100)*Number(recharge_value)),
+                    balance: increment((Number(amountDetails.level3_percent) / 100) * Number(recharge_value)),
+                    indirectRecharge: increment((Number(amountDetails.level3_percent) / 100) * Number(recharge_value)),
                     indirectMember: arrayUnion(user_id)
                 });
                 setLoading(false);
             }
             getRecharges_list();
-            
+
         }).catch((error) => {
             console.log('Some Error Occured', error);
             setLoading(false);
         });
-        
+
     }
 
     const handleDrawerOpen = () => {
@@ -267,13 +268,20 @@ export default function Transactions() {
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">
-                                            {index+1}
+                                            {index + 1}
                                         </TableCell>
                                         <TableCell align="right">{row.mobno}</TableCell>
                                         <TableCell align="right">{row.refno}</TableCell>
                                         <TableCell align="right">Rs.{row.recharge_value}</TableCell>
                                         <TableCell align="right">{row.status}</TableCell>
-                                        {loading===true?<RotatingLines />:<TableCell align="right">
+                                        {loading === true ? <TableCell align='center'>
+                                            <RotatingLines 
+                                            strokeColor="grey"
+                                            strokeWidth="5"
+                                            animationDuration="0.75"
+                                            width="20" 
+                                            />
+                                        </TableCell> : <TableCell align="right">
                                             {row.status === 'pending' && (
                                                 <Box>
                                                     <IconButton onClick={() => updateStatus(row.recharge_id, 'confirmed', row.recharge_value, row.user_id, row)}><Check /></IconButton>
