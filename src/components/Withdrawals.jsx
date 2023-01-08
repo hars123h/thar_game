@@ -114,7 +114,7 @@ export default function Withdrawals() {
 
     }
     // This is the rate at which the polling is done to update and get the new Data
-    useInterval(getWithdrawals_list, 10000);
+    useInterval(getWithdrawals_list, 5000);
 
     useEffect(() => {
         if(localStorage.getItem('name')===null) {

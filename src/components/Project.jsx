@@ -118,7 +118,7 @@ const Project = () => {
 
 //[#2e9afe]
     return (
-        <div className='md:h-screen xs:h-[1200px] bg-yellow-500 h-screen'>
+        <div className='md:h-screen overflow-y-scroll xs:h-[700px] bg-yellow-500 h-screen'>
 
             <div className="options text-center bg-yellow-500 text-white text-md pt-5 font-normal pb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate(-1)} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute left-2  storke-white top-5 cursor-pointer">
@@ -133,7 +133,7 @@ const Project = () => {
                 <div onClick={() => setCurrent_tab('completed')} className={`cursor-pointer h-[40px] flex items-center justify-center w-1/2 text-center border-b-4 ${current_tab === 'completed' ? 'border-yellow-600 text-yellow-500' : 'text-white'}`}>Completed</div>
             </div>
 
-            <div className='overflow-y-scroll h-[800px] mx-auto w-[95%] mt-2 p-2 pb-10'>
+            <div className=' mx-auto w-[95%] mt-2 p-2 pb-10'>
                 {
                     current_tab === 'earning' && userDetails && ('plans_purchased' in userDetails) && (
                         userDetails.plans_purchased.map((element, index) => {

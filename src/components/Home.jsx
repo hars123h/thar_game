@@ -87,7 +87,9 @@ const Home = () => {
         } else {
             //console.log({...currPlan, quantity});
             //setCurrPlan({...currPlan, quantity});
-            if (quantity * (currPlan.plan_amount) >= userDetails.balance) {
+            console.log(userDetails);
+            console.log((quantity*currPlan.plan_amount), Number(userDetails.balance));
+            if ((Number(quantity) * Number(currPlan.plan_amount)) > Number(userDetails.balance)) {
                 toast("You don't have enough balance to make this purchase", { autoClose: 1000 });
             } else {
                 const docRef = doc(db, 'users', auth.currentUser.uid);
@@ -99,7 +101,7 @@ const Home = () => {
                     time: new Date().toDateString()
                 });
                 await updateDoc(docRef, {
-                    balance: increment(-1 * (quantity * (currPlan.plan_amount))),
+                    balance: Number(userDetails.balance)-Number(Number(quantity)*Number(currPlan.plan_amount)),
                     boughtLong:increment(currPlan.product_type==='long'?1:0),
                     plans_purchased: arrayUnion({
                         ...currPlan,
