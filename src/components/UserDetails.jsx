@@ -18,7 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { Box, InputAdornment, TextField, Tab, Tabs } from '@material-ui/core';
+import { Box, InputAdornment, TextField, Tab, Tabs, Select, MenuItem } from '@material-ui/core';
 import { Search, Visibility, Block, Edit } from '@material-ui/icons';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
@@ -97,6 +97,10 @@ export default function User() {
     const [value, setValue] = React.useState(0);
     const [recharges, setRecharges] = useState([]);
     const [withdrawals, setWithdrawals] = useState([]);
+    const [refer1, setRefer1] = useState([]);
+    const [refer2, setRefer2] = useState([]);
+
+    const [CurrentLevel, setCurrentLevel] = useState('level1');
 
     useEffect(() => {
         if (localStorage.getItem('name') === null) {
@@ -104,7 +108,31 @@ export default function User() {
         }
         getRecharges();
         getWithdrawals();
+        getReferDetails();
     }, []);
+
+    const getReferDetails = () => {
+        var temp1 =[];
+        var temp2 = [];
+        
+        location.state.directMember.map(async(id)=>{
+            const dataTemp = await getDoc(doc(db, 'users', id));
+            if(dataTemp.exists()) {
+                temp1.push(dataTemp.data());
+            }
+            
+        });
+        setRefer1(temp1);
+
+        location.state.indirectMember.map(async(id)=>{
+            const dataTemp = await getDoc(doc(db, 'users', id));
+            if(dataTemp.exists()) {
+                temp2.push(dataTemp.data());
+            }
+        });
+        
+        setRefer2(temp2);
+    }
 
     const getWithdrawals = async() => {
         const withdrawal1 = await getDocs(collection(db, `/users/${location.state.user_id}/withdrawals`))
@@ -255,6 +283,7 @@ export default function User() {
                         </Tabs>
                     </Box>
                     <TabPanel value={value} index={0}>
+                        
                         <Table size='small'>
                             <TableHead>
                                 <TableRow>
@@ -272,11 +301,11 @@ export default function User() {
                                     recharges && recharges.map((element) => {
                                         return (
                                             <TableRow>
-                                                <TableCell>{location.state.bankDetails.fullName?location.state.bankDetails.fullName:''}</TableCell>
+                                                <TableCell>{location.state.bankDetails?.fullName?location.state.bankDetails.fullName:'Not Given'}</TableCell>
                                                 <TableCell>{element.mobno}</TableCell>
                                                 <TableCell>{element.refno}</TableCell>
                                                 <TableCell><span className='font-bold'>{String(element.status).toUpperCase()}</span></TableCell>
-                                                <TableCell>Rs.{element.recharge_value}</TableCell>
+                                                <TableCell>&#8377;{element.recharge_value}</TableCell>
                                                 <TableCell>{new Date(element.time.seconds * 1000).toDateString()}</TableCell>
                                             </TableRow>
                                         )
@@ -308,7 +337,7 @@ export default function User() {
                                                 <TableCell>{element.bankName}</TableCell>
                                                 <TableCell>{element.ifsc}</TableCell>
                                                 <TableCell><span className='font-bold'>{String(element.status).toUpperCase()}</span></TableCell>
-                                                <TableCell>Rs. {element.withdrawalAmount}</TableCell>
+                                                <TableCell>&#8377; {element.withdrawalAmount}</TableCell>
                                                 <TableCell>{new Date(element.time.seconds*1000).toDateString()}</TableCell>
                                             </TableRow>
                                         )
@@ -318,35 +347,65 @@ export default function User() {
                         </Table>
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        <Table>
+                        <Select variant='outlined' onChange={e=>setCurrentLevel(e.target.value)} value={CurrentLevel} label="Refer Level">
+                            <MenuItem value={"level1"}>Level 1</MenuItem>
+                            <MenuItem value={"level2"}>Level 2</MenuItem>
+                        </Select>
+                        {CurrentLevel==='level1' && <Table size='small'>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Name</TableCell>
-                                    <TableCell>Mobile Number</TableCell>
-                                    <TableCell>Reference Id</TableCell>
-                                    <TableCell>Status</TableCell>
-                                    <TableCell>Amount</TableCell>
+                                    <TableCell>Phone Number</TableCell>
+                                    <TableCell>Reward</TableCell>
+                                    <TableCell>Level</TableCell>
+                                    <TableCell>Total Recharge</TableCell>
                                     <TableCell>Date</TableCell>
                                 </TableRow>
                             </TableHead>
 
                             <TableBody>
                                 {
-                                    location.state?.recharges && location.state?.recharges.map((element) => {
+                                    refer1.map((element) => {
                                         return (
-                                            <TableRow>
-                                                <TableCell>Name</TableCell>
-                                                <TableCell>Mobile Number</TableCell>
-                                                <TableCell>Reference Id</TableCell>
-                                                <TableCell>Status</TableCell>
-                                                <TableCell>Amount</TableCell>
-                                                <TableCell>Date</TableCell>
+                                            <TableRow key={element.user_id}>
+                                                <TableCell>{element.mobno}</TableCell>
+                                                <TableCell>&#8377;{Number(element.directRecharge)+Number(element.indirectRecharge)}</TableCell>
+                                                <TableCell>Level 1</TableCell>
+                                                <TableCell>&#8377;{element.recharge_amount}</TableCell>
+                                                <TableCell>{new Date(element.time.seconds * 1000).toDateString()}</TableCell>
                                             </TableRow>
                                         )
                                     })
                                 }
                             </TableBody>
-                        </Table>
+                        </Table>}
+
+                        {CurrentLevel==='level2' && <Table size="small">
+                            <TableHead>
+                                <TableRow>
+                                <TableCell>Phone Number</TableCell>
+                                    <TableCell>Reward</TableCell>
+                                    <TableCell>Level</TableCell>
+                                    <TableCell>Total Recharge</TableCell>
+                                    <TableCell>Date</TableCell>
+                                </TableRow>
+                            </TableHead>
+
+                            <TableBody>
+                                {
+                                    refer2.map((element) => {
+                                        return (
+                                            <TableRow key={element.user_id}>
+                                                <TableCell>{element.mobno}</TableCell>
+                                                <TableCell>&#8377;{Number(element.directRecharge)+Number(element.indirectRecharge)}</TableCell>
+                                                <TableCell>Level 2</TableCell>
+                                                <TableCell>&#8377;{element.recharge_amount}</TableCell>
+                                                <TableCell>{new Date(element.time.seconds * 1000).toDateString()}</TableCell>
+                                            </TableRow>
+                                        )
+                                    })
+                                }
+                            </TableBody>
+                        </Table>}
                     </TabPanel>
                 </Box>
 
