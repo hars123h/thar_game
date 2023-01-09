@@ -167,7 +167,7 @@ const Withdrawal = () => {
             <div className="part1 bg-[#d3d6fe] p-3 rounded-lg mx-3 mt-5 flex flex-col gap-3">
                 <div className='text-amber-800 text-sm'>* The time of withdrawal and arrival is subject to the real-time processing time of the local bank, and the normal arrival time is 10 minutes to 24 hours.</div>
                 <div className='text-amber-800 text-sm'>* A single minimum withdrawal amount of not less than Rs {amountDetails.mwamount}.</div>
-                <div className='text-amber-800 text-sm'>* Withdrawal time is 09:30-19:00 every day.</div>
+                <div className='text-amber-800 text-sm'>* Withdrawal Time is 24 Hours Everyday.</div>
             </div>
 {/* [#2e9afe] */}
             <div>
