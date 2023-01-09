@@ -9,10 +9,16 @@ import db from '../firebase/config';
 import { useState } from 'react';
 import ss_logo from '../images/ss_logo.jpg';
 import { RotatingLines } from 'react-loader-spinner';
+import book_image from '../images/book_image.png';
 import paper_image from '../images/paper_image.png';
+import adminSetting from '../images/adminSetting.png';
+import  money_bag from '../images/money_bag.png';
+import invite_image from '../images/invite_image.png';
+import recharge_image from '../images/recharge_image.png';
 import buildingNew from '../images/buildingNew.png';
 import homeNew from '../images/homeNew.png';
 import teamNew from '../images/teamNew.png';
+
 import moneyBag_yellow from '../images/moneyBag_yellow.png';
 import recharge_yellow from '../images/recharge_yellow.png';
 import book_yellow from '../images/book_yellow.png';
@@ -113,42 +119,42 @@ const Mine = () => {
 
 {/*#7dc1ff */}
         <ul className=' list-none flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <li className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
-            <img src={moneyBag_yellow} alt="invite" className='w-14 h-14 mx-auto' />
+          <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
+            <img src={money_bag} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Withdrawl</div>
           </li>
 
-          <li className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge')}>
-            <img src={recharge_yellow} alt="invite" className='w-14 h-14 mx-auto' />
+          <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge')}>
+            <img src={recharge_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Recharge</div>
           </li>
 
-          <li className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/project')}>
-            <img src={book_yellow} alt="invite" className='w-14 h-14 mx-auto' />
+          <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/project')}>
+            <img src={book_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Project</div>
           </li>
         </ul>
 
         <div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/invite')}>
-            <img src={invite_yellow} alt="invite" className='w-14 h-14 mx-auto' />
+          <div className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/invite')}>
+            <img src={invite_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Invite</div>
           </div>
 
-          <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/record')}>
-            <img src={page_yellow} alt="invite" className='w-14 h-14 mx-auto' />
+          <div className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/record')}>
+            <img src={paper_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Record</div>
           </div>
 
-          <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/settings', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
-            <img src={adminSetting_yellow} alt="invite" className='w-14 h-14 mx-auto' />
+          <div className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/settings', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
+            <img src={adminSetting} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Settings</div>
           </div>
         </div>
 
         <div className="flex justify-around items-center mx-auto w-4/5 mt-10">
-          <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/user_feedback')}>
-            <img src={page_yellow} alt="invite" className='w-14 h-14 mx-auto' />
+          <div className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/user_feedback')}>
+            <img src={paper_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Feedback</div>
           </div>
         </div>
