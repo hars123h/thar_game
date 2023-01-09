@@ -25,7 +25,7 @@ const Record = () => {
     const auth = getAuth();
 
     const getRecharges_list = async () => {
-        const q = query(collection(db, "recharges"), where("user_id", "==", auth.currentUser.uid));
+        const q = query(collection(db, "recharges"), where("user_id", "==", localStorage.getItem('uid')));
         var temp_Data = [];
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
@@ -35,7 +35,7 @@ const Record = () => {
     }
 
     const getWithdrawals_list = async () => {
-        const q = query(collection(db, "withdrawals"), where("user_id", "==", auth.currentUser.uid));
+        const q = query(collection(db, "withdrawals"), where("user_id", "==", localStorage.getItem('uid')));
         var temp_Data = [];
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
@@ -51,7 +51,7 @@ const Record = () => {
 
     useEffect(() => {
         const getRecharges_list = async () => {
-            const q = query(collection(db, "recharges"), where("user_id", "==", auth.currentUser.uid));
+            const q = query(collection(db, "recharges"), where("user_id", "==", localStorage.getItem('uid')));
             var temp_Data = [];
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {

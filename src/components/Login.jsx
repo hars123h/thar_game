@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebase/config';
 import { toast } from 'react-toastify';
-import siteTheme from '../images/siteTheme.png';
 import latest_logo from '../images/latest_logo.jpg';
 
 

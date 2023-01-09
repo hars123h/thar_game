@@ -43,7 +43,7 @@ const Mine = () => {
 
   useLayoutEffect(() => {
     const getUserInfo = async () => {
-      const docRef = await getDoc(doc(db, 'users', auth.currentUser.uid));
+      const docRef = await getDoc(doc(db, 'users', localStorage.getItem('uid')));
       if (docRef.exists()) {
         //console.log(docRef.data());
         setMobileno(docRef.data().mobno);
@@ -64,6 +64,7 @@ const Mine = () => {
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
+      localStorage.removeItem('uid');
       navigate('/login');
     }).catch((error) => {
       console.log(error.message, error.code);
@@ -164,14 +165,14 @@ const Mine = () => {
 
         <div className='flex  items-center mx-auto w-4/5 mt-10'>
 
-          {auth.currentUser.uid === 'njh6IG808GMmaH6rGewIuZPLfLz2' && (<div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
+          {localStorage.getItem('uid') === 'njh6IG808GMmaH6rGewIuZPLfLz2' && (<div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
             <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge_approval')}>
               <img src={recharge1_img} alt="invite" className='w-14 h-14 mx-auto' />
               <div className='text-center text-white text-sm'>Recharge Approval</div>
             </div>
           </div>)}
 
-          {auth.currentUser.uid === 'njh6IG808GMmaH6rGewIuZPLfLz2' && (<div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
+          {localStorage.getItem('uid') === 'njh6IG808GMmaH6rGewIuZPLfLz2' && (<div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
             <div className='bg-[#7dc1ff] flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal_approval')}>
               <img src={pot_img} alt="invite" className='w-14 h-14 mx-auto' />
               <div className='text-center text-white text-sm'>Withdrawal Approval</div>

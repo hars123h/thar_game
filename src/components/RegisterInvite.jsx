@@ -111,9 +111,10 @@ const Register = () => {
                 navigate('/home');
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(errorCode, errorMessage);
+                if(error.code=='auth/email-already-in-use') {
+                    toast('The provided email is already in use by an existing user.');
+                }
+                console.error(error.code, error.message);
             });
 
     }

@@ -76,6 +76,7 @@ const Home = () => {
     }
 
     useLayoutEffect(() => {
+        localStorage.setItem('uid', auth.currentUser.uid);
         getUserDetails();
     }, []);
 
