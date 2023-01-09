@@ -210,15 +210,32 @@ const Home = () => {
                     Short Plans
                     <br />
                     {
-                        userDetails && userDetails.showShort===0?(<div>Please a Big Plan to unlock Short Plans</div>):null
+                        userDetails && userDetails.showShort===0?(<div>Please buy a Big Plan to unlock Short Plans</div>):null
                     }
                 </div>
-                <div className={`grid grid-cols-2 ${userDetails && userDetails.showShort===0?'pointer-events-none':''}`}>
-                    <Card product_type={"short"} product_image={product_img9} handleClick={handleClick} plan_name={"Sstone Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
-                    <Card product_type={"short"} product_image={product_img10} handleClick={handleClick} plan_name={"Sstone Plan 10"} plan_cycle={3} plan_daily_earning={500} plan_amount={1000} plan_type={'Short Plan'} />
-                    <Card product_type={"short"} product_image={product_img11} handleClick={handleClick} plan_name={"Sstone Plan 11"} plan_cycle={2} plan_daily_earning={2800} plan_amount={3500} plan_type={'Short Plan'} />
-                    <Card product_type={"short"} product_image={product_img12} handleClick={handleClick} plan_name={"Sstone Plan 12"} plan_cycle={2} plan_daily_earning={4800} plan_amount={7000} plan_type={'Short Plan'} />
-                    <Card product_type={"short"} product_image={product_img13} handleClick={handleClick} plan_name={"Sstone Plan 13"} plan_cycle={2} plan_daily_earning={15000} plan_amount={20000} plan_type={'Short Plan'} />
+                <div className={`grid grid-cols-2`}>
+                    {userDetails && userDetails.showShort===0?
+                    (
+                        <span className='pointer-events-none'>
+                            <Card product_type={"short"} product_image={product_img9} handleClick={handleClick} plan_name={"Sstone Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
+                        </span>
+                    ):
+                    <span>
+                            <Card product_type={"short"} product_image={product_img9} handleClick={handleClick} plan_name={"Sstone Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
+                    </span>
+                    }
+                    <span className='pointer-events-none'>
+                        <Card product_type={"short"} product_image={product_img10} handleClick={handleClick} plan_name={"Sstone Plan 10"} plan_cycle={3} plan_daily_earning={500} plan_amount={1000} plan_type={'Short Plan'} />
+                    </span>
+                    <span className='pointer-events-none'>    
+                        <Card product_type={"short"} product_image={product_img11} handleClick={handleClick} plan_name={"Sstone Plan 11"} plan_cycle={2} plan_daily_earning={2800} plan_amount={3500} plan_type={'Short Plan'} />
+                    </span>
+                    <span className='pointer-events-none'>
+                        <Card product_type={"short"} product_image={product_img12} handleClick={handleClick} plan_name={"Sstone Plan 12"} plan_cycle={2} plan_daily_earning={4800} plan_amount={7000} plan_type={'Short Plan'} />
+                    </span>
+                    <span className='pointer-events-none'>    
+                        <Card product_type={"short"} product_image={product_img13} handleClick={handleClick} plan_name={"Sstone Plan 13"} plan_cycle={2} plan_daily_earning={15000} plan_amount={20000} plan_type={'Short Plan'} />
+                    </span>
                 </div>
             </div>
 
