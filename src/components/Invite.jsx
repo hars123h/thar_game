@@ -66,12 +66,12 @@ const Invite = () => {
                 </CopyToClipboard>
             </div>
 
-            <div className="qr mx-auto ">
+            <div className="qr mx-auto flex justify-center items-center">
                 <QRCode
-                    size={200}
+                    size={120}
                     style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                    value={`http://localhost:3000/register/invite_code/${userDetails.user_invite}`}
-                    viewBox={`0 0 200 200`}
+                    value={`https://www.sstonebats.com/register/invite_code/${userDetails.user_invite}`}
+                    viewBox={`0 0 120 120`}
                 />
             </div>
 

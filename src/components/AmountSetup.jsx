@@ -204,7 +204,7 @@ export default function AmountSetup() {
                         sx={{ width: "50%"}}
                         variant="outlined"
                         defaultValue={amounts.amount}
-                        onChange={e=>setAmounts({...amounts, amount:e.target.value})}
+                        onChange={e=>setAmounts({...amounts, amount:Number(e.target.value)})}
                         type="number"
                     />
 
@@ -214,7 +214,7 @@ export default function AmountSetup() {
                         placeholder={amounts.mwamount}
                         sx={{ width: "50%" }}
                         variant="outlined"
-                        onChange={e=>setAmounts({...amounts, mwamount:e.target.value})}
+                        onChange={e=>setAmounts({...amounts, mwamount:Number(e.target.value)})}
                         type="number"
                     />
 
@@ -224,7 +224,7 @@ export default function AmountSetup() {
                         placeholder={amounts.invite_bonus}
                         sx={{ width: "50%" }}
                         variant="outlined"
-                        onChange={e=>setAmounts({...amounts, invite_bonus:e.target.value})}
+                        onChange={e=>setAmounts({...amounts, invite_bonus:Number(e.target.value)})}
                         type="number"
                     />
 
@@ -234,7 +234,7 @@ export default function AmountSetup() {
                         placeholder={amounts.level1_percent}
                         sx={{ width: "50%" }}
                         variant="outlined"
-                        onChange={e=>setAmounts({...amounts, level1_percent:e.target.value})}
+                        onChange={e=>setAmounts({...amounts, level1_percent:Number(e.target.value)})}
                         type="number"
                     />
 
@@ -244,7 +244,7 @@ export default function AmountSetup() {
                         placeholder={amounts.level2_percent}
                         sx={{ width: "50%" }}
                         variant="outlined"
-                        onChange={e=>setAmounts({...amounts, level2_percent:e.target.value})}
+                        onChange={e=>setAmounts({...amounts, level2_percent:Number(e.target.value)})}
                         type="number"
                     />
 
@@ -254,7 +254,7 @@ export default function AmountSetup() {
                         placeholder={amounts.level3_percent}
                         sx={{ width: "50%" }}
                         variant="outlined"
-                        onChange={e=>setAmounts({...amounts, level3_percent:e.target.value})}
+                        onChange={e=>setAmounts({...amounts, level3_percent:Number(e.target.value)})}
                         type="number"
                     />
 
@@ -265,7 +265,7 @@ export default function AmountSetup() {
                         sx={{ width: "50%" }}
                         variant="outlined"
                         helperText="[0.01 == 1%], [0.02 == 2%], [0.03 == 3%], ... [0.10 == 10%]"
-                        onChange={e=>setAmounts({...amounts, recharge_bonus:e.target.value})}
+                        onChange={e=>setAmounts({...amounts, recharge_bonus:Number(e.target.value)})}
                         type="number"
                     />
 
@@ -276,7 +276,7 @@ export default function AmountSetup() {
                         sx={{ width: "50%" }}
                         variant="outlined"
                         helperText="[0.01 == 1%], [0.02 == 2%], [0.03 == 3%]"
-                        onChange={e=>setAmounts({...amounts, withdrawal_fee:e.target.value})}
+                        onChange={e=>setAmounts({...amounts, withdrawal_fee:Number(e.target.value)})}
                         type="number"
                     />
 
