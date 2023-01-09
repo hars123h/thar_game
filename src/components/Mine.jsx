@@ -188,7 +188,7 @@ const Mine = () => {
       </div>
 
       {/*Navigation Bar 2*/}
-      <div className="fixed bottom-0 z-10 bg-green-600 rounded-none text-white flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
+      <div className="fixed bottom-0 z-10 bg-yellow-600 rounded-none text-white flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
         <div className="flex flex-row justify-around items-center w-full py-2">
           <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={() => navigate('/home')}>
             <img src={homeNew} alt="online" className='w-8' />

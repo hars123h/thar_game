@@ -21,7 +21,7 @@ const Card = ({product_type, product_image, plan_name, plan_type, plan_amount, p
             {(plan_name==='Sstone Plan 6' || plan_name==='Sstone Plan 7' || plan_name==='Sstone Plan 8' )?<div className="cursor-pointer btn text-white text-center p-2 mt-1 text-lg rounded-md  w-4/5 mx-auto bg-yellow-400"
             >Click to buy</div>:
 
-            <div className="cursor-pointer btn text-white text-center p-2 mt-1 text-lg rounded-md  w-4/5 mx-auto bg-yellow-400"
+            <div className="cursor-pointer btn text-white text-center p-2 mt-1 text-lg rounded-md  w-4/5 mx-auto bg-green-600"
             onClick={()=>handleClick(product_type ,plan_name, plan_type, plan_amount, plan_daily_earning, plan_cycle)}>Click to buy</div>}
         </div>
     </div>
