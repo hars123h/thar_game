@@ -168,7 +168,7 @@ const Home = () => {
                     <a href="https://telegram.me/SsToneOfficalgroup" className=' no-underline text-white cursor-pointer'>
                         <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
                             <img src={headset1} alt="online" className='w-10' />
-                            <div>Online</div>
+                            <div>Telegram</div>
                         </div>
                     </a>
 
