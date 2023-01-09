@@ -12,7 +12,7 @@ const Team = () => {
   const [loading, setLoading] = useState(true);
 
   const getUserDetails = async() => {
-    const details = await getDoc(doc(db, 'users', auth.currentUser.uid));
+    const details = await getDoc(doc(db, 'users', localStorage.getItem('uid')));
     setUserDetails(details.data());
   }
 
