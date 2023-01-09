@@ -1,15 +1,6 @@
 import React from 'react';
-import hp_small from '../images/hp_small.png';
-import invite_img from '../images/invite_img.png';
-import btm_home from '../images/btm_home.png';
-import btm_cpy from '../images/btm_cpy.png';
-import btm_team from '../images/btm_tem.png';
-import btm_prof from '../images/btm_prof.png';
 import recharge1_img from '../images/recharge1_img.png';
-import project_img from '../images/project_img.png';
 import pot_img from '../images/pot_img.png';
-import doc_img from '../images/doc_img.png';
-import setting_img from '../images/setting_img.png';
 import { useNavigate } from 'react-router-dom';
 import { signOut, getAuth } from 'firebase/auth';
 import { useLayoutEffect } from 'react';
@@ -28,6 +19,12 @@ import buildingNew from '../images/buildingNew.png';
 import homeNew from '../images/homeNew.png';
 import teamNew from '../images/teamNew.png';
 
+import moneyBag_yellow from '../images/moneyBag_yellow.png';
+import recharge_yellow from '../images/recharge_yellow.png';
+import book_yellow from '../images/book_yellow.png';
+import invite_yellow from '../images/invite_yellow.png';
+import page_yellow from '../images/page_yellow.png';
+import adminSetting_yellow from '../images/adminSetting_yellow.png';
 
 const Mine = () => {
 
@@ -123,41 +120,41 @@ const Mine = () => {
 {/*#7dc1ff */}
         <ul className=' list-none flex justify-around items-center mx-auto w-4/5 mt-10'>
           <li className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
-            <img src={money_bag} alt="invite" className='w-14 h-14 mx-auto' />
+            <img src={moneyBag_yellow} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Withdrawl</div>
           </li>
 
           <li className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge')}>
-            <img src={recharge_image} alt="invite" className='w-14 h-14 mx-auto' />
+            <img src={recharge_yellow} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Recharge</div>
           </li>
 
           <li className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/project')}>
-            <img src={book_image} alt="invite" className='w-14 h-14 mx-auto' />
+            <img src={book_yellow} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Project</div>
           </li>
         </ul>
 
         <div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
           <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/invite')}>
-            <img src={invite_image} alt="invite" className='w-14 h-14 mx-auto' />
+            <img src={invite_yellow} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Invite</div>
           </div>
 
           <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/record')}>
-            <img src={paper_image} alt="invite" className='w-14 h-14 mx-auto' />
+            <img src={page_yellow} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Record</div>
           </div>
 
           <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/settings', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
-            <img src={adminSetting} alt="invite" className='w-14 h-14 mx-auto' />
+            <img src={adminSetting_yellow} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Settings</div>
           </div>
         </div>
 
         <div className="flex justify-around items-center mx-auto w-4/5 mt-10">
           <div className='bg-green-700 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/user_feedback')}>
-            <img src={paper_image} alt="invite" className='w-14 h-14 mx-auto' />
+            <img src={page_yellow} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Feedback</div>
           </div>
         </div>
@@ -188,7 +185,7 @@ const Mine = () => {
       </div>
 
       {/*Navigation Bar 2*/}
-      <div className="fixed bottom-0 z-10 bg-yellow-600 rounded-none text-white flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
+      <div className="fixed bottom-0 z-10 bg-yellow-500 rounded-none text-white flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
         <div className="flex flex-row justify-around items-center w-full py-2">
           <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={() => navigate('/home')}>
             <img src={homeNew} alt="online" className='w-8' />
