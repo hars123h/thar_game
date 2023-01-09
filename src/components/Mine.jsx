@@ -9,16 +9,10 @@ import db from '../firebase/config';
 import { useState } from 'react';
 import ss_logo from '../images/ss_logo.jpg';
 import { RotatingLines } from 'react-loader-spinner';
-import book_image from '../images/book_image.png';
 import paper_image from '../images/paper_image.png';
-import adminSetting from '../images/adminSetting.png';
-import  money_bag from '../images/money_bag.png';
-import invite_image from '../images/invite_image.png';
-import recharge_image from '../images/recharge_image.png';
 import buildingNew from '../images/buildingNew.png';
 import homeNew from '../images/homeNew.png';
 import teamNew from '../images/teamNew.png';
-
 import moneyBag_yellow from '../images/moneyBag_yellow.png';
 import recharge_yellow from '../images/recharge_yellow.png';
 import book_yellow from '../images/book_yellow.png';
