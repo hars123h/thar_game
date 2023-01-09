@@ -34,6 +34,8 @@ const Register = () => {
         createUserWithEmailAndPassword(auth, new_mobno, pwd)
             .then((userCredential) => {
                 //console.log(userCredential);
+                toast('Registration Successful', {autoClose:2000});
+                
                 try {
                     //console.log(auth.currentUser.uid);
                     setDoc(doc(db, "users", auth.currentUser.uid), {
@@ -107,7 +109,9 @@ const Register = () => {
                 setCpwd('');
                 setwpwd('');
                 setInvt('');
-                navigate('/home');
+                setTimeout(()=>{
+                    navigate('/home');
+                },2000);
             })
             .catch((error) => {
                 if(error.code=='auth/email-already-in-use') {

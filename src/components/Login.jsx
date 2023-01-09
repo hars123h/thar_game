@@ -43,7 +43,11 @@ const Login = () => {
         const new_mobno = mobno + '@gmail.com';
         signInWithEmailAndPassword(auth, new_mobno, pwd)
         .then((userCredential)=>{
-            navigate('/home');
+            toast('Login Successful', {autoClose:2000});
+            setTimeout(()=>{
+                navigate('/home');
+            },2000);
+            
         })
         .catch(error=>{
             console.log(error.message, error.code);
