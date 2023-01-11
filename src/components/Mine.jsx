@@ -12,13 +12,13 @@ import { RotatingLines } from 'react-loader-spinner';
 import book_image from '../images/book_image.png';
 import paper_image from '../images/paper_image.png';
 import adminSetting from '../images/adminSetting.png';
-import  money_bag from '../images/money_bag.png';
+import money_bag from '../images/money_bag.png';
 import invite_image from '../images/invite_image.png';
 import recharge_image from '../images/recharge_image.png';
 import buildingNew from '../images/buildingNew.png';
 import homeNew from '../images/homeNew.png';
 import teamNew from '../images/teamNew.png';
-
+import {toast} from 'react-toastify';
 import moneyBag_yellow from '../images/moneyBag_yellow.png';
 import recharge_yellow from '../images/recharge_yellow.png';
 import book_yellow from '../images/book_yellow.png';
@@ -68,6 +68,28 @@ const Mine = () => {
     });
   }
 
+  const isBetween = () => {
+    var startTime = '9:00:00';
+    var endTime = '19:00:00';
+
+    var currentDate = new Date()
+
+    var startDate = new Date(currentDate.getTime());
+    startDate.setHours(startTime.split(":")[0]);
+    startDate.setMinutes(startTime.split(":")[1]);
+    startDate.setSeconds(startTime.split(":")[2]);
+
+    var endDate = new Date(currentDate.getTime());
+    endDate.setHours(endTime.split(":")[0]);
+    endDate.setMinutes(endTime.split(":")[1]);
+    endDate.setSeconds(endTime.split(":")[2]);
+
+
+    var valid = startDate < currentDate && endDate > currentDate;
+    console.log(valid);
+    return valid;
+  }
+
   if (loading) {
     return (
       <div className='flex flex-col justify-center items-center  h-screen bg-gray-50 z-10 opacity-90'>
@@ -87,7 +109,7 @@ const Mine = () => {
     <div>
 
       <div className='flex flex-col'>
-{/* [#2e9afe] */}
+        {/* [#2e9afe] */}
         <div className="top bg-yellow-500 h-56">
 
           <div className="info pt-10 pl-10 flex items-center justify-start">
@@ -97,7 +119,7 @@ const Mine = () => {
               <div className='text-xs border-2 border-white py-1 px-2 w-2/5 text-center rounded-lg mt-1'>LV0</div>
             </div>
           </div>
-{/* [#2b85d9] */}
+          {/* [#2b85d9] */}
           <div className="h-28 overflow-y-visible rounded-xl  info_box bg-yellow-400 text-white flex items-center justify-between w-4/5 mx-auto mt-5 p-4">
             <div className='flex flex-col items-center'>
               <div className='text-xs mb-2'>&#8377; {new Intl.NumberFormat().format(balance)}</div>
@@ -117,12 +139,16 @@ const Mine = () => {
         </div>
 
 
-{/*#7dc1ff */}
+        {/*#7dc1ff */}
         <ul className=' list-none flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
+
+          {isBetween() === false ? <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => toast('You can writhdrawl only between 9:00 to 19:00 hours only.', {autoClose:3000})}>
             <img src={money_bag} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Withdrawl</div>
-          </li>
+          </li> : <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
+            <img src={money_bag} alt="invite" className='w-14 h-14 mx-auto' />
+            <div className='text-center text-white text-sm'>Withdrawl</div>
+          </li>}
 
           <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge')}>
             <img src={recharge_image} alt="invite" className='w-14 h-14 mx-auto' />

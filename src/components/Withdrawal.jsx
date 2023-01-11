@@ -30,11 +30,6 @@ const Withdrawal = () => {
     });
     useEffect(() => {
 
-        if(!isBetween()) {
-            toast('You can withdraw only between 9:00 to 19:00 hours only!', {autoClose:3000});
-            navigate('/mine');
-        }
-
         const getDetails = async () => {
             const docRef = await getDoc(doc(db, 'users', auth.currentUser.uid));
             if (docRef.exists()) {
@@ -53,27 +48,6 @@ const Withdrawal = () => {
         
     }, []);
 
-    const isBetween = () => {
-        var startTime = '9:00:00';
-        var endTime = '19:00:00';
-
-        var currentDate = new Date()
-
-        var startDate = new Date(currentDate.getTime());
-        startDate.setHours(startTime.split(":")[0]);
-        startDate.setMinutes(startTime.split(":")[1]);
-        startDate.setSeconds(startTime.split(":")[2]);
-
-        var endDate = new Date(currentDate.getTime());
-        endDate.setHours(endTime.split(":")[0]);
-        endDate.setMinutes(endTime.split(":")[1]);
-        endDate.setSeconds(endTime.split(":")[2]);
-
-
-        var valid = startDate < currentDate && endDate > currentDate;
-        console.log(valid);
-        return valid;
-    }
 
     const handleWithdrawalAmount = (e) => {
         setWamount(e.target.value);
