@@ -63,14 +63,14 @@ const Withdrawal = () => {
             return;
         }
 
-        if((Number(wamount)+(Number(amountDetails.withdrawal_fee)*Number(wamount)/100))<Number(amountDetails.mwamount)) {
+        if((Number(wamount))<Number(amountDetails.mwamount)) {
             //console.log((Number(wamount)+Number(amountDetails.withdrawal_fee)), Number(amountDetails.mwamount));
             toast(`Amount should be greater than ${amountDetails.mwamount}`);
             //console.log(wamount, amountDetails.amount);
             return;
         }
 
-        if(((Number(wamount)+(Number(amountDetails.withdrawal_fee)*Number(wamount)/100))>Number(balance))) {
+        if(((Number(wamount))>Number(balance))) {
             toast('You dont have enough balance');
             return;
         }
@@ -78,7 +78,7 @@ const Withdrawal = () => {
         if(wpassword === loc.state.withdrawalPassword && otp===otpfield) {
             //console.log({ withdrawalAmount: wamount, ...details, user_id:auth.currentUser.uid, status:'pending' });
         try {
-            const docRef1 = await addDoc(collection(db, "withdrawals"), { withdrawalAmount: (Number(wamount)+(Number(amountDetails.withdrawal_fee)*Number(wamount)/100)), ...details, user_id:auth.currentUser.uid, time:Timestamp.now(), status:'pending' });
+            const docRef1 = await addDoc(collection(db, "withdrawals"), { withdrawalAmount: (Number(wamount)), ...details, afterDeduction:(Number(wamount)-(Number(amountDetails.withdrawal_fee)*Number(wamount)/100)), user_id:auth.currentUser.uid, time:Timestamp.now(), status:'pending' });
             const docRef2 = await addDoc(collection(db, 'users', auth.currentUser.uid, 'withdrawals'), {withdrawals_id:docRef1.id, time:Timestamp.now()});
             //console.log("Document written with ID: ", docRef1.id, docRef2.id);
             toast('Withdrawal request placed successfully!',{autoClose:1000});

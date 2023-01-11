@@ -241,6 +241,7 @@ export default function Withdrawals() {
                                 <TableRow>
                                     <TableCell>User</TableCell>
                                     <TableCell align="right">Amount</TableCell>
+                                    <TableCell align="right">Amount after Deduction</TableCell>
                                     <TableCell align="right">Name</TableCell>
                                     <TableCell align="right">Account Number</TableCell>
                                     <TableCell align="right">IFSC Code</TableCell>
@@ -256,14 +257,15 @@ export default function Withdrawals() {
                                     >
                                         
                                         <TableCell align="right">{element.phoneNo}</TableCell>
-                                        <TableCell align='right'>{element.withdrawalAmount}</TableCell>
+                                        <TableCell align='right'>&#8377;{element.withdrawalAmount}</TableCell>
+                                        <TableCell align='right'>&#8377;{element?.afterDeduction?element.afterDeduction:0}</TableCell>
                                         <TableCell align="right">{element.fullName}</TableCell>
                                         <TableCell align="right">{element.bankAccount}</TableCell>
                                         <TableCell align="right">{element.ifsc}</TableCell>
                                         <TableCell align="right">{element.bankName}</TableCell>
                                         {(element.status==='pending') && <TableCell align='right'>
                                             <IconButton onClick={() => updateStatus(element.withdrawal_id, 'confirmed', element.withdrawalAmount, element.user_id)}>
-                                                <CheckCircle/>
+                                                <CheckCircle color='primary'/>
                                             </IconButton>
                                             <IconButton onClick={() => updateStatus(element.withdrawal_id, 'declined', element.withdrawalAmount, element.user_id)}>
                                                 <Close/>
