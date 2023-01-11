@@ -4,7 +4,7 @@ import { getAuth } from 'firebase/auth';
 import { doc, getDoc, collection, addDoc, Timestamp } from 'firebase/firestore';
 import db from '../firebase/config.js';
 import { useNavigate, useLocation } from 'react-router-dom';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useContext } from 'react';
 import { AmountContext } from '../App.js';
 
@@ -22,75 +22,105 @@ const Withdrawal = () => {
     const [wamount, setWamount] = useState(0);
     // const [btnActive, setBtnActive] = useState(true);
     const [details, setDetails] = useState({
-        fullName:'',
-        phoneNo:'',
-        bankAccount:'',
-        bankName:'',
-        ifsc:'',
+        fullName: '',
+        phoneNo: '',
+        bankAccount: '',
+        bankName: '',
+        ifsc: '',
     });
     useEffect(() => {
+
+        if(!isBetween()) {
+            toast('You can withdraw only between 9:00 to 19:00 hours only!', {autoClose:3000});
+            navigate('/mine');
+        }
+
         const getDetails = async () => {
             const docRef = await getDoc(doc(db, 'users', auth.currentUser.uid));
             if (docRef.exists()) {
-                if(!docRef.data().bankDetails) {
+                if (!docRef.data().bankDetails) {
                     toast('Fill bank details first!');
                     navigate('/bank', { state: { withdrawalPassword: loc.state.withdrawalPassword, loginPassword: loc.state.loginPassword } });
                 } else {
                     setDetails(docRef.data().bankDetails);
-                    docRef.data().balance?setBalance(docRef.data().balance):setBalance(0);
+                    docRef.data().balance ? setBalance(docRef.data().balance) : setBalance(0);
                 }
             } else {
                 console.log('Something went wrong');
             }
         }
         getDetails();
+        
     }, []);
 
+    const isBetween = () => {
+        var startTime = '9:00:00';
+        var endTime = '19:00:00';
+
+        var currentDate = new Date()
+
+        var startDate = new Date(currentDate.getTime());
+        startDate.setHours(startTime.split(":")[0]);
+        startDate.setMinutes(startTime.split(":")[1]);
+        startDate.setSeconds(startTime.split(":")[2]);
+
+        var endDate = new Date(currentDate.getTime());
+        endDate.setHours(endTime.split(":")[0]);
+        endDate.setMinutes(endTime.split(":")[1]);
+        endDate.setSeconds(endTime.split(":")[2]);
+
+
+        var valid = startDate < currentDate && endDate > currentDate;
+        console.log(valid);
+        return valid;
+    }
+
     const handleWithdrawalAmount = (e) => {
-        // if(e.target.value>balance || e.target.value==='') {
-        //     toast('Withdrawal amount should be smaller or equal to balance');
-        // }
-        // else {
-        //     setWamount(Number(e.target.value));
-        // }
         setWamount(e.target.value);
     }
 
     const handleWithdrawal = async () => {
 
-        if(Number(wamount)===false || Number(wamount)<=0) {
+        
+
+        if (Number(wamount) === false || Number(wamount) <= 0) {
             toast('Enter a valid number');
             return;
         }
 
-        if((Number(wamount))<Number(amountDetails.mwamount)) {
+        if ((Number(wamount)) < Number(amountDetails.mwamount)) {
             //console.log((Number(wamount)+Number(amountDetails.withdrawal_fee)), Number(amountDetails.mwamount));
             toast(`Amount should be greater than ${amountDetails.mwamount}`);
             //console.log(wamount, amountDetails.amount);
             return;
         }
 
-        if(((Number(wamount))>Number(balance))) {
+        if ((Number(wamount) > 50000)) {
+            toast('Amount should be greatr than Rs 50,000');
+            return;
+        }
+
+        if (((Number(wamount)) > Number(balance))) {
             toast('You dont have enough balance');
             return;
         }
 
-        if(wpassword === loc.state.withdrawalPassword && otp===otpfield) {
+        if (wpassword === loc.state.withdrawalPassword && otp === otpfield) {
             //console.log({ withdrawalAmount: wamount, ...details, user_id:auth.currentUser.uid, status:'pending' });
-        try {
-            const docRef1 = await addDoc(collection(db, "withdrawals"), { withdrawalAmount: (Number(wamount)), ...details, afterDeduction:(Number(wamount)-(Number(amountDetails.withdrawal_fee)*Number(wamount)/100)), user_id:auth.currentUser.uid, time:Timestamp.now(), status:'pending' });
-            const docRef2 = await addDoc(collection(db, 'users', auth.currentUser.uid, 'withdrawals'), {withdrawals_id:docRef1.id, time:Timestamp.now()});
-            //console.log("Document written with ID: ", docRef1.id, docRef2.id);
-            toast('Withdrawal request placed successfully!',{autoClose:1000});
-            navigate('/record');
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
-        }else {
+            try {
+                const docRef1 = await addDoc(collection(db, "withdrawals"), { withdrawalAmount: (Number(wamount)), ...details, afterDeduction: (Number(wamount) - (Number(amountDetails.withdrawal_fee) * Number(wamount) / 100)), user_id: auth.currentUser.uid, time: Timestamp.now(), status: 'pending' });
+                const docRef2 = await addDoc(collection(db, 'users', auth.currentUser.uid, 'withdrawals'), { withdrawals_id: docRef1.id, time: Timestamp.now() });
+                //console.log("Document written with ID: ", docRef1.id, docRef2.id);
+                toast('Withdrawal request placed successfully!', { autoClose: 1000 });
+                navigate('/record');
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        } else {
             toast('Withdrawal Password is incorrect');
             //console.log(wpassword, loc.state.withdrawalPassword);
         }
-        
+
     }
 
     const handleOTPSend = (otpGenerated) => {
@@ -108,7 +138,7 @@ const Withdrawal = () => {
         document.getElementById('withdrawal_field').value = balance;
         setWamount(balance);
     }
-//[#2e9afe]
+    //[#2e9afe]
     return (
         <div className='bg-yellow-500 flex flex-col p-4 sm:h-[1000px] md:h-[950px]'>
             <div className="options text-center text-white text-lg pt-2 font-medium">
@@ -131,7 +161,7 @@ const Withdrawal = () => {
             </div>
 
             <div className="part1 bg-[#d3d6fe] p-4 rounded-lg mx-3 mt-5">
-{/* #87a1c3 */}
+                {/* #87a1c3 */}
                 <div className="balance flex justify-between text-gray-600 text-xl p-3 border-[#87a1c3] border-b-2">
                     <div className="phoneno">Phone Number:</div>
                     <div className='text-black text-sm'>{details.phoneNo}</div>
@@ -154,12 +184,12 @@ const Withdrawal = () => {
 
                 <div className="balance flex justify-between text-gray-600 sm:text-md md:text-xl p-3 border-[#87a1c3] border-b-2">
                     <div className="wpwd w-2/3">Withdrawal Password:</div>
-                    <input type="password" onChange={e=>setWpassword(e.target.value)} placeholder='Enter Password' className='outline-none bg-[#d3d6fe] w-1/3' />
+                    <input type="password" onChange={e => setWpassword(e.target.value)} placeholder='Enter Password' className='outline-none bg-[#d3d6fe] w-1/3' />
                 </div>
 
                 <div className="balance flex justify-between text-gray-600 sm:text-md md:text-xl p-3 border-[#87a1c3] border-b-2">
-                    <div className="wpwd w-2/3">OTP: <span className='text-sm bg-yellow-500 text-white px-3 py-1 hover:cursor-pointer rounded-full' onClick={()=>handleOTPSend(String(Math.floor(100000 + Math.random() * 900000)))}>Send OTP</span></div>
-                    <input type="password" onChange={e=>setOtp(e.target.value)} placeholder='Enter OTP' className='outline-none bg-[#d3d6fe] w-1/3' />
+                    <div className="wpwd w-2/3">OTP: <span className='text-sm bg-yellow-500 text-white px-3 py-1 hover:cursor-pointer rounded-full' onClick={() => handleOTPSend(String(Math.floor(100000 + Math.random() * 900000)))}>Send OTP</span></div>
+                    <input type="password" onChange={e => setOtp(e.target.value)} placeholder='Enter OTP' className='outline-none bg-[#d3d6fe] w-1/3' />
                 </div>
 
             </div>
@@ -167,9 +197,9 @@ const Withdrawal = () => {
             <div className="part1 bg-[#d3d6fe] p-3 rounded-lg mx-3 mt-5 flex flex-col gap-3">
                 <div className='text-amber-800 text-sm'>* The time of withdrawal and arrival is subject to the real-time processing time of the local bank, and the normal arrival time is 10 minutes to 24 hours.</div>
                 <div className='text-amber-800 text-sm'>* A single minimum withdrawal amount of not less than Rs {amountDetails.mwamount}.</div>
-                <div className='text-amber-800 text-sm'>* Withdrawal Time is 24 Hours Everyday.</div>
+                <div className='text-amber-800 text-sm'>* Withdrawal Time is 9:00 to 19:00  Everyday.</div>
             </div>
-{/* [#2e9afe] */}
+            {/* [#2e9afe] */}
             <div>
                 <button onClick={handleWithdrawal} className='bg-yellow-600 text-white text-lg mt-5 mb-20 rounded-lg shadow-md block w-full py-2 shadow-amber-400'>Confirm</button>
             </div>
