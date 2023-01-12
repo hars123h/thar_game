@@ -149,7 +149,7 @@ const Register = () => {
                 </svg>
                 Register</div>
             <div className='text-center'>
-                <img src={waltonbd_company} alt="hp_logo" className='m-auto md:w-1/5 sm:w-1/5 my-5' width={300} />
+                <img src={waltonbd_company} alt="hp_logo" className='m-auto md:w-1/5 sm:w-1/5 my-5' width={200} />
             </div>
             <div className="box mb-20 border-2 m-auto border-black rounded-xl border-solid lg:w-2/5 w-4/5 shadow-xl p-4 w-50% flex flex-col">
                 <input value={mobno} onChange={e => setMobno(e.target.value)} type="text" className='p-2 outline-none mb-2 border-2 border-black rounded-full' placeholder='Phone number' name="phoneno" id="phoneno" />

@@ -56,7 +56,7 @@ const Login = () => {
     return (
         <div>
             <div className='text-center'>
-                <img src={waltonbd_company} alt="hp_logo" className='m-auto md:w-2/6 sm:w-1/5 my-5' width={300}/>
+                <img src={waltonbd_company} alt="hp_logo" className='m-auto md:w-2/6 sm:w-1/6 my-5' width={200}/>
             </div>
             <div className='flex flex-col m-auto w-3/5'>
                 <div className=" items-center mb-3 p-2 phoneno flex border-none bg-[#f1f1f1] rounded-md">
