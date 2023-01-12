@@ -45,7 +45,7 @@ const Bank = () => {
     }
 //[#2e9afe]
     return (
-        <div className='bg-yellow-500 h-full p-4 sm:h-[700px] md:h-[950px]'>
+        <div className='bg-blue-500 h-full p-4 sm:h-[700px] md:h-[950px]'>
             <div className="options text-center text-white text-2xl pt-2 font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate('/settings', { state: { withdrawalPassword: loc.state.withdrawalPassword, loginPassword: loc.state.loginPassword } })} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute left-2  storke-white top-5 cursor-pointer">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -54,7 +54,7 @@ const Bank = () => {
             </div>
 
 {/* #757575 */}
-            <div className="box mx-2 bg-yellow-400 text-white p-2 rounded-md mt-4">
+            <div className="box mx-2 bg-blue-400 text-white p-2 rounded-md mt-4">
                 <div className='flex gap-2 items-center  text-md p-3 m-1  cursor-pointer'>
                     <input type="text" onChange={handleChange} name='fullName' value={details.fullName} className='outline-none w-full bg-inherit placeholder-white' placeholder='Full Name' />
                 </div>
@@ -81,7 +81,7 @@ const Bank = () => {
             </div>
 
             <div className='mb-[1000px]'>
-                <button onClick={handleSubmit} className='bg-yellow-400 text-white text-lg mt-5 mb-20 rounded-lg shadow-xl block w-full py-2 shadow-yellow-200'>Confirm</button>
+                <button onClick={handleSubmit} className='bg-blue-400 text-white text-lg mt-5 mb-20 rounded-lg shadow-xl block w-full py-2 shadow-blue-200'>Confirm</button>
             </div>
         </div>
     )

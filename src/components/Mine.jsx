@@ -19,12 +19,6 @@ import buildingNew from '../images/buildingNew.png';
 import homeNew from '../images/homeNew.png';
 import teamNew from '../images/teamNew.png';
 import {toast} from 'react-toastify';
-import moneyBag_yellow from '../images/moneyBag_yellow.png';
-import recharge_yellow from '../images/recharge_yellow.png';
-import book_yellow from '../images/book_yellow.png';
-import invite_yellow from '../images/invite_yellow.png';
-import page_yellow from '../images/page_yellow.png';
-import adminSetting_yellow from '../images/adminSetting_yellow.png';
 import waltonbd_company from '../images/waltonbd_company.png';
 
 
@@ -112,7 +106,7 @@ const Mine = () => {
 
       <div className='flex flex-col'>
         {/* [#2e9afe] */}
-        <div className="top bg-yellow-500 h-56">
+        <div className="top bg-blue-500 h-56">
 
           <div className="info pt-10 pl-10 flex items-center justify-start">
             <div className='flex justify-center items-center'><img src={waltonbd_company} alt="logo" className='w-16' /></div>
@@ -122,7 +116,7 @@ const Mine = () => {
             </div>
           </div>
           {/* [#2b85d9] */}
-          <div className="h-28 overflow-y-visible rounded-xl  info_box bg-yellow-400 text-white flex items-center justify-between w-4/5 mx-auto mt-5 p-4">
+          <div className="h-28 overflow-y-visible rounded-xl  info_box bg-blue-400 text-white flex items-center justify-between w-4/5 mx-auto mt-5 p-4">
             <div className='flex flex-col items-center'>
               <div className='text-xs mb-2'>&#8377; {new Intl.NumberFormat().format(balance)}</div>
               <div>Balance</div>
@@ -144,44 +138,44 @@ const Mine = () => {
         {/*#7dc1ff */}
         <ul className=' list-none flex justify-around items-center mx-auto w-4/5 mt-10'>
 
-          {isBetween() === false ? <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => toast('You can writhdrawl only between 9:00 to 19:00 hours only.', {autoClose:3000})}>
+          {isBetween() === false ? <li className='bg-blue-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => toast('You can writhdrawl only between 9:00 to 19:00 hours only.', {autoClose:3000})}>
             <img src={money_bag} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Withdrawl</div>
-          </li> : <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
+          </li> : <li className='bg-blue-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/withdrawal', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
             <img src={money_bag} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Withdrawl</div>
           </li>}
 
-          <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge')}>
+          <li className='bg-blue-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/recharge')}>
             <img src={recharge_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Recharge</div>
           </li>
 
-          <li className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/project')}>
+          <li className='bg-blue-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/project')}>
             <img src={book_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Project</div>
           </li>
         </ul>
 
         <div className='flex justify-around items-center mx-auto w-4/5 mt-10'>
-          <div className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/invite')}>
+          <div className='bg-blue-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/invite')}>
             <img src={invite_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Invite</div>
           </div>
 
-          <div className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/record')}>
+          <div className='bg-blue-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/record')}>
             <img src={paper_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Record</div>
           </div>
 
-          <div className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/settings', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
+          <div className='bg-blue-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/settings', { state: { withdrawalPassword: originalwpwd, loginPassword: originalpwd } })}>
             <img src={adminSetting} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Settings</div>
           </div>
         </div>
 
         <div className="flex justify-around items-center mx-auto w-4/5 mt-10">
-          <div className='bg-yellow-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/user_feedback')}>
+          <div className='bg-blue-400 flex-col flex items-center justify-around p-3 rounded-2xl m-4 w-[100px] cursor-pointer' onClick={() => navigate('/user_feedback')}>
             <img src={paper_image} alt="invite" className='w-14 h-14 mx-auto' />
             <div className='text-center text-white text-sm'>Feedback</div>
           </div>
@@ -208,12 +202,12 @@ const Mine = () => {
 
 
         <div className="button w-4/5 mx-auto text-white text-lg mt-20 mb-20">
-          <button className='w-full bg-yellow-500 rounded-lg py-1 ' onClick={handleSignOut}>Sign Out</button>
+          <button className='w-full bg-blue-500 rounded-lg py-1 ' onClick={handleSignOut}>Sign Out</button>
         </div>
       </div>
 
       {/*Navigation Bar 2*/}
-      <div className="fixed bottom-0 z-10 bg-yellow-500 rounded-none text-white flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
+      <div className="fixed bottom-0 z-10 bg-blue-500 rounded-none text-white flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
         <div className="flex flex-row justify-around items-center w-full py-2">
           <div className='cursor-pointer mx-2 flex flex-col justify-center items-center' onClick={() => navigate('/home')}>
             <img src={homeNew} alt="online" className='w-8' />

@@ -160,7 +160,7 @@ const Home = () => {
             </div>
 
             {/*Marquee Implementation*/}
-            <div className="bg-yellow-500 rounded-lg text-white relative flex overflow-x-hidden h-10 mx-auto mt-2 border-2 border-gray-100 sm:w-3/5 lg:w-3/5 overflow-y-hidden">
+            <div className="bg-blue-500 rounded-lg text-white relative flex overflow-x-hidden h-10 mx-auto mt-2 border-2 border-gray-100 sm:w-3/5 lg:w-3/5 overflow-y-hidden">
                 <div className="py-12 animate-marquee flex flex-col whitespace-nowrap">
                     <span className="mx-4 text-sm">91915*****05 Member withdrawl 100000 Rs</span>
                     <span className="mx-4 text-sm">91702*****84 Member withdrawl 30000 Rs</span>
@@ -171,7 +171,7 @@ const Home = () => {
             </div>
 
             {/*Navigation Bar 1*/}
-            <div className="bg-yellow-500 rounded-lg text-white relative flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 sm:w-3/5 lg:w-3/5 overflow-y-hidden">
+            <div className="bg-blue-500 rounded-lg text-white relative flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 sm:w-3/5 lg:w-3/5 overflow-y-hidden">
                 <div className="flex flex-row justify-around items-center w-full py-2">
                     <a href="https://telegram.me/WaltonOfficialGroup91" className=' no-underline text-white cursor-pointer'>
                         <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
@@ -199,7 +199,7 @@ const Home = () => {
 
             {/*Plans Cards*/}
             <div className="card_grid grid grid-cols-1 sm:w-3/5 lg:w-3/5 mx-auto mt-2 mb-20">
-                <div className='text-center bg-yellow-500 mx-1 text-white text-lg font-medium py-2'>Big Plans</div>
+                <div className='text-center bg-blue-500 mx-1 text-white text-lg font-medium py-2'>Big Plans</div>
 
                 <div className='grid grid-cols-2'>
                     <Card product_type={"long"} product_image={waltonbd_product1}  handleClick={handleClick} plan_name={"Walton Plan 1"} plan_cycle={90} plan_daily_earning={90} plan_amount={600} plan_type={'Big Plan'} />
@@ -214,7 +214,7 @@ const Home = () => {
 
                 </div>
                 {/* [#0096D5] */}
-                <div className='text-center bg-yellow-500 mx-1 text-white text-lg font-medium py-2' >
+                <div className='text-center bg-blue-500 mx-1 text-white text-lg font-medium py-2' >
                     Short Plans
                     <br />
                     {
@@ -250,7 +250,7 @@ const Home = () => {
 
 
             {/*Navigation Bar 2*/}
-            <div className="fixed bottom-0 z-10 bg-yellow-500 rounded-none text-white flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
+            <div className="fixed bottom-0 z-10 bg-blue-500 rounded-none text-white flex overflow-x-hidden  mx-auto mt-2 border-2 border-gray-100 w-full overflow-y-hidden">
                 <div className="flex flex-row justify-around items-center w-full py-2">
                     <div className='cursor-pointer mx-2 flex flex-col justify-center items-center'>
                         <img src={homeNew} alt="online" className='w-8' />

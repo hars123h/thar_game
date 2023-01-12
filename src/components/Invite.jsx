@@ -42,7 +42,7 @@ const Invite = () => {
     }
 //[#2e9afe]
     return (
-        <div className=' bg-yellow-500 h-[1000px] flex flex-col text-white font-light p-5'>
+        <div className=' bg-blue-500 h-[1000px] flex flex-col text-white font-light p-5'>
             <div className="top p-3 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => navigate(-1)} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
