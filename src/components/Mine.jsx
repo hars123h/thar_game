@@ -25,6 +25,8 @@ import book_yellow from '../images/book_yellow.png';
 import invite_yellow from '../images/invite_yellow.png';
 import page_yellow from '../images/page_yellow.png';
 import adminSetting_yellow from '../images/adminSetting_yellow.png';
+import waltonbd_company from '../images/waltonbd_company.png';
+
 
 const Mine = () => {
 
@@ -86,7 +88,7 @@ const Mine = () => {
 
 
     var valid = startDate < currentDate && endDate > currentDate;
-    console.log(valid);
+    //console.log(valid);
     return valid;
   }
 
@@ -113,7 +115,7 @@ const Mine = () => {
         <div className="top bg-yellow-500 h-56">
 
           <div className="info pt-10 pl-10 flex items-center justify-start">
-            <div className='flex justify-center items-center'><img src={ss_logo} alt="logo" className='w-20 rounded-full' /></div>
+            <div className='flex justify-center items-center'><img src={waltonbd_company} alt="logo" className='w-16' /></div>
             <div className="user_no flex flex-col text-white ml-5">
               <div className="no text-3xl font-medium">{mobileno}</div>
               <div className='text-xs border-2 border-white py-1 px-2 w-2/5 text-center rounded-lg mt-1'>LV0</div>

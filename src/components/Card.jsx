@@ -18,7 +18,7 @@ const Card = ({product_type, product_image, plan_name, plan_type, plan_amount, p
             <div className="basic_info  text-white">Project Cycle: {plan_cycle} days</div>
             <div className="basic_info  text-white">Total Earning: &#8377;{new Intl.NumberFormat().format(plan_cycle*plan_daily_earning)}</div>
 
-            {(plan_name==='Sstone Plan 6' || plan_name==='Sstone Plan 7' || plan_name==='Sstone Plan 8' )?<div className="cursor-pointer btn text-white text-center p-2 mt-1 text-lg rounded-md  w-4/5 mx-auto bg-yellow-400"
+            {(plan_name==='Walton Plan 6' || plan_name==='Walton Plan 7' || plan_name==='Walton Plan 8' )?<div className="cursor-pointer btn text-white text-center p-2 mt-1 text-lg rounded-md  w-4/5 mx-auto bg-yellow-400"
             >Click to buy</div>:
 
             <div className="cursor-pointer btn text-white text-center p-2 mt-1 text-lg rounded-md  w-4/5 mx-auto bg-yellow-400"

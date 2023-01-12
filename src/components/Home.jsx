@@ -16,26 +16,34 @@ import { arrayUnion, doc, getDoc, increment, updateDoc } from 'firebase/firestor
 import db from '../firebase/config.js';
 import { getAuth } from 'firebase/auth';
 import headset1 from '../images/headset1.png';
-import product_img1 from '../images/product_img1.jpg';
-import product_img2 from '../images/product_img2.jpg';
-import product_img3 from '../images/product_img3.jpg';
-import product_img4 from '../images/product_img4.jpg';
+import waltonbd_product1 from '../images/waltonbd_product1.jpg';
+
+import waltonbd_product2 from '../images/waltonbd_product2.jpg';
+import waltonbd_product3 from '../images/waltonbd_product3.jpg';
+import waltonbd_product4 from '../images/waltonbd_product4.jpg';
+
+import waltonbd_product5 from '../images/waltonbd_product5.jpg';
+import waltonbd_product6 from '../images/waltonbd_product6.png';
+import waltonbd_product7 from '../images/waltonbd_product7.jpg';
+
+import waltonbd_product8 from '../images/waltonbd_product8.jpg';
+import waltonbd_product9 from '../images/waltonbd_product9.jpg';
+import waltonbd_product10 from '../images/waltonbd_product10.jpg';
+
+import waltonbd_product11 from '../images/waltonbd_product11.jpg';
+import waltonbd_product12 from '../images/waltonbd_product12.jpg';
+import waltonbd_product13 from '../images/waltonbd_product13.jpg';
+
 import download_image from '../images/download_image.png';
-import product_img5 from '../images/product_img5.jpg';
-import product_img17 from '../images/product_img17.jpg';
-import product_img7 from '../images/product_img7.jpg';
-import product_img8 from '../images/product_img8.jpg';
 import recharge_image from '../images/recharge_image.png';
-import product_img9 from '../images/product_img9.jpg';
-import product_img10 from '../images/product_img10.jpg';
-import product_img11 from '../images/product_img11.jpg';
-import product_img12 from '../images/product_img12.jpg';
 import invite_image from '../images/invite_image.png';
-import product_img13 from '../images/product_img13.jpg';
 import paper_image from '../images/paper_image.png';
 import buildingNew from '../images/buildingNew.png';
 import homeNew from '../images/homeNew.png';
 import teamNew from '../images/teamNew.png';
+
+
+
 
 
 
@@ -194,15 +202,15 @@ const Home = () => {
                 <div className='text-center bg-yellow-500 mx-1 text-white text-lg font-medium py-2'>Big Plans</div>
 
                 <div className='grid grid-cols-2'>
-                    <Card product_type={"long"} product_image={product_img1}  handleClick={handleClick} plan_name={"Sstone Plan 1"} plan_cycle={90} plan_daily_earning={90} plan_amount={600} plan_type={'Big Plan'} />
-                    <Card product_type={"long"} product_image={product_img2} handleClick={handleClick} plan_name={"Sstone Plan 2"} plan_cycle={90} plan_daily_earning={260} plan_amount={2000} plan_type={'Big Plan'} />
-                    <Card product_type={"long"} product_image={product_img3} handleClick={handleClick} plan_name={"Sstone Plan 3"} plan_cycle={90} plan_daily_earning={410} plan_amount={3000} plan_type={'Big Plan'} />
-                    <Card product_type={"long"} product_image={product_img4} handleClick={handleClick} plan_name={"Sstone Plan 4"} plan_cycle={90} plan_daily_earning={810} plan_amount={5000} plan_type={'Big Plan'} />
+                    <Card product_type={"long"} product_image={waltonbd_product1}  handleClick={handleClick} plan_name={"Walton Plan 1"} plan_cycle={90} plan_daily_earning={90} plan_amount={600} plan_type={'Big Plan'} />
+                    <Card product_type={"long"} product_image={waltonbd_product2} handleClick={handleClick} plan_name={"Walton Plan 2"} plan_cycle={90} plan_daily_earning={260} plan_amount={2000} plan_type={'Big Plan'} />
+                    <Card product_type={"long"} product_image={waltonbd_product3} handleClick={handleClick} plan_name={"Walton Plan 3"} plan_cycle={90} plan_daily_earning={410} plan_amount={3000} plan_type={'Big Plan'} />
+                    <Card product_type={"long"} product_image={waltonbd_product4} handleClick={handleClick} plan_name={"Walton Plan 4"} plan_cycle={90} plan_daily_earning={810} plan_amount={5000} plan_type={'Big Plan'} />
                     {/* Some Plans will unlock after using the website for some days */}
-                    <Card product_type={"long"} product_image={product_img5} handleClick={handleClick} plan_name={"Sstone Plan 5"} plan_cycle={90} plan_daily_earning={2000} plan_amount={10000} plan_type={'Big Plan'} />
-                    <Card product_type={"long"} product_image={product_img17} handleClick={handleClick} plan_name={"Sstone Plan 6"} plan_cycle={90} plan_daily_earning={4000} plan_amount={18000} plan_type={'Big Plan'} />
-                    <Card product_type={"long"} product_image={product_img7} handleClick={handleClick} plan_name={"Sstone Plan 7"} plan_cycle={90} plan_daily_earning={12000} plan_amount={35000} plan_type={'Big Plan'} />
-                    <Card product_type={"long"} product_image={product_img8} handleClick={handleClick} plan_name={"Sstone Plan 8"} plan_cycle={90} plan_daily_earning={25000} plan_amount={55000} plan_type={'Big Plan'} />
+                    <Card product_type={"long"} product_image={waltonbd_product5} handleClick={handleClick} plan_name={"Walton Plan 5"} plan_cycle={90} plan_daily_earning={1800} plan_amount={10000} plan_type={'Big Plan'} />
+                    <Card product_type={"long"} product_image={waltonbd_product6} handleClick={handleClick} plan_name={"Walton Plan 6"} plan_cycle={90} plan_daily_earning={4000} plan_amount={18000} plan_type={'Big Plan'} />
+                    <Card product_type={"long"} product_image={waltonbd_product7} handleClick={handleClick} plan_name={"Walton Plan 7"} plan_cycle={90} plan_daily_earning={12000} plan_amount={35000} plan_type={'Big Plan'} />
+                    <Card product_type={"long"} product_image={waltonbd_product8} handleClick={handleClick} plan_name={"Walton Plan 8"} plan_cycle={90} plan_daily_earning={25000} plan_amount={55000} plan_type={'Big Plan'} />
 
                 </div>
                 {/* [#0096D5] */}
@@ -217,24 +225,24 @@ const Home = () => {
                     {userDetails && userDetails.showShort===0?
                     (
                         <span className='pointer-events-none'>
-                            <Card product_type={"short"} product_image={product_img9} handleClick={handleClick} plan_name={"Sstone Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
+                            <Card product_type={"short"} product_image={waltonbd_product9} handleClick={handleClick} plan_name={"Walton Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
                         </span>
                     ):
                     <span>
-                            <Card product_type={"short"} product_image={product_img9} handleClick={handleClick} plan_name={"Sstone Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
+                            <Card product_type={"short"} product_image={waltonbd_product9} handleClick={handleClick} plan_name={"Walton Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
                     </span>
                     }
                     <span className='pointer-events-none'>
-                        <Card product_type={"short"} product_image={product_img10} handleClick={handleClick} plan_name={"Sstone Plan 10"} plan_cycle={3} plan_daily_earning={500} plan_amount={1000} plan_type={'Short Plan'} />
+                        <Card product_type={"short"} product_image={waltonbd_product10} handleClick={handleClick} plan_name={"Walton Plan 10"} plan_cycle={3} plan_daily_earning={500} plan_amount={1000} plan_type={'Short Plan'} />
                     </span>
                     <span className='pointer-events-none'>    
-                        <Card product_type={"short"} product_image={product_img11} handleClick={handleClick} plan_name={"Sstone Plan 11"} plan_cycle={2} plan_daily_earning={2800} plan_amount={3500} plan_type={'Short Plan'} />
+                        <Card product_type={"short"} product_image={waltonbd_product11} handleClick={handleClick} plan_name={"Walton Plan 11"} plan_cycle={2} plan_daily_earning={2800} plan_amount={3500} plan_type={'Short Plan'} />
                     </span>
                     <span className='pointer-events-none'>
-                        <Card product_type={"short"} product_image={product_img12} handleClick={handleClick} plan_name={"Sstone Plan 12"} plan_cycle={2} plan_daily_earning={4800} plan_amount={7000} plan_type={'Short Plan'} />
+                        <Card product_type={"short"} product_image={waltonbd_product12} handleClick={handleClick} plan_name={"Walton Plan 12"} plan_cycle={2} plan_daily_earning={4800} plan_amount={7000} plan_type={'Short Plan'} />
                     </span>
                     <span className='pointer-events-none'>    
-                        <Card product_type={"short"} product_image={product_img13} handleClick={handleClick} plan_name={"Sstone Plan 13"} plan_cycle={2} plan_daily_earning={15000} plan_amount={20000} plan_type={'Short Plan'} />
+                        <Card product_type={"short"} product_image={waltonbd_product13} handleClick={handleClick} plan_name={"Walton Plan 13"} plan_cycle={2} plan_daily_earning={15000} plan_amount={20000} plan_type={'Short Plan'} />
                     </span>
                 </div>
             </div>

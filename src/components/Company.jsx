@@ -2,6 +2,7 @@ import React from 'react';
 // import hp_cpy_image from '../images/hp_cpy_image.jpg';
 import { useNavigate } from 'react-router-dom';
 import siteTheme from '../images/siteTheme.png';
+import waltonbd_logo from '../images/waltonbd_logo.jpg'
 
 const Company = () => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Company = () => {
             </div>
 
             <div className="hp_company mt-10">
-                <img src={siteTheme} alt="hp" className='sm:w-3/6 md:w-2/6 mx-auto' />
+                <img src={waltonbd_logo} alt="hp" className='sm:w-3/6 md:w-2/6 mx-auto' />
             </div>
 
             <div className=" cpy_info sm:w-4/5 lg:w-3/4 mx-auto mt-5">
@@ -26,9 +27,9 @@ const Company = () => {
             </div>
 
             <div className="part sm:w-4/5 lg:w-3/4 mx-auto text-white mt-4">
-                <div className="heading font-bold mb-1">Sareen Sports</div>
+                <div className="heading font-bold mb-1">Walton</div>
                 <hr />
-                <div className="data text-sm mt-2">Sareen Sports is the place where Tradition meets Technology, Leadership through Quality is our motto and that's why we are called "SS means Cricket".
+                <div className="data text-sm mt-2">Walton is the latest multinational electrical, electronics, automobiles and other appliances brand with one of the largest well equipped R & I facilities in the world carried out its production through different subsidiaries under the banner of Walton group headquarters in Bangladesh. Today, Walton has a workforce of more than 30000+ in total 22 production bases under 700+ acres of factory area. The capacity of yearly production is 10 million units based on the market demands. Walton is the giant professional manufacturer in the relevant industry and has gained high reputation in terms of its unbeatable capability for producing Electrical and Electronics goods in the most competitive way in aspect of quality, cost, design and innovation.
                 </div>
             </div>
 
@@ -36,21 +37,28 @@ const Company = () => {
                 <div className="heading font-bold mb-1">Our History</div>
                 <hr />
                 <div className="data text-sm mt-2">
-                    Sareen Sports Industries was started in the year 1969 by Mr. N.K. Sareen under the inspiration of his father Mr. M.L. Sareen, Sareen Sports Industries entered in the Indian market with a great hard work and dedication to launch their registered Trade-Mark SS SUNRIDGES in the year 1976. The company started export of cricket bats in 1979 to UK and Australia. Sareen Sports Industries manufacturers quality cricket equipments for meeting the requirements of national and international markets. The company also added on the production of Cricket Balls and Soft Leather Protective Equipments under the flagship of “SS SUNRIDGES” in the year 1985.
+                Business started since 1977 and early 2008 WHIPLC started manufacturing of Refrigerator, Freezer, Air Conditioner, Compressor and now onward expanding its operation in Television, Home & Electrical Appliances. Walton & Marcel have become the most trusted and prestigious Brand in the E&E industry in Bangladesh through its strong manufacturing base, quality products, competitive price, extensive market coverage and last but not the least, the prompt after sales services. As a result, within a very short period of time, both the Brands have captured substantial market share and positioned itself as the most dominant performer in the E&E sector in Bangladesh. Product portfolio of WHIPLC includes Refrigerator (Frost & Non-Frost), Freezer, Air Conditioner, Compressor and Television.
                 </div>
             </div>
 
             <div className="part sm:w-4/5 lg:w-3/4 mx-auto text-white mt-4">
-                <div className="heading font-bold mb-1">Our Purpose</div>
+                <div className="heading font-bold mb-1">Our Production Facilities</div>
                 <hr />
-                <div className="data text-sm mt-2">As our SS Brand Cricket Equipments are known as a name of Quality goods are used by the international cricket players like Saurav Ganguly, Virender Sehwag, Sachin Tendulkar, V.V.S Laxman, Roger Binny, Manoj Prabhakar, and many other test cricketers like S. Ramesh, Yuvraj Singh, Akash Chopra, and Deep Das Gupta. The highest test runs scored by V.V.S. Laxman 281 and now 309 by Virender Sehwag at Multan in Pakistan are by our Cricket Bat SS TON. Our purpose is to serve the best, ALWAYS!
+                <div className="data text-sm mt-2">The Manufacturing Plant & Headquarters of WHIPLC is located at Chandra, Kaliakoir, Gazipur, Bangladesh. The plant is treated as one of the sophisticated manufacturing plants in Bangladesh as well as in South Asia. Walton innovates to build a more advanced, sustainable and environment friendly society through the combination of sophisticated technologies and expertise. The manufacturing plant of WHIPLC is approx. 5,000,000 sft. of working space consisting of 19 Buildings and Shades.
+                </div>
+            </div>
+
+            <div className="part sm:w-4/5 lg:w-3/4 mx-auto text-white mt-4">
+                <div className="heading font-bold mb-1">Awards</div>
+                <hr />
+                <div className="data text-sm mt-2">Walton is the No. 1 Manufacturer and Exporter of Refrigerator, Air Conditioner, LED TV, Mobile Phone, Walton has achieved many international & national awards and recognitions like some recent prestigious and best business awards are: The Golden Globe Tiger Award 2015 in the category of Excellence & Leadership Brand, DHL-Daily Star Bangladesh 15th Business Award 2014 for Best Enterprise in Bangladesh, Asia Best Employer Brand Awards in 2015, Six times 1st Prize for Highest VAT Payer at DITF-2015, 2014, 2013, 2012, 2011 & 2010 respectively, Second Prize for Premier Pavilion Category at DITF-2015, Best Refrigerator Brand Award-2014, Best Television Brand Award-2014, Best Local Brand Award-2014, 1st Prize for Premier Pavilion Category at DITF-2014, The Global Brand excellence Award in 2014 for brand excellence in consumer electronics, 1st Prize for Premier Pavilion Category at DITF-2013, Best Sponsor Award-2012, Creative Media Ltd. BABISAS Award-2012, Best Brand (Refrigerator) Award-2011, 2nd Prize for Premier Pavilion Category at DITF-2011, 2nd Prize for Premier Pavilion Category at DITF-2010, 1st Prize for Premier Pavilion Category at DITF-2009, 1st Prize for Premier Pavilion Category at CITF-2005.
                 </div>
             </div>
 
             <div className="part  sm:w-4/5 lg:w-3/4 mx-auto text-white mt-4">
                 <div className="heading font-bold mb-1">Our Vision</div>
                 <hr />
-                <div className="data text-sm mt-2">The company has a good share of export business in the world market exporting to Australia, UK, USA, South Africa, Canada, Sri Lanka and Bangladesh. Our company is engaged in making the product for international companies. Our product brands are TON L.E, TON ELITE, TON VA-999, TON HERITAGE, TON CAMBRIDGE. Our Sunridges SS cricket equipment is used by international players like Arvinda DeSilva, Lance Klusner, Alister Cambell, Ravindu Shah, Trevour, Hitesh Modi, Chaminda Vaas, Hassan Tilakratne and many others. Our vision is to grow with a rapid speed.</div>
+                <div className="data text-sm mt-2">Along the way, Walton has earned domestic and global recognition for its experience and proven track record in a variety of electronics fields. Walton is the pioneer of developing state of the art designs and modern technology having leading market share specializing in Multi-Stored Refrigerators, Freezers, Air Conditioners, LED/ LCD televisions, Motorcycles, Smart Phones and Home Appliances.Walton is working on carrying the flag of red and green into the global market presence from the present 40 countries to more than 200 countries to dominate Go Global and the top five Electronics Brand of the Globe within 2030.</div>
                 <br />
                 <br />
             </div>
