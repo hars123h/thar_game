@@ -146,18 +146,18 @@ const Register = () => {
                 <img src={waltonbd_company} alt="hp_logo" className='m-auto md:w-1/5 sm:w-1/5 my-5' width={300} />
             </div>
             <div className="box mb-20 border-2 m-auto border-black rounded-xl border-solid lg:w-2/5 w-4/5 shadow-xl p-4 w-50% flex flex-col">
-                <input value={mobno} onChange={e => setMobno(e.target.value)} type="text" className='p-2 outline-none mb-2 border-2 border-gray-100 rounded-full' placeholder='Phone number' name="phoneno" id="phoneno" />
-                <div className='flex border-2 border-gray-100 rounded-full mb-2'>
+                <input value={mobno} onChange={e => setMobno(e.target.value)} type="text" className='p-2 outline-none mb-2 border-2 border-black rounded-full' placeholder='Phone number' name="phoneno" id="phoneno" />
+                <div className='flex border-2 border-black rounded-full mb-2'>
                     <input type="text" onChange={e=>setOtp(e.target.value)}  className='p-2 w-[90%] outline-none rounded-full' placeholder='OTP' name="otp" id="otp"/>
                     <button className='bg-yellow-500 text-white text-xs mr-1 px-4 my-1  rounded-full' onClick={()=>handleOTPSend(String(Math.floor(100000 + Math.random() * 900000)))}>OTP</button>
                 </div>
-                <input value={pwd} onChange={e => setpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-gray-100 rounded-full' placeholder='Please enter login password' name="passowrd" id="pass" />
-                <input value={cpwd} onChange={e => setCpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-gray-100 rounded-full' placeholder='Please confirm the login password' name="cnfpass" id="cnfpass" />
-                <input value={wpwd} onChange={e => setwpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-gray-100 rounded-full' placeholder="Please enter the Withdrawal password" name="withpassword" id="wthpass" />
-                <input value={invt} onChange={e => setInvt(e.target.value)} type="text" className='p-2 mb-2  outline-none border-2 border-gray-100 rounded-full' placeholder='Invitation code' name="invite_code" id="inv_code" />
+                <input value={pwd} onChange={e => setpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-black rounded-full' placeholder='Please enter login password' name="passowrd" id="pass" />
+                <input value={cpwd} onChange={e => setCpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-black rounded-full' placeholder='Please confirm the login password' name="cnfpass" id="cnfpass" />
+                <input value={wpwd} onChange={e => setwpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-black rounded-full' placeholder="Please enter the Withdrawal password" name="withpassword" id="wthpass" />
+                <input value={invt} onChange={e => setInvt(e.target.value)} type="text" className='p-2 mb-2  outline-none border-2 border-black rounded-full' placeholder='Invitation code' name="invite_code" id="inv_code" />
                 {/*[#0096D5] [#00704A]*/}
                 <button onClick={handleRegister} className='bg-yellow-500 text-white pt-1 pb-1 rounded-full text-lg'>Register</button>
-                <div onClick={() => navigate('/login')} className='cursor-pointer text-center text-gray-500 mt-2 p-2 mb-2 border-2 border-gray-100 rounded-full'>
+                <div onClick={() => navigate('/login')} className='cursor-pointer text-center text-gray-500 mt-2 p-2 mb-2 border-2 border-black rounded-full'>
                     Already have an account, log in
                 </div>
             </div>
