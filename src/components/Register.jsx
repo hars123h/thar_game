@@ -27,6 +27,12 @@ const Register = () => {
     const amountDetails = useContext(AmountContext);
 
     const handleRegister = async () => {
+
+        if(pwd!==cpwd) {
+            toast('Passwords do not match!', {autoClose:3000});
+            return;
+        }
+
         if(otp!==otpfield) {
             toast('Wrong OTP entered!');
             return;

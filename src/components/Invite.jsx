@@ -50,11 +50,11 @@ const Invite = () => {
             </div>
 
             <p className='p-3 text-xs break-words'>
-                https://www.sstonebats.com/register/invite_code/${userDetails.user_invite}
+            https://www.waltonbd91.com/register/invite_code/${userDetails.user_invite}
             </p>
 
             <div className='p-3 font-bold cursor-pointer'>
-                <CopyToClipboard text={`https://www.sstonebats.com/register/invite_code/${userDetails.user_invite}`} onCopy={() => toast('Copied to clipboard')}>
+                <CopyToClipboard text={`https://www.waltonbd91.com/register/invite_code/${userDetails.user_invite}`} onCopy={() => toast('Copied to clipboard')}>
                     <span>Invite Link: click to copy</span>
                 </CopyToClipboard>
             </div>
@@ -70,7 +70,7 @@ const Invite = () => {
                 <QRCode
                     size={120}
                     style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                    value={`https://www.sstonebats.com/register/invite_code/${userDetails.user_invite}`}
+                    value={`https://www.waltonbd91.com/register/invite_code/${userDetails.user_invite}`}
                     viewBox={`0 0 120 120`}
                 />
             </div>
