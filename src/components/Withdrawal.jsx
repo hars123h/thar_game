@@ -122,9 +122,9 @@ const Withdrawal = () => {
                 </svg>
                 Withdrawl
             </div>
-
+{/*| After Deduction} */}
             <div className="part1 bg-[#d3d6fe] p-3 rounded-lg mx-3 mt-5">
-                <div className='text-blue-600 px-2 my-1  rounded-full border border-blue-600 inline'>Withdrawal Fee {amountDetails.withdrawal_fee}% | After Deduction Rs.{(Number(wamount) - (Number(amountDetails.withdrawal_fee) * Number(wamount) / 100))}</div>
+                <div className='text-blue-600 px-2 my-1  rounded-full border border-blue-600 inline'>Withdrawal Fee {amountDetails.withdrawal_fee}% | Rs.{(Number(wamount) - (Number(amountDetails.withdrawal_fee) * Number(wamount) / 100))}</div>
                 <div className='flex items-center justify-start gap-2 my-1'>
                     <div className='text-blue-600 text-3xl'>&#8377;</div>
                     <div className="value"> <input type="number" id="withdrawal_field" onChange={handleWithdrawalAmount} className='w-full text-2xl outline-none bg-[#d3d6fe] py-2' placeholder='Amount' /></div>
