@@ -106,7 +106,7 @@ export default function Transactions() {
 
     const getRecharges_list = async () => {
         const docRef = collection(db, 'recharges');
-        const docSnap = await getDocs(docRef).then(()=>setLoading(false));
+        const docSnap = await getDocs(docRef);
         // console.log(docSnap);
         var temp_Data = [];
         var idx = 0;
@@ -168,6 +168,7 @@ export default function Transactions() {
                     indirectRecharge: increment(Number(recharge_value)),
                     indirectMember: arrayUnion(user_id)
                 });
+                setLoading(false);
             }
             getRecharges_list();
 
