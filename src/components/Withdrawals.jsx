@@ -130,9 +130,9 @@ export default function Withdrawals() {
             status: new_status
         }).then(() => {
             //console.log('Withdrawal Status Approved', new_status);
-            if (new_status === 'confirmed') {
+            if (new_status === 'declined') {
                 updateDoc(docRef2, {
-                    balance: increment(-Number(withdrawal_value))
+                    balance: increment(Number(withdrawal_value))
                 });
             }
             getWithdrawals_list();

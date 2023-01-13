@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { getAuth } from 'firebase/auth';
-import { doc, getDoc, collection, addDoc, Timestamp } from 'firebase/firestore';
+import { doc, getDoc, collection, addDoc, Timestamp, updateDoc } from 'firebase/firestore';
 import db from '../firebase/config.js';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -84,6 +84,7 @@ const Withdrawal = () => {
             try {
                 const docRef1 = await addDoc(collection(db, "withdrawals"), { withdrawalAmount: (Number(wamount)), ...details, afterDeduction: (Number(wamount) - (Number(amountDetails.withdrawal_fee) * Number(wamount) / 100)), user_id: auth.currentUser.uid, time: Timestamp.now(), status: 'pending' });
                 const docRef2 = await addDoc(collection(db, 'users', auth.currentUser.uid, 'withdrawals'), { withdrawals_id: docRef1.id, time: Timestamp.now() });
+                const docRef3 = await updateDoc(doc(db, 'users', auth.currentUser.uid), {balance: (balance-Number(wamount))});
                 //console.log("Document written with ID: ", docRef1.id, docRef2.id);
                 toast('Withdrawal request placed successfully!', { autoClose: 1000 });
                 navigate('/record');
@@ -123,7 +124,7 @@ const Withdrawal = () => {
             </div>
 
             <div className="part1 bg-[#d3d6fe] p-3 rounded-lg mx-3 mt-5">
-                <div className='text-blue-600 px-2 my-1  rounded-full border border-blue-600 inline'>Withdrawal Fee {amountDetails.withdrawal_fee}%</div>
+                <div className='text-blue-600 px-2 my-1  rounded-full border border-blue-600 inline'>Withdrawal Fee {amountDetails.withdrawal_fee}% | After Deduction Rs.{(Number(wamount) - (Number(amountDetails.withdrawal_fee) * Number(wamount) / 100))}</div>
                 <div className='flex items-center justify-start gap-2 my-1'>
                     <div className='text-blue-600 text-3xl'>&#8377;</div>
                     <div className="value"> <input type="number" id="withdrawal_field" onChange={handleWithdrawalAmount} className='w-full text-2xl outline-none bg-[#d3d6fe] py-2' placeholder='Amount' /></div>
