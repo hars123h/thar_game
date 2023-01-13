@@ -18,8 +18,8 @@ const Register = () => {
     const navigate = useNavigate();
     const auth = getAuth();
     const {invite_code} = useParams();
-    const [otp, setOtp] = useState('');
-    const [otpfield, setOTPfield] = useState('');
+    //const [otp, setOtp] = useState('');
+    //const [otpfield, setOTPfield] = useState('');
     const [mobno, setMobno] = useState('');
     const [pwd, setpwd] = useState('');
     const [cpwd, setCpwd] = useState('');
@@ -34,10 +34,10 @@ const Register = () => {
             return;
         }
 
-        if(otp!==otpfield) {
-            toast('Wrong OTP entered!');
-            return;
-        }
+        // if(otp!==otpfield) {
+        //     toast('Wrong OTP entered!');
+        //     return;
+        // }
         //console.log({ mobno, pwd, cpwd, wpwd, invt });
         const new_mobno = mobno + '@gmail.com';
         createUserWithEmailAndPassword(auth, new_mobno, pwd)
@@ -130,16 +130,16 @@ const Register = () => {
 
     }
 
-    const handleOTPSend = (otpGenerated) => {
-        //toast('I was clicked');
-        setOTPfield(otpGenerated)
-        fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=27b58V4YOqBDMgWvNjapz1k9IHlrJfynC6w0hceRAZGoLimK3PuJC7OoiV4N2B6DjfwWKzb0lhgEetPH&variables_values=${otpGenerated}&route=otp&numbers=${mobno}`)
-            .then((response) => {
-                //console.log(response);
-                toast('OTP sent successfully');
-            })
-            .catch(error => toast('Something went wrong'));
-    }
+    // const handleOTPSend = (otpGenerated) => {
+    //     //toast('I was clicked');
+    //     setOTPfield(otpGenerated)
+    //     fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=27b58V4YOqBDMgWvNjapz1k9IHlrJfynC6w0hceRAZGoLimK3PuJC7OoiV4N2B6DjfwWKzb0lhgEetPH&variables_values=${otpGenerated}&route=otp&numbers=${mobno}`)
+    //         .then((response) => {
+    //             //console.log(response);
+    //             toast('OTP sent successfully');
+    //         })
+    //         .catch(error => toast('Something went wrong'));
+    // }
 //[#0096D5]
     return (
         <div>
@@ -153,10 +153,10 @@ const Register = () => {
             </div>
             <div className="box mb-20 border-2 m-auto border-black rounded-xl border-solid lg:w-2/5 w-4/5 shadow-xl p-4 w-50% flex flex-col">
                 <input value={mobno} onChange={e => setMobno(e.target.value)} type="text" className='p-2 outline-none mb-2 border-2 border-black rounded-full' placeholder='Phone number' name="phoneno" id="phoneno" />
-                <div className='flex border-2 border-black rounded-full mb-2'>
+                {/* <div className='flex border-2 border-black rounded-full mb-2'>
                     <input type="text" onChange={e=>setOtp(e.target.value)}  className='p-2 w-[90%] outline-none rounded-full' placeholder='OTP' name="otp" id="otp"/>
                     <button className='bg-blue-500 text-white text-xs mr-1 px-4 my-1  rounded-full' onClick={()=>handleOTPSend(String(Math.floor(100000 + Math.random() * 900000)))}>OTP</button>
-                </div>
+                </div> */}
                 <input value={pwd} onChange={e => setpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-black rounded-full' placeholder='Please enter login password' name="passowrd" id="pass" />
                 <input value={cpwd} onChange={e => setCpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-black rounded-full' placeholder='Please confirm the login password' name="cnfpass" id="cnfpass" />
                 <input value={wpwd} onChange={e => setwpwd(e.target.value)} type="password" className='p-2 mb-2 outline-none border-2 border-black rounded-full' placeholder="Please enter the Withdrawal password" name="withpassword" id="wthpass" />
