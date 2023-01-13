@@ -117,7 +117,8 @@ const Home = () => {
                         quantity: quantity,
                         date_purchased: new Date().toDateString(),
                         date_till_rewarded: new Date().toDateString(),
-                        time: new Date().toDateString()
+                        time: new Date().toDateString(),
+                        ddmmyy:new Date().getMilliseconds()
                     })
                 }).then(() => {
                     //console.log('Product successfully purchased');
