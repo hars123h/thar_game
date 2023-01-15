@@ -36,17 +36,13 @@ const Project = () => {
                     var temp = document.data().plans_purchased.map((element) => {
                         var days = DateDifference(new Date(element.date_till_rewarded), new Date(Math.min(new Date(), addDays(new Date(element.date_purchased), element.plan_cycle))));
                         var days2 = DateDifference(new Date(element.date_till_rewarded), addDays(new Date(element.date_purchased), element.plan_cycle));
-
-                        // if(element.product_type==='short' && days<element.plan_cycle) {
-                        //     return {
-                        //         ...element
-                        //     }
-                        // }
-                        //console.log(days, element);
+                        //console.log(days, days2, new Date(Math.min(new Date(), addDays(new Date(element.date_purchased), element.plan_cycle))).toDateString());
 
                         if(element.product_type==='short') {
+                            console.log("The is the short plan");
                             if(days===element.plan_cycle) {
                                 earn = (days * element.quantity * element.plan_daily_earning);
+                                console.log("we are here", earn);
                                 return {
                                     ...element,
                                     date_till_rewarded: new Date(Math.min(new Date(), addDays(new Date(element.date_purchased), element.plan_cycle))).toDateString()
@@ -58,15 +54,13 @@ const Project = () => {
                             }
                         }
 
-                        if (days > element.plan_cycle) {
+                        if(element.product_type==='long'){   
+                            //console.log("This is the long plan"); 
+                            earn = earn + (days * element.quantity * element.plan_daily_earning);
                             return {
-                                ...element
+                                ...element,
+                                date_till_rewarded: new Date(Math.min(new Date(), addDays(new Date(element.date_purchased), element.plan_cycle))).toDateString()
                             }
-                        }
-                        earn = earn + (days * element.quantity * element.plan_daily_earning);
-                        return {
-                            ...element,
-                            date_till_rewarded: new Date(Math.min(new Date(), addDays(new Date(element.date_purchased), element.plan_cycle))).toDateString()
                         }
                     });
                     const docRef1 = doc(db, 'users', auth.currentUser.uid);
@@ -78,7 +72,6 @@ const Project = () => {
                     })
                         .then(() => console.log('Reward successfully updated'))
                         .catch(error => console.log('Some error Occured'));
-
                 }
             } else {
                 console.log('Data not found');
