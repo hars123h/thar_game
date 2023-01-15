@@ -97,7 +97,7 @@ const Home = () => {
             //console.log({...currPlan, quantity});
             //setCurrPlan({...currPlan, quantity});
             console.log(userDetails);
-            console.log((quantity*currPlan.plan_amount), Number(userDetails.balance));
+            console.log((quantity * currPlan.plan_amount), Number(userDetails.balance));
             if ((Number(quantity) * Number(currPlan.plan_amount)) > Number(userDetails.balance)) {
                 toast("You don't have enough balance to make this purchase", { autoClose: 1000 });
             } else {
@@ -110,15 +110,15 @@ const Home = () => {
                     time: new Date().toDateString()
                 });
                 await updateDoc(docRef, {
-                    balance: Number(userDetails.balance)-Number(Number(quantity)*Number(currPlan.plan_amount)),
-                    boughtLong:increment(currPlan.product_type==='long'?1:0),
+                    balance: Number(userDetails.balance) - Number(Number(quantity) * Number(currPlan.plan_amount)),
+                    boughtLong: increment(currPlan.product_type === 'long' ? 1 : 0),
                     plans_purchased: arrayUnion({
                         ...currPlan,
                         quantity: quantity,
                         date_purchased: new Date().toDateString(),
                         date_till_rewarded: new Date().toDateString(),
                         time: new Date().toDateString(),
-                        ddmmyy:new Date().getMilliseconds()
+                        ddmmyy: new Date().getMilliseconds()
                     })
                 }).then(() => {
                     //console.log('Product successfully purchased');
@@ -203,7 +203,7 @@ const Home = () => {
                 <div className='text-center bg-blue-500 mx-1 text-white text-lg font-medium py-2'>Big Plans</div>
 
                 <div className='grid grid-cols-2'>
-                    <Card product_type={"long"} product_image={waltonbd_product1}  handleClick={handleClick} plan_name={"Walton Plan 1"} plan_cycle={90} plan_daily_earning={90} plan_amount={600} plan_type={'Big Plan'} />
+                    <Card product_type={"long"} product_image={waltonbd_product1} handleClick={handleClick} plan_name={"Walton Plan 1"} plan_cycle={90} plan_daily_earning={90} plan_amount={600} plan_type={'Big Plan'} />
                     <Card product_type={"long"} product_image={waltonbd_product2} handleClick={handleClick} plan_name={"Walton Plan 2"} plan_cycle={90} plan_daily_earning={260} plan_amount={2000} plan_type={'Big Plan'} />
                     <Card product_type={"long"} product_image={waltonbd_product3} handleClick={handleClick} plan_name={"Walton Plan 3"} plan_cycle={90} plan_daily_earning={410} plan_amount={3000} plan_type={'Big Plan'} />
                     <Card product_type={"long"} product_image={waltonbd_product4} handleClick={handleClick} plan_name={"Walton Plan 4"} plan_cycle={90} plan_daily_earning={810} plan_amount={5000} plan_type={'Big Plan'} />
@@ -219,30 +219,42 @@ const Home = () => {
                     Short Plans
                     <br />
                     {
-                        userDetails && userDetails.showShort===0?(<div>Please buy a Big Plan to unlock Short Plans</div>):null
+                        userDetails && userDetails.showShort === 0 ? (<div>Please buy a Big Plan to unlock Short Plans</div>) : null
                     }
                 </div>
                 <div className={`grid grid-cols-2`}>
-                    {userDetails && userDetails.showShort===0?
-                    (
-                        <span className='pointer-events-none'>
+                    {userDetails && userDetails.showShort === 0 ?
+                        (
+                            <span className='pointer-events-none'>
+                                <Card product_type={"short"} product_image={waltonbd_product9} handleClick={handleClick} plan_name={"Walton Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
+                            </span>
+                        ) :
+                        <span>
                             <Card product_type={"short"} product_image={waltonbd_product9} handleClick={handleClick} plan_name={"Walton Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
                         </span>
-                    ):
-                    <span>
-                            <Card product_type={"short"} product_image={waltonbd_product9} handleClick={handleClick} plan_name={"Walton Plan 9"} plan_cycle={2} plan_daily_earning={250} plan_amount={350} plan_type={'Short Plan'} />
-                    </span>
                     }
+
+                    {
+                        userDetails && userDetails.showShort === 0 ?
+                            (
+                                <span className='pointer-events-none'>
+                                    <Card product_type={"short"} product_image={waltonbd_product10} handleClick={handleClick} plan_name={"Walton Plan 10"} plan_cycle={3} plan_daily_earning={500} plan_amount={1000} plan_type={'Short Plan'} />
+                                </span>
+                            ) : (
+                                <span >
+                                    <Card product_type={"short"} product_image={waltonbd_product10} handleClick={handleClick} plan_name={"Walton Plan 10"} plan_cycle={3} plan_daily_earning={500} plan_amount={1000} plan_type={'Short Plan'} />
+                                </span>
+                            )
+                    }
+
+
                     <span className='pointer-events-none'>
-                        <Card product_type={"short"} product_image={waltonbd_product10} handleClick={handleClick} plan_name={"Walton Plan 10"} plan_cycle={3} plan_daily_earning={500} plan_amount={1000} plan_type={'Short Plan'} />
-                    </span>
-                    <span className='pointer-events-none'>    
                         <Card product_type={"short"} product_image={waltonbd_product11} handleClick={handleClick} plan_name={"Walton Plan 11"} plan_cycle={2} plan_daily_earning={2800} plan_amount={3500} plan_type={'Short Plan'} />
                     </span>
                     <span className='pointer-events-none'>
                         <Card product_type={"short"} product_image={waltonbd_product12} handleClick={handleClick} plan_name={"Walton Plan 12"} plan_cycle={2} plan_daily_earning={4800} plan_amount={7000} plan_type={'Short Plan'} />
                     </span>
-                    <span className='pointer-events-none'>    
+                    <span className='pointer-events-none'>
                         <Card product_type={"short"} product_image={waltonbd_product13} handleClick={handleClick} plan_name={"Walton Plan 13"} plan_cycle={2} plan_daily_earning={15000} plan_amount={20000} plan_type={'Short Plan'} />
                     </span>
                 </div>
